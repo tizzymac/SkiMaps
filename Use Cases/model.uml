@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_DqSqAMcAEeiX89PBGRjj5A" name="model">
+  <packagedElement xmi:type="uml:Actor" xmi:id="_hsOzoMcAEeiX89PBGRjj5A" name="Skier"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_uLRuQMcAEeiX89PBGRjj5A" name="Presses Emergency Button"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_3HQx0McAEeiX89PBGRjj5A" name="Get Skier's Location"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_5Jw1EMcAEeiX89PBGRjj5A" name="Request information about the nature of the injury"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_Aai7EMcBEeiX89PBGRjj5A" name="Ski Patrol"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_CruTgMcBEeiX89PBGRjj5A" name="Call local ski patrol and send info"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_TJr6wMcBEeiX89PBGRjj5A" name=" " memberEnd="_TJr6wccBEeiX89PBGRjj5A _TJr6xMcBEeiX89PBGRjj5A">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_TJr6wccBEeiX89PBGRjj5A" name="skier" type="_hsOzoMcAEeiX89PBGRjj5A" association="_TJr6wMcBEeiX89PBGRjj5A">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_TJr6wscBEeiX89PBGRjj5A" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_TJr6w8cBEeiX89PBGRjj5A" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_TJr6xMcBEeiX89PBGRjj5A" name="presses emergency button" type="_uLRuQMcAEeiX89PBGRjj5A" association="_TJr6wMcBEeiX89PBGRjj5A">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_TJr6xccBEeiX89PBGRjj5A" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_TJr6xscBEeiX89PBGRjj5A" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_U6r-UMcBEeiX89PBGRjj5A" name=" " memberEnd="_U6r-UccBEeiX89PBGRjj5A _U6r-VMcBEeiX89PBGRjj5A">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_U6r-UccBEeiX89PBGRjj5A" name="skier" type="_hsOzoMcAEeiX89PBGRjj5A" association="_U6r-UMcBEeiX89PBGRjj5A">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_U6r-UscBEeiX89PBGRjj5A" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_U6r-U8cBEeiX89PBGRjj5A" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_U6r-VMcBEeiX89PBGRjj5A" name="get skier's location" type="_3HQx0McAEeiX89PBGRjj5A" association="_U6r-UMcBEeiX89PBGRjj5A">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_U6r-VccBEeiX89PBGRjj5A" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_U6r-VscBEeiX89PBGRjj5A" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_V-ouoMcBEeiX89PBGRjj5A" name=" " memberEnd="_V-ouoccBEeiX89PBGRjj5A _V-oupMcBEeiX89PBGRjj5A">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_V-ouoccBEeiX89PBGRjj5A" name="skier" type="_hsOzoMcAEeiX89PBGRjj5A" association="_V-ouoMcBEeiX89PBGRjj5A">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_V-ouoscBEeiX89PBGRjj5A" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_V-ouo8cBEeiX89PBGRjj5A" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_V-oupMcBEeiX89PBGRjj5A" name="request information about the nature of the injury" type="_5Jw1EMcAEeiX89PBGRjj5A" association="_V-ouoMcBEeiX89PBGRjj5A">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_V-oupccBEeiX89PBGRjj5A" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_V-oupscBEeiX89PBGRjj5A" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_WytP4McBEeiX89PBGRjj5A" name=" " memberEnd="_WytP4ccBEeiX89PBGRjj5A _WytP5McBEeiX89PBGRjj5A">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_WytP4ccBEeiX89PBGRjj5A" name="call local ski patrol and send info" type="_CruTgMcBEeiX89PBGRjj5A" association="_WytP4McBEeiX89PBGRjj5A">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WytP4scBEeiX89PBGRjj5A" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WytP48cBEeiX89PBGRjj5A" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_WytP5McBEeiX89PBGRjj5A" name="ski patrol" type="_Aai7EMcBEeiX89PBGRjj5A" association="_WytP4McBEeiX89PBGRjj5A">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WytP5ccBEeiX89PBGRjj5A" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WytP5scBEeiX89PBGRjj5A" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_c0NfUMcBEeiX89PBGRjj5A" client="_CruTgMcBEeiX89PBGRjj5A" supplier="_5Jw1EMcAEeiX89PBGRjj5A"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_d03rEMcBEeiX89PBGRjj5A" client="_CruTgMcBEeiX89PBGRjj5A" supplier="_3HQx0McAEeiX89PBGRjj5A"/>
+</uml:Model>
