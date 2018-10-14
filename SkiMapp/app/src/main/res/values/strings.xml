@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">SkiMapp</string>
+
+    <!-- Home Page Buttons -->
+    <string name="directions">Get me somewhere</string>
+    <string name="info_lookup">Information</string>
+    <string name="emergency">Emergency</string>
+
+    <!-- Preferences: Ski Ability -->
+    <string name="pref_ski_ability">Your Ski Ability</string>
+    <string name="pref_green">Green</string>
+    <string name="pref_blue">Blue</string>
+    <string name="pref_black">Black</string>
+
+    <string-array name="pref_userSettings_entries">
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Black</item>
+    </string-array>
+    <string-array name="pref_userSettings_values">
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Black</item>
+    </string-array>
+    <string name="pref_userSettings_default">Default</string>
+
+    <string name="settings">Settings</string>
+    <string name="set_level">Set My Level</string>
+
 </resources>
