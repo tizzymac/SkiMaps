@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Nodes>
+    <Node
+        name="a"
+        x="1"
+        y="1"
+        z="2" />
+    <Node
+        name="b"
+        x="4"
+        y="3"
+        z="6" />
+    <Node
+        name="c"
+        x="5"
+        y="2"
+        z="4" />
+    <Node
+        name="d"
+        x="6"
+        y="1"
+        z="2" />
+</Nodes>

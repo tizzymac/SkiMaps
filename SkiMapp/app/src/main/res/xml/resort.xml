@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SkiResort>
+    <Lifts>
+        <Lift
+            name="BigLift"
+            start="@nodes/a"
+            end="@nodes/b" />
+        <Lift
+            name="LittleLift"
+            start="@nodes/d"
+            end="@nodes/c" />
+    </Lifts>
+    <Runs>
+        <Run
+            name="Run1"
+            start="@nodes/b"
+            end="@nodes/a"
+            level="Black" />
+        <Run
+            name="Run2"
+            start="@nodes/b"
+            end="@nodes/c"
+            level="Green" />
+        <Run
+            name="Run3"
+            start="@nodes/c"
+            end="@nodes/d"
+            level="Blue" />
+        <Run
+            name="Run4"
+            start="@nodes/c"
+            end="@nodes/d"
+            level="Black" />
+        <Run
+            name="Run5"
+            start="@nodes/c"
+            end="@nodes/a"
+            level="Blue" />
+    </Runs>
+</SkiResort>
