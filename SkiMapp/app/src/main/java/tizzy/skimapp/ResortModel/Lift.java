@@ -7,9 +7,9 @@ package tizzy.skimapp.ResortModel;
 public class Lift {
 
     private String name;
-    private Node start, end;
+    private GeoNode start, end;
 
-    public Lift(String name, Node start, Node end) {
+    public Lift(String name, GeoNode start, GeoNode end) {
         this.name = name;
         this.start = start;
         this.end = end;
@@ -23,19 +23,19 @@ public class Lift {
         this.name = name;
     }
 
-    public Node getStart() {
+    public GeoNode getStart() {
         return start;
     }
 
-    public void setStart(Node start) {
+    public void setStart(GeoNode start) {
         this.start = start;
     }
 
-    public Node getEnd() {
+    public GeoNode getEnd() {
         return end;
     }
 
-    public void setEnd(Node end) {
+    public void setEnd(GeoNode end) {
         this.end = end;
     }
 }

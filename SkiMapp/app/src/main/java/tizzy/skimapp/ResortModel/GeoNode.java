@@ -4,12 +4,12 @@ package tizzy.skimapp.ResortModel;
  * Created by tizzy on 10/15/18.
  */
 
-public class Node {
+public class GeoNode {
 
     private String id;
     private int x, y, z;
 
-    public Node(String id, int x, int y, int z) {
+    public GeoNode(String id, int x, int y, int z) {
         this.id = id;
         this.x = x;
         this.y = y;

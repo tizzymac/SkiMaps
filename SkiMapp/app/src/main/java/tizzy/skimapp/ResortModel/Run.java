@@ -7,9 +7,9 @@ package tizzy.skimapp.ResortModel;
 public class Run {
 
     private String name, level;
-    private Node start, end;
+    private GeoNode start, end;
 
-    public Run(String name, String level, Node start, Node end) {
+    public Run(String name, String level, GeoNode start, GeoNode end) {
         this.name = name;
         this.level = level;
         this.start = start;
@@ -32,19 +32,19 @@ public class Run {
         this.level = level;
     }
 
-    public Node getStart() {
+    public GeoNode getStart() {
         return start;
     }
 
-    public void setStart(Node start) {
+    public void setStart(GeoNode start) {
         this.start = start;
     }
 
-    public Node getEnd() {
+    public GeoNode getEnd() {
         return end;
     }
 
-    public void setEnd(Node end) {
+    public void setEnd(GeoNode end) {
         this.end = end;
     }
 }
