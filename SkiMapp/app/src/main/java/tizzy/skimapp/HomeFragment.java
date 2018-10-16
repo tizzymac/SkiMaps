@@ -27,26 +27,17 @@ public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment";
 
-    private TextView skiAbility;
-    private TextView runLevel;
-    private Button settingsButton;
+    private TextView mSkiAbility;
+    private TextView mRunLevel;
+    private Button mSettingsButton;
+    private Button mInfoButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        InputStream resortIS = null;
-        InputStream nodeIS = null;
-        try {
-            resortIS = getContext().getAssets().open("resort.xml");
-            nodeIS = getContext().getAssets().open("nodes.xml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Resort resort = new Resort(nodeIS, resortIS);
-
-        settingsButton = view.findViewById(R.id.settingsButton);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
+        mSettingsButton = view.findViewById(R.id.settingsButton);
+        mSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -56,12 +47,23 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        skiAbility = view.findViewById(R.id.skiAbility);
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        skiAbility.setText(sharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
+        mInfoButton = view.findViewById(R.id.infoButton);
+        mInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        runLevel = view.findViewById(R.id.runLevel);
-        runLevel.setText(
+                // Open RunInfo for now
+                Intent intent = RunListActivity.newIntent(getActivity());
+                startActivity(intent);
+            }
+        });
+
+        mSkiAbility = view.findViewById(R.id.skiAbility);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+        mSkiAbility.setText(sharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
+
+        mRunLevel = view.findViewById(R.id.runLevel);
+        mRunLevel.setText(
                 // Get level from resort xml
                 ""
         );

@@ -6,45 +6,45 @@ package tizzy.skimapp.ResortModel;
 
 public class Run {
 
-    private String name, level;
-    private GeoNode start, end;
+    private String mName, mLevel;
+    private GeoNode mStart, mEnd;
 
     public Run(String name, String level, GeoNode start, GeoNode end) {
-        this.name = name;
-        this.level = level;
-        this.start = start;
-        this.end = end;
+        this.mName = name;
+        this.mLevel = level;
+        this.mStart = start;
+        this.mEnd = end;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.mName = name;
     }
 
     public String getLevel() {
-        return level;
+        return mLevel;
     }
 
     public void setLevel(String level) {
-        this.level = level;
+        this.mLevel = level;
     }
 
     public GeoNode getStart() {
-        return start;
+        return mStart;
     }
 
     public void setStart(GeoNode start) {
-        this.start = start;
+        this.mStart = start;
     }
 
     public GeoNode getEnd() {
-        return end;
+        return mEnd;
     }
 
     public void setEnd(GeoNode end) {
-        this.end = end;
+        this.mEnd = end;
     }
 }

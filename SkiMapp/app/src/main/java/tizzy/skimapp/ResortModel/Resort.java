@@ -1,11 +1,14 @@
 package tizzy.skimapp.ResortModel;
 
 
+import android.content.Context;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,21 +21,53 @@ import javax.xml.parsers.DocumentBuilderFactory;
  */
 
 public class Resort {
+    private static Resort sResort;
+    private GeoNode[] mNodes;
+    private List<Lift> mLifts;
+    private List<Run> mRuns;
 
-    private static GeoNode[] mNodes;
-    private static List<Lift> mLifts;
-    private static List<Run> mRuns;
+    public static Resort get(Context context) {
+        if (sResort == null) {
+            sResort = new Resort(context);
+        }
+        return sResort;
+    }
 
-    public Resort(InputStream nodeIS, InputStream liftIS) {
-
+    private Resort(Context context) {
         mLifts = new ArrayList<>();
         mRuns = new ArrayList<>();
 
-        readResortFromXML(nodeIS, liftIS);
+        // Get Input Streams
+        InputStream resortIS = null;
+        InputStream nodeIS = null;
+        try {
+            resortIS = context.getAssets().open("resort.xml");
+            nodeIS = context.getAssets().open("nodes.xml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        readResortFromXML(nodeIS, resortIS);
     }
 
-    private static void readResortFromXML(InputStream nodeIS, InputStream liftIS) {
+//    public Resort(InputStream nodeIS, InputStream liftIS) {
+//
+//        mLifts = new ArrayList<>();
+//        mRuns = new ArrayList<>();
+//
+//        readResortFromXML(nodeIS, liftIS);
+//
+//    }
+
+    public List<Run> getRuns() {
+        return mRuns;
+    }
+
+    public List<Lift> getLifts() {
+        return mLifts;
+    }
+
+    private void readResortFromXML(InputStream nodeIS, InputStream liftIS) {
 
         // First read in all nodes
         try {
@@ -77,8 +112,8 @@ public class Resort {
                     // Add to lift list
                     mLifts.add(new Lift(
                             liftElement.getAttribute("name"),
-                            mNodes[Integer.parseInt(liftElement.getAttribute("start"))],
-                            mNodes[Integer.parseInt(liftElement.getAttribute("end"))]
+                            mNodes[Integer.parseInt(liftElement.getAttribute("start")) - 1],
+                            mNodes[Integer.parseInt(liftElement.getAttribute("end")) - 1]
                     ));
                 }
             }
@@ -94,8 +129,8 @@ public class Resort {
                     mRuns.add(new Run(
                             runElement.getAttribute("name"),
                             runElement.getAttribute("level"),
-                            mNodes[Integer.parseInt(runElement.getAttribute("start"))],
-                            mNodes[Integer.parseInt(runElement.getAttribute("end"))]
+                            mNodes[Integer.parseInt(runElement.getAttribute("start")) - 1],
+                            mNodes[Integer.parseInt(runElement.getAttribute("end")) - 1]
                     ));
                 }
             }

@@ -3,38 +3,38 @@
     <Lifts>
         <Lift
             name="BigLift"
-            start="@nodes/a"
-            end="@nodes/b" />
+            start="1"
+            end="2" />
         <Lift
             name="LittleLift"
-            start="@nodes/d"
-            end="@nodes/c" />
+            start="4"
+            end="3" />
     </Lifts>
     <Runs>
         <Run
             name="Run1"
-            start="@nodes/b"
-            end="@nodes/a"
+            start="2"
+            end="1"
             level="Black" />
         <Run
             name="Run2"
-            start="@nodes/b"
-            end="@nodes/c"
+            start="2"
+            end="3"
             level="Green" />
         <Run
             name="Run3"
-            start="@nodes/c"
-            end="@nodes/d"
+            start="3"
+            end="4"
             level="Blue" />
         <Run
             name="Run4"
-            start="@nodes/c"
-            end="@nodes/d"
+            start="3"
+            end="4"
             level="Black" />
         <Run
             name="Run5"
-            start="@nodes/c"
-            end="@nodes/a"
+            start="3"
+            end="1"
             level="Blue" />
     </Runs>
 </SkiResort>
