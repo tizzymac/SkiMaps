@@ -50,15 +50,6 @@ public class Resort {
         readResortFromXML(nodeIS, resortIS);
     }
 
-//    public Resort(InputStream nodeIS, InputStream liftIS) {
-//
-//        mLifts = new ArrayList<>();
-//        mRuns = new ArrayList<>();
-//
-//        readResortFromXML(nodeIS, liftIS);
-//
-//    }
-
     public List<Run> getRuns() {
         return mRuns;
     }

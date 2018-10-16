@@ -7,7 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,23 +43,39 @@ public class RunListFragment extends Fragment {
         mRunRecyclerView.setAdapter(mAdapter);
     }
 
-    private class RunHolder extends RecyclerView.ViewHolder {
+    private class RunHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mRunNameTextView;
-        private TextView mRunLevelTextView;
+        private ImageView mRunLevelImageView;
         private Run mRun;
+
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(getActivity(), mRun.getName() + " clicked!", Toast.LENGTH_SHORT).show();
+        }
 
         public RunHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_run, parent, false));
+            itemView.setOnClickListener(this);
 
             mRunNameTextView = itemView.findViewById(R.id.run_name);
-            mRunLevelTextView = itemView.findViewById(R.id.run_level);
+            mRunLevelImageView = itemView.findViewById(R.id.run_level);
         }
 
         public void bind(Run run) {
             mRun = run;
-            mRunLevelTextView.setText(mRun.getLevel());
             mRunNameTextView.setText(mRun.getName());
+
+            switch (mRun.getLevel()) {
+                case ("Green"): mRunLevelImageView.setImageResource(R.mipmap.ic_green);
+                                break;
+                case ("Blue"):  mRunLevelImageView.setImageResource(R.mipmap.ic_blue);
+                                break;
+                case ("Black"): mRunLevelImageView.setImageResource(R.mipmap.ic_black);
+                                break;
+            }
+
+            mRunLevelImageView.setVisibility(View.VISIBLE);
         }
     }
 
