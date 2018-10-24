@@ -1,4 +1,4 @@
-package tizzy.skimapp;
+package tizzy.skimapp.GetInfo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,17 +11,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
+import tizzy.skimapp.R;
+import tizzy.skimapp.ResortModel.Lift;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.ResortModel.Run;
 
 public class RunListFragment extends Fragment {
 
     private RecyclerView mRunRecyclerView;
-    private RunAdapter mAdapter;
+//    private RecyclerView mLiftRecyclerView;
+    private RunAdapter mRunAdapter;
+//    private LiftAdapter mLiftAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,8 +41,8 @@ public class RunListFragment extends Fragment {
         Resort resort = Resort.get(getActivity());
         List<Run> runs = resort.getRuns();
 
-        mAdapter = new RunAdapter(runs);
-        mRunRecyclerView.setAdapter(mAdapter);
+        mRunAdapter = new RunAdapter(runs);
+        mRunRecyclerView.setAdapter(mRunAdapter);
     }
 
     private class RunHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -65,7 +67,6 @@ public class RunListFragment extends Fragment {
         public void bind(Run run) {
             mRun = run;
             mRunNameTextView.setText(mRun.getName());
-
             switch (mRun.getLevel()) {
                 case ("Green"): mRunLevelImageView.setImageResource(R.mipmap.ic_green);
                                 break;
@@ -74,7 +75,6 @@ public class RunListFragment extends Fragment {
                 case ("Black"): mRunLevelImageView.setImageResource(R.mipmap.ic_black);
                                 break;
             }
-
             mRunLevelImageView.setVisibility(View.VISIBLE);
         }
     }

@@ -1,4 +1,4 @@
-package tizzy.skimapp;
+package tizzy.skimapp.GetInfo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,11 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import tizzy.skimapp.ResortModel.Run;
+import tizzy.skimapp.R;
 
 public class RunInfoFragment extends Fragment {
-
-    private Run mRun;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package tizzy.skimapp;
+package tizzy.skimapp.Settings;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import tizzy.skimapp.HomeActivity;
+import tizzy.skimapp.R;
 
 /**
  * Created by tizzy on 10/13/18.

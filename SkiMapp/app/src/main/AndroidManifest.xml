@@ -17,9 +17,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SettingsActivity"/>
-        <activity android:name=".RunInfoActivity"/>
-        <activity android:name=".RunListActivity"/>
+        <activity android:name=".Settings.SettingsActivity"/>
+        <activity android:name=".GetInfo.RunInfoActivity"/>
+        <activity android:name=".GetInfo.InfoListActivity"/>
     </application>
 
 </manifest>

@@ -14,10 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import tizzy.skimapp.ResortModel.Resort;
+import tizzy.skimapp.GetInfo.InfoListActivity;
+import tizzy.skimapp.Settings.SettingsActivity;
 
 /**
  * Created by tizzy on 10/13/18.
@@ -53,7 +51,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
 
                 // Open RunInfo for now
-                Intent intent = RunListActivity.newIntent(getActivity());
+                Intent intent = InfoListActivity.newIntent(getActivity());
                 startActivity(intent);
             }
         });

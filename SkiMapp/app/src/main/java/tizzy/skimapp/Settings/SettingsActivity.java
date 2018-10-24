@@ -1,11 +1,9 @@
-package tizzy.skimapp;
+package tizzy.skimapp.Settings;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.RadioButton;
 
 /**
  * Created by tizzy on 10/13/18.

@@ -7,9 +7,9 @@ package tizzy.skimapp.ResortModel;
 public class Run {
 
     private String mName, mLevel;
-    private GeoNode mStart, mEnd;
+    private Node mStart, mEnd;   // Do we need these?
 
-    public Run(String name, String level, GeoNode start, GeoNode end) {
+    public Run(String name, String level, Node start, Node end) {
         this.mName = name;
         this.mLevel = level;
         this.mStart = start;
@@ -20,31 +20,11 @@ public class Run {
         return mName;
     }
 
-    public void setName(String name) {
-        this.mName = name;
-    }
-
     public String getLevel() {
         return mLevel;
     }
 
     public void setLevel(String level) {
         this.mLevel = level;
-    }
-
-    public GeoNode getStart() {
-        return mStart;
-    }
-
-    public void setStart(GeoNode start) {
-        this.mStart = start;
-    }
-
-    public GeoNode getEnd() {
-        return mEnd;
-    }
-
-    public void setEnd(GeoNode end) {
-        this.mEnd = end;
     }
 }

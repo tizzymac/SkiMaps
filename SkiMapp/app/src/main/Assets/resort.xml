@@ -12,27 +12,27 @@
     </Lifts>
     <Runs>
         <Run
-            name="Run1"
+            name="Run 1"
             start="2"
             end="1"
             level="Black" />
         <Run
-            name="Run2"
+            name="Run 2"
             start="2"
             end="3"
             level="Green" />
         <Run
-            name="Run3"
+            name="Run 3"
             start="3"
             end="4"
             level="Blue" />
         <Run
-            name="Run4"
+            name="Run 4"
             start="3"
             end="4"
             level="Black" />
         <Run
-            name="Run5"
+            name="Run 5"
             start="3"
             end="1"
             level="Blue" />

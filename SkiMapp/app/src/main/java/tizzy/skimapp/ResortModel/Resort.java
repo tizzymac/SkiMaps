@@ -22,9 +22,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class Resort {
     private static Resort sResort;
-    private GeoNode[] mNodes;
+    private tizzy.skimapp.ResortModel.Node[] mNodes;
     private List<Lift> mLifts;
     private List<Run> mRuns;
+    // mountains
 
     public static Resort get(Context context) {
         if (sResort == null) {
@@ -33,7 +34,7 @@ public class Resort {
         return sResort;
     }
 
-    private Resort(Context context) {
+    public Resort(Context context) {
         mLifts = new ArrayList<>();
         mRuns = new ArrayList<>();
 
@@ -48,6 +49,10 @@ public class Resort {
         }
 
         readResortFromXML(nodeIS, resortIS);
+    }
+
+    public tizzy.skimapp.ResortModel.Node[] getNodes() {
+        return mNodes;
     }
 
     public List<Run> getRuns() {
@@ -68,18 +73,20 @@ public class Resort {
             doc.getDocumentElement().normalize();
 
             NodeList nNodeList = doc.getElementsByTagName("Node");
-            mNodes = new GeoNode[nNodeList.getLength()];
+            mNodes = new tizzy.skimapp.ResortModel.Node[nNodeList.getLength()];
             for (int i = 0; i < nNodeList.getLength(); i++) {
                 Node nNode = nNodeList.item(i);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) nNode;
 
                     // Add to node list
-                    mNodes[i] = new GeoNode(
+                    mNodes[i] = new tizzy.skimapp.ResortModel.Node(
                             element.getAttribute("id"),
-                            Integer.parseInt(element.getAttribute("x")),
-                            Integer.parseInt(element.getAttribute("y")),
-                            Integer.parseInt(element.getAttribute("z")));
+                            new Coords(
+                                    Integer.parseInt(element.getAttribute("x")),
+                                    Integer.parseInt(element.getAttribute("y")),
+                                    Integer.parseInt(element.getAttribute("z")))
+                            );
                 }
             }
         } catch (Exception e) {
