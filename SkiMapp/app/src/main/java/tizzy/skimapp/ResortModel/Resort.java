@@ -40,15 +40,13 @@ public class Resort {
 
         // Get Input Streams
         InputStream resortIS = null;
-        InputStream nodeIS = null;
         try {
             resortIS = context.getAssets().open("resort.xml");
-            nodeIS = context.getAssets().open("nodes.xml");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        readResortFromXML(nodeIS, resortIS);
+        readResortFromXML(resortIS);
     }
 
     public tizzy.skimapp.ResortModel.Node[] getNodes() {
@@ -63,15 +61,16 @@ public class Resort {
         return mLifts;
     }
 
-    private void readResortFromXML(InputStream nodeIS, InputStream liftIS) {
+    private void readResortFromXML(InputStream resortIS) {
 
-        // First read in all nodes
+        // Then read in Lifts & Runs
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(nodeIS);
+            Document doc = dBuilder.parse(resortIS);
             doc.getDocumentElement().normalize();
 
+            // Nodes
             NodeList nNodeList = doc.getElementsByTagName("Node");
             mNodes = new tizzy.skimapp.ResortModel.Node[nNodeList.getLength()];
             for (int i = 0; i < nNodeList.getLength(); i++) {
@@ -86,19 +85,9 @@ public class Resort {
                                     Integer.parseInt(element.getAttribute("x")),
                                     Integer.parseInt(element.getAttribute("y")),
                                     Integer.parseInt(element.getAttribute("z")))
-                            );
+                    );
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Then read in Lifts & Runs
-        try {
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(liftIS);
-            doc.getDocumentElement().normalize();
 
             // Lifts
             NodeList nLiftList = doc.getElementsByTagName("Lift");
