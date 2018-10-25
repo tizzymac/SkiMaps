@@ -14,16 +14,34 @@ import android.widget.Toast;
 import java.util.List;
 
 import tizzy.skimapp.R;
-import tizzy.skimapp.ResortModel.Lift;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.ResortModel.Run;
 
 public class RunListFragment extends Fragment {
 
+    private static final String ARG_RESORT = "resort";
+    private Resort mResort;
+
     private RecyclerView mRunRecyclerView;
 //    private RecyclerView mLiftRecyclerView;
     private RunAdapter mRunAdapter;
 //    private LiftAdapter mLiftAdapter;
+
+    public static RunListFragment newInstance(Resort resort) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_RESORT, resort);
+        RunListFragment fragment = new RunListFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mResort = (Resort) getArguments().getSerializable(ARG_RESORT);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,10 +56,7 @@ public class RunListFragment extends Fragment {
     }
 
     private void updateUI() {
-        Resort resort = Resort.get(getActivity());
-        List<Run> runs = resort.getRuns();
-
-        mRunAdapter = new RunAdapter(runs);
+        mRunAdapter = new RunAdapter(mResort.getRuns());
         mRunRecyclerView.setAdapter(mRunAdapter);
     }
 

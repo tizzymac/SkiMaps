@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import tizzy.skimapp.GetInfo.InfoListActivity;
+import tizzy.skimapp.ResortModel.Resort;
+import tizzy.skimapp.RouteFinding.DirectionsActivity;
 import tizzy.skimapp.Settings.SettingsActivity;
 
 /**
@@ -29,10 +31,27 @@ public class HomeFragment extends Fragment {
     private TextView mRunLevel;
     private Button mSettingsButton;
     private Button mInfoButton;
+    private Button mDirectionsButton;
+
+    Resort mResort;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // Create the resort
+        mResort = Resort.get(getActivity());
+            // TODO only want to create it once when app is first opened
+
+        mDirectionsButton = view.findViewById(R.id.directionsButton);
+        mDirectionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open Route Finder
+                Intent intent = DirectionsActivity.newIntent(getActivity(), mResort);
+                startActivity(intent);
+            }
+        });
 
         mSettingsButton = view.findViewById(R.id.settingsButton);
         mSettingsButton.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +70,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
 
                 // Open RunInfo for now
-                Intent intent = InfoListActivity.newIntent(getActivity());
+                Intent intent = InfoListActivity.newIntent(getActivity(), mResort);
                 startActivity(intent);
             }
         });

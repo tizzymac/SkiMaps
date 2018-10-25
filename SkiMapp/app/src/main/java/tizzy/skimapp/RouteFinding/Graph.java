@@ -1,11 +1,12 @@
 package tizzy.skimapp.RouteFinding;
 
+import java.io.Serializable;
 import java.util.List;
 
 import tizzy.skimapp.ResortModel.Edge;
 import tizzy.skimapp.ResortModel.Node;
 
-public class Graph {
+public class Graph implements Serializable {
 
     private List<Node> nodes;
     private List<Edge> edges;
@@ -22,4 +23,5 @@ public class Graph {
     public List<Edge> getEdges() {
         return edges;
     }
+
 }

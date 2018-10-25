@@ -1,6 +1,8 @@
 package tizzy.skimapp.ResortModel;
 
-public class Node {
+import java.io.Serializable;
+
+public class Node implements Serializable {
 
     final private String mId;
     private Coords mCoords;

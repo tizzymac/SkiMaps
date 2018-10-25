@@ -15,7 +15,6 @@ import java.util.List;
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Lift;
 import tizzy.skimapp.ResortModel.Resort;
-import tizzy.skimapp.ResortModel.Run;
 
 public class LiftListFragment extends Fragment {
 

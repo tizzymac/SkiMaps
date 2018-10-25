@@ -27,4 +27,9 @@
     <string name="settings">Settings</string>
     <string name="set_level">Set My Level</string>
 
+    <!-- Route Finding -->
+    <string name="where_to">Where would you like to go?</string>
+    <string name="where_from">Where are you going from?</string>
+    <string name="go">GO</string>
+
 </resources>

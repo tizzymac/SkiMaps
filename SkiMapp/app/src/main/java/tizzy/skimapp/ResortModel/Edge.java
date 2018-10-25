@@ -1,8 +1,9 @@
 package tizzy.skimapp.ResortModel;
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class Edge {
+public class Edge implements Serializable {
 
     private final String mId;
     private final Node mSource;

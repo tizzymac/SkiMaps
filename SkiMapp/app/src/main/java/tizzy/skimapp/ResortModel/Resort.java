@@ -10,7 +10,9 @@ import org.w3c.dom.NodeList;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -20,7 +22,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
  * Created by tizzy on 10/15/18.
  */
 
-public class Resort {
+public class Resort implements Serializable {
     private static Resort sResort;
     private tizzy.skimapp.ResortModel.Node[] mNodes;
     private List<Lift> mLifts;
@@ -49,8 +51,8 @@ public class Resort {
         readResortFromXML(resortIS);
     }
 
-    public tizzy.skimapp.ResortModel.Node[] getNodes() {
-        return mNodes;
+    public List<tizzy.skimapp.ResortModel.Node> getNodes() {
+        return Arrays.asList(mNodes);
     }
 
     public List<Run> getRuns() {
@@ -89,6 +91,7 @@ public class Resort {
                 }
             }
 
+
             // Lifts
             NodeList nLiftList = doc.getElementsByTagName("Lift");
             for (int i = 0; i < nLiftList.getLength(); i++) {
@@ -121,10 +124,24 @@ public class Resort {
                     ));
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public List<Edge> getEdges() {
+        List<Edge> edges = new ArrayList<>();
+
+        // Lifts
+        for (Lift lift : mLifts) {
+            edges.add(lift.getEdge());
+        }
+
+        // Runs
+        for (Run run : mRuns) {
+            edges.add(run.getEdge());
+        }
+
+        return edges;
     }
 }
