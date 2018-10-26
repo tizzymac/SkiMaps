@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment {
     private Button mSettingsButton;
     private Button mInfoButton;
     private Button mDirectionsButton;
+    private SharedPreferences mSharedPref;
 
     Resort mResort;
 
@@ -43,12 +44,17 @@ public class HomeFragment extends Fragment {
         mResort = Resort.get(getActivity());
             // TODO only want to create it once when app is first opened
 
+        mSkiAbility = view.findViewById(R.id.skiAbility);
+        mSharedPref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+        mSkiAbility.setText(mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
+
         mDirectionsButton = view.findViewById(R.id.directionsButton);
         mDirectionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Open Route Finder
-                Intent intent = DirectionsActivity.newIntent(getActivity(), mResort);
+                Intent intent = DirectionsActivity.newIntent(getActivity(), mResort,
+                        mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
                 startActivity(intent);
             }
         });
@@ -74,10 +80,6 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        mSkiAbility = view.findViewById(R.id.skiAbility);
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        mSkiAbility.setText(sharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
 
         mRunLevel = view.findViewById(R.id.runLevel);
         mRunLevel.setText(

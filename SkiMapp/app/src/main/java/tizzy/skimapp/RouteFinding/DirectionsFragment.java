@@ -12,23 +12,29 @@ import android.widget.TextView;
 import java.util.LinkedList;
 
 import tizzy.skimapp.R;
+import tizzy.skimapp.ResortModel.Edge;
+import tizzy.skimapp.ResortModel.Lift;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Resort;
+import tizzy.skimapp.ResortModel.Run;
 
 public class DirectionsFragment extends Fragment {
     private static final String ARG_RESORT = "resort";
+    private static final String ARG_SKI_ABILITY = "ski_ability";
 
     private Resort mResort;
     private Graph mResortGraph;
+    private String mSkiAbility;
 
     private Button setLevelButton;
     private EditText mToInput;
     private EditText mFromInput;
     private TextView mRoute;
 
-    public static DirectionsFragment newInstance(Resort resort) {
+    public static DirectionsFragment newInstance(Resort resort, String skiAbility) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_RESORT, resort);
+        args.putString(ARG_SKI_ABILITY, skiAbility);
         DirectionsFragment fragment = new DirectionsFragment();
         fragment.setArguments(args);
 
@@ -40,7 +46,8 @@ public class DirectionsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mResort = (Resort) getArguments().getSerializable(ARG_RESORT);
-        mResortGraph = new Graph(mResort.getNodes(), mResort.getEdges());
+        mSkiAbility = getArguments().getString(ARG_SKI_ABILITY);
+        mResortGraph = new Graph(mResort.getNodes(), mResort.getEdges(), mSkiAbility);
     }
 
     @Override
@@ -67,14 +74,49 @@ public class DirectionsFragment extends Fragment {
                 LinkedList<Node> path = dijkstra.getPath(end);
 
                 // Display
-                String route = "";
-                for (Node n : path) {
-                    route = route + n.getId();
-                }
-                mRoute.setText(route);
+//                String route = "";
+//                for (Node n : path) {
+//                    route = route + n.getId();
+//                }
+                mRoute.setText(runsAndLifts(path));
             }
         });
 
         return view;
+    }
+
+    private String runsAndLifts(LinkedList<Node> path) {
+        int l = path.size();
+        String route = "Start: " + path.get(0) + "\n\n";
+
+        for (int i = 0; i < l-1; i++) {
+            // Get run/lift from pairs of nodes
+            Edge edge = getEdgeFromNodes(path.get(i), path.get(i+1));
+            if (edge != null) {
+                // TODO Edge can have multiple runs/lifts
+                route = route + edge.getId() + "\n";
+                if (edge.getRuns() != null) {
+                    // TODO why are runs all null? Are they not getting set right?
+                    // Print run level
+                    for (Run r : edge.getRuns()) {
+                        route = route + "  " + r.getLevel() + "\n";
+                    }
+                }
+            }
+        }
+
+        route = route + "\nEnd: " + path.get(l-1);
+
+        return route;
+    }
+
+    private Edge getEdgeFromNodes(Node start, Node end) {
+
+        for (Edge e : mResort.getEdges()) {
+            if ((e.getSource().equals(start)) && (e.getDestination().equals(end))) {
+                return e;
+            }
+        }
+        return null;
     }
 }

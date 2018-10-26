@@ -134,7 +134,7 @@ public class Resort implements Serializable {
 
         // Lifts
         for (Lift lift : mLifts) {
-            edges.add(lift.getEdge());
+            edges.add(lift.getEdge()); // no... should be creating an edge with the lifts
         }
 
         // Runs
