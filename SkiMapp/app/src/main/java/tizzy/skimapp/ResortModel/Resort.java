@@ -134,12 +134,53 @@ public class Resort implements Serializable {
 
         // Lifts
         for (Lift lift : mLifts) {
-            edges.add(lift.getEdge()); // no... should be creating an edge with the lifts
+
+            boolean edgeExists = false;
+            // Check if there is an edge with the same start and end nodes
+            for (Edge e : edges) {
+                if ((e.getSource() == lift.getStart())
+                        && (e.getDestination() == lift.getEnd())) {
+                    e.addLift(lift);
+                    edgeExists = true;
+                }
+            }
+            if (!edgeExists) {
+                // Create new edge
+                Edge newEdge = new Edge(
+                        lift.getName(),  // TODO
+                        lift.getStart(),
+                        lift.getEnd(),
+                        1);     // TODO
+                newEdge.addLift(lift);
+                edges.add(newEdge);
+            }
+
+            //edges.add(lift.getEdge()); // no... should be creating an edge with the lifts
         }
 
         // Runs
         for (Run run : mRuns) {
-            edges.add(run.getEdge());
+
+            // Check if there is an edge with the same start and end nodes
+            boolean edgeExists = false;
+            for (Edge e : edges) {
+                if ((e.getSource() == run.getStart())
+                        && (e.getDestination() == run.getEnd())) {
+                    e.addRun(run);
+                }
+            }
+            if (!edgeExists) {
+                // Create new edge
+                Edge newEdge = new Edge(
+                        run.getName(),  // TODO
+                        run.getStart(),
+                        run.getEnd(),
+                        1);     // TODO
+                newEdge.addRun(run);
+                edges.add(newEdge);
+            }
+
+//            edges.add(run.getEdge());
         }
 
         return edges;

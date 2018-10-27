@@ -77,9 +77,9 @@ public class Dijkstra {
         return neighbors;
     }
 
-    private Node getMinimum(Set<Node> Nodees) {
+    private Node getMinimum(Set<Node> nodes) {
         Node minimum = null;
-        for (Node Node : Nodees) {
+        for (Node Node :nodes) {
             if (minimum == null) {
                 minimum = Node;
             } else {

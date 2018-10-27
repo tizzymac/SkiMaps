@@ -1,6 +1,7 @@
 package tizzy.skimapp.ResortModel;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Edge implements Serializable {
@@ -18,6 +19,9 @@ public class Edge implements Serializable {
         this.mSource = source;
         this.mDestination = destination;
         this.mWeight = weight;
+
+        this.mRuns = new HashSet<>();
+        this.mLifts = new HashSet<>();
     }
 
     public String getId() {
@@ -50,5 +54,13 @@ public class Edge implements Serializable {
 
     public Set<Run> getRuns() {
         return mRuns;
+    }
+
+    public void addRun(Run run) {
+        mRuns.add(run);
+    }
+
+    public void addLift(Lift lift) {
+        mLifts.add(lift);
     }
 }

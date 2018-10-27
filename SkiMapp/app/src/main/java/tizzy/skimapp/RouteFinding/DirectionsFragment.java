@@ -73,12 +73,12 @@ public class DirectionsFragment extends Fragment {
                 dijkstra.execute(start);
                 LinkedList<Node> path = dijkstra.getPath(end);
 
-                // Display
-//                String route = "";
-//                for (Node n : path) {
-//                    route = route + n.getId();
-//                }
-                mRoute.setText(runsAndLifts(path));
+                if (path == null) {
+                    // What is going on here...
+                    mRoute.setText("This route is not possible with your constraints.");
+                } else {
+                    mRoute.setText(runsAndLifts(path));
+                }
             }
         });
 

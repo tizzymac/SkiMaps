@@ -10,7 +10,7 @@ public class Run implements Serializable {
 
     private String mName, mLevel;
     private Node mStart, mEnd;
-    private Edge mEdge;
+    //private Edge mEdge;
 
     public Run(String name, String level, Node start, Node end) {
         this.mName = name;
@@ -18,7 +18,7 @@ public class Run implements Serializable {
         this.mStart = start;
         this.mEnd = end;
 
-        this.mEdge = new Edge(name, start, end, edgeWeight());
+        //this.mEdge = new Edge(name, start, end, edgeWeight());
     }
 
     public String getName() {
@@ -29,8 +29,12 @@ public class Run implements Serializable {
         return mLevel;
     }
 
-    public Edge getEdge() {
-        return mEdge;
+    public Node getStart() {
+        return mStart;
+    }
+
+    public Node getEnd() {
+        return mEnd;
     }
 
     private int edgeWeight() {
