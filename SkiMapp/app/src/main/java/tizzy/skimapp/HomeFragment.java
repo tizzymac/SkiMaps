@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment {
     private Button mSettingsButton;
     private Button mInfoButton;
     private Button mDirectionsButton;
+    private Button mMapButton;
     private SharedPreferences mSharedPref;
 
     Resort mResort;
@@ -86,6 +87,17 @@ public class HomeFragment extends Fragment {
                 // Get level from resort xml
                 ""
         );
+
+        mMapButton = view.findViewById(R.id.mapButton);
+        mMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Open OSM Map View
+                Intent intent = MapActivity.newIntent(getActivity());
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

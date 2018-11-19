@@ -8,17 +8,21 @@
     android:background="@color/colorPrimaryDark">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="top"
         android:text="@string/settings"
         android:textAlignment="center"
-        android:textColor="#EDB147"
-        android:textSize="30sp"/>
+        android:textColor="@color/colorPrimary"
+        android:textSize="40sp"
+        android:layout_margin="20dp"/>
 
     <ListView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        android:layout_margin="20dp"
         android:id="@android:id/list">
     </ListView>
 
@@ -27,6 +31,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/set_level"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:layout_margin="20dp"
         />
 
 </LinearLayout>

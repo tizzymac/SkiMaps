@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<SkiResort>
+    <Nodes>
+        <Node
+            id="1"
+            x="1"
+            y="1"
+            z="2" />
+        <Node
+            id="2"
+            x="4"
+            y="3"
+            z="6" />
+        <Node
+            id="3"
+            x="7"
+            y="2"
+            z="5" />
+        <Node
+            id="4"
+            x="6"
+            y="1"
+            z="2" />
+        <Node
+            id="5"
+            x="5"
+            y="2"
+            z="4" />
+        <Node
+            id="6"
+            x="6"
+            y="3"
+            z="4" />
+    </Nodes>
+    <Lifts>
+        <Lift
+            name="BigLift"
+            start="1"
+            end="4" />
+        <Lift
+            name="MediumLift"
+            start="1"
+            end="2" />
+        <Lift
+            name="LittleLift"
+            start="2"
+            end="3" />
+    </Lifts>
+    <Runs>
+        <Run
+            name="Run 1"
+            start="2"
+            end="1"
+            level="Black" />
+        <Run
+            name="Run 2"
+            start="3"
+            end="2"
+            level="Black" />
+        <Run
+            name="Run 3"
+            start="3"
+            end="2"
+            level="Black" />
+        <Run
+            name="Run 4"
+            start="3"
+            end="2"
+            level="Blue" />
+        <Run
+            name="Run 5"
+            start="3"
+            end="4"
+            level="Green" />
+        <Run
+            name="Run 6"
+            start="4"
+            end="6"
+            level="Green" />
+        <Run
+            name="Run 7"
+            start="4"
+            end="5"
+            level="Black" />
+        <Run
+            name="Run 8"
+            start="4"
+            end="5"
+            level="Blue" />
+        <Run
+            name="Run 9"
+            start="6"
+            end="5"
+            level="Green" />
+        <Run
+            name="Run 10"
+            start="6"
+            end="1"
+            level="Black" />
+        <Run
+            name="Run 11"
+            start="6"
+            end="2"
+            level="Blue" />
+        <Run
+            name="Run 12"
+            start="5"
+            end="1"
+            level="Green" />
+        <Run
+            name="Run 13"
+            start="5"
+            end="1"
+            level="Blue" />
+    </Runs>
+    <Facilities>
+        <Facility
+            type="Restaurant"
+            name="Pizza Restaurant"
+            location="5"/>
+    </Facilities>
+</SkiResort>

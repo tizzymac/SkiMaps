@@ -8,17 +8,15 @@ import java.io.Serializable;
 
 public class Run implements Serializable {
 
-    private String mName, mLevel;
+    private String mName; //, mLevel;
+    private SkiLevel mLevel;
     private Node mStart, mEnd;
-    //private Edge mEdge;
 
     public Run(String name, String level, Node start, Node end) {
         this.mName = name;
-        this.mLevel = level;
+        this.mLevel = new SkiLevel(level);
         this.mStart = start;
         this.mEnd = end;
-
-        //this.mEdge = new Edge(name, start, end, edgeWeight());
     }
 
     public String getName() {
@@ -26,7 +24,7 @@ public class Run implements Serializable {
     }
 
     public String getLevel() {
-        return mLevel;
+        return mLevel.getLevelString();
     }
 
     public Node getStart() {
@@ -44,5 +42,13 @@ public class Run implements Serializable {
                         (mEnd.getCoords().getX() - mStart.getCoords().getX())^2 +
                                 (mEnd.getCoords().getY() - mStart.getCoords().getY())^2 +
                                 (mEnd.getCoords().getZ() - mStart.getCoords().getZ())^2 ));
+    }
+
+    public Boolean isWithinLevel(String level) {
+        SkiLevel skiersLevel = new SkiLevel(level);
+        if (mLevel.getLevelNumber() <= skiersLevel.getLevelNumber()) {
+            return true;
+        }
+        return false;
     }
 }

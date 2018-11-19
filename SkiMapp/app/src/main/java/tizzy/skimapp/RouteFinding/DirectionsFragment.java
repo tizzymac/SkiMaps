@@ -94,14 +94,25 @@ public class DirectionsFragment extends Fragment {
             Edge edge = getEdgeFromNodes(path.get(i), path.get(i+1));
             if (edge != null) {
                 // TODO Edge can have multiple runs/lifts
-                route = route + edge.getId() + "\n";
+                //route = route + edge.getId() + "\n";
+
                 if (edge.getRuns() != null) {
-                    // TODO why are runs all null? Are they not getting set right?
                     // Print run level
                     for (Run r : edge.getRuns()) {
-                        route = route + "  " + r.getLevel() + "\n";
+                        if (r.isWithinLevel(mSkiAbility)) {
+                            route = route + r.getName() + " : " + r.getLevel() + " | ";
+                        }
                     }
+                    route = route + "\n";
                 }
+
+                if (edge.getLifts() != null) {
+                    for (Lift lift : edge.getLifts()) {
+                        route = route + lift.getName() + " | ";
+                    }
+                    route = route + "\n";
+                }
+
             }
         }
 

@@ -3,60 +3,94 @@
     <Nodes>
         <Node
             id="1"
-            x="1"
-            y="1"
-            z="2" />
+            x="39.197746"
+            y="-106.969734"
+            z="3"
+            desc="Bottom of SK"/>
         <Node
             id="2"
-            x="4"
-            y="3"
-            z="6" />
+            x="39.187735"
+            y="-106.972137"
+            z="6"
+            desc="Top of SK and VE"/>
         <Node
             id="3"
-            x="5"
-            y="2"
-            z="4" />
+            x="39.208255"
+            y="-106.949993"
+            z="1"
+            desc="Bottom of VE"/>
         <Node
             id="4"
-            x="6"
-            y="1"
-            z="2" />
+            x="39.195352"
+            y="-106.967846"
+            z="4"
+            desc="Promenade joins Fast Draw" />
+        <!-- Banzai Ridge -->
+        <Node
+            id="5"
+            x="39.188267"
+            y="-106.970678"
+            z="4"
+            desc="Start of Fast Draw" />
+        <Node
+            id="6"
+            x="39.188766"
+            y="-106.968962"
+            z="4"
+            desc="Start of Ute Chute" />
+        <Node
+            id="7"
+            x="39.189198"
+            y="-106.967846"
+            z="4"
+            desc="Start of Moonshine" />
+        <Node
+            id="8"
+            x="39.189697"
+            y="-106.966387"
+            z="4"
+            desc="Start of Coney Glade" />
+        <Node
+            id="9"
+            x="39.190097"
+            y="-106.965099"
+            z="4"
+            desc="Start of Cabin" />
+
     </Nodes>
     <Lifts>
         <Lift
-            name="BigLift"
+            name="Sam's Knob"
             start="1"
             end="2" />
         <Lift
-            name="LittleLift"
-            start="4"
-            end="3" />
+            name="Village Express"
+            start="3"
+            end="2" />
     </Lifts>
     <Runs>
+        <!-- Sam's Knob -->
         <Run
-            name="Run 1"
+            name="Zugspitze"
             start="2"
             end="1"
             level="Black" />
         <Run
-            name="Run 2"
+            name="Promenade"
             start="2"
-            end="3"
-            level="Green" />
-        <Run
-            name="Run 3"
-            start="3"
-            end="4"
-            level="Blue" />
-        <Run
-            name="Run 4"
-            start="3"
             end="4"
             level="Black" />
         <Run
-            name="Run 5"
-            start="3"
+            name="Fast Draw"
+            start="5"
             end="1"
+            midpoints="4"
+            level="Black" />
+        <Run
+            name="Banzai Ridge"
+            start="2"
+            end=""
+            midpoints="5,6,7,8,9"
             level="Blue" />
     </Runs>
 </SkiResort>

@@ -15,40 +15,54 @@
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="#EDB147"
-        android:textSize="30sp"/>
+        android:textSize="40sp"/>
 
     <Button
         android:id="@+id/directionsButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#EDB147"
+        android:textColor="@color/colorPrimaryDark"
         android:text="@string/directions"
         android:textSize="24sp"
         android:layout_margin="20dp"/>
 
     <Button
         android:id="@+id/infoButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#EDB147"
+        android:textColor="@color/colorPrimaryDark"
         android:text="@string/info_lookup"
         android:textSize="24sp"
         android:layout_margin="20dp"/>
 
     <Button
         android:id="@+id/emergencyButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#EDB147"
+        android:textColor="@color/colorPrimaryDark"
         android:text="@string/emergency"
         android:textSize="24sp"
         android:layout_margin="20dp"/>
 
     <Button
-        android:id="@+id/settingsButton"
-        android:layout_width="wrap_content"
+        android:id="@+id/mapButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#EDB147"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/map"
+        android:textSize="24sp"
+        android:layout_margin="20dp"/>
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EDB147"
+        android:textColor="@color/colorPrimaryDark"
         android:text="SETTINGS"
         android:textSize="24sp"
         android:layout_margin="20dp"/>

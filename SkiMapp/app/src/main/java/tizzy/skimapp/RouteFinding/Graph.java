@@ -3,6 +3,7 @@ package tizzy.skimapp.RouteFinding;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -25,17 +26,19 @@ public class Graph implements Serializable {
 
         if (maxLevel.equals("Green")) {
             // Remove all Blacks and Blues from edges
-            for (Edge e : edges) {
+            for (Iterator<Edge> iterator = edges.iterator(); iterator.hasNext();) {
+                Edge e = iterator.next();
                 Set<Run> allRuns = e.getRuns();
                 if (allRuns != null) {
-                    for (Run r : allRuns) {
+                    for (Iterator<Run> runIterator = allRuns.iterator(); runIterator.hasNext();) {
+                        Run r = runIterator.next();
                         if (!r.getLevel().equals("Green")) {
-                            e.getRuns().remove(r);
+                            runIterator.remove();
                         }
                     }
                     if ((e.getRuns().isEmpty()) && (e.getLifts().isEmpty())) {
                         // Remove the edge all together
-                        edges.remove(e);
+                        iterator.remove();
                     }
                 }
             }
@@ -43,17 +46,20 @@ public class Graph implements Serializable {
 
         if (maxLevel.equals("Blue")) {
             // Remove all Black runs
-            for (Edge e : edges) {
+            for (Iterator<Edge> iterator = edges.iterator(); iterator.hasNext();) {
+                //for (Edge e : edges) {
+                Edge e = iterator.next();
                 Set<Run> allRuns = e.getRuns();
                 if (allRuns != null) {
-                    for (Run r : allRuns) {
+                    for (Iterator<Run> runIterator = allRuns.iterator(); runIterator.hasNext();) {
+                        Run r = runIterator.next();
                         if (r.getLevel().equals("Black")) {
-                            e.getRuns().remove(r);
+                            runIterator.remove();
                         }
                     }
                     if ((e.getRuns().isEmpty()) && (e.getLifts().isEmpty())) {
                         // Remove the edge all together
-                        edges.remove(e);
+                        iterator.remove();
                     }
                 }
             }

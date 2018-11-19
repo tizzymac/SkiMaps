@@ -3,51 +3,79 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="top"
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/where_to"
-        android:textAlignment="center"
-        android:textColor="#EDB147"
-        android:textSize="30sp"/>
-
-    <EditText
-        android:id="@+id/where_to"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/where_from"
-        android:textAlignment="center"
-        android:textColor="#EDB147"
-        android:textSize="30sp"/>
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/where_to"
+            android:textAlignment="center"
+            android:textColor="#EDB147"
+            android:textSize="26sp"
+            android:layout_margin="20dp"/>
 
-    <EditText
-        android:id="@+id/where_from"
+        <EditText
+            android:id="@+id/where_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_margin="12dp"
+            android:textSize="24sp"
+            android:textAlignment="viewEnd"/>
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/where_from"
+            android:textAlignment="center"
+            android:textColor="#EDB147"
+            android:textSize="26sp"
+            android:layout_margin="20dp"/>
+
+        <EditText
+            android:id="@+id/where_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_margin="12dp"
+            android:textSize="24sp"
+            android:textAlignment="viewEnd"/>
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/go_button"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/go" />
-
+        android:background="#EDB147"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/go"
+        android:textSize="20sp"
+        android:layout_margin="12dp"/>
+    
     <TextView
         android:id="@+id/route"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:gravity="bottom"
         android:textAlignment="center"
-        android:textColor="#EDB147"
-        android:textSize="30sp"/>
+        android:textColor="@color/colorPrimaryDark"
+        android:background="#7398b9"
+        android:textSize="24sp"/>
 
 </LinearLayout>
