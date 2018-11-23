@@ -78,4 +78,12 @@
         android:background="#7398b9"
         android:textSize="24sp"/>
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_view">
+
+
+    </ListView>
+
 </LinearLayout>
