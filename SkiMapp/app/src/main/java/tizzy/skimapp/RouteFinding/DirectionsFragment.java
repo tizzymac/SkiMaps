@@ -30,6 +30,7 @@ public class DirectionsFragment extends Fragment {
 
     private Button mGoButton;
     private Button mBathroomButton;
+    private Button mFoodButton;
     private EditText mToInput;
     private EditText mFromInput;
     private TextView mRoute;
@@ -57,6 +58,52 @@ public class DirectionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_directions, container, false);
 
+        mBathroomButton = view.findViewById(R.id.bathroom);
+        mBathroomButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Find shortest route to a bathroom
+
+                // Pretend current node is 2
+                FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
+                Path path = facilityFinder.pathToNearestFacility(mResort.getNodes().get(1), "Restrooms");
+
+                if (path == null) {
+                    mRoute.setText("This route is not possible with your constraints.");
+                } else {
+                    if (path.getDistance() == 1) {
+                        mRoute.setText("You are already here!");
+                    } else {
+                        mRoute.setText(path.getRunsAndLifts(mResort, mSkiAbility));
+                    }
+                }
+            }
+        });
+
+        mFoodButton = view.findViewById(R.id.food);
+        mFoodButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Find shorest route to a restaurant
+
+                // Pretend current node is 2
+                FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
+                Path path = facilityFinder.pathToNearestFacility(mResort.getNodes().get(1), "Restaurant");
+
+                if (path.getDistance() == 0) {
+                    mRoute.setText("This route is not possible with your constraints.");
+                } else {
+                    if (path.getDistance() == 1) {
+                        mRoute.setText("You are already here!");
+                    } else {
+                        mRoute.setText(path.getRunsAndLifts(mResort, mSkiAbility));
+                    }
+                }
+            }
+        });
+
         mToInput = view.findViewById(R.id.where_to);
         mFromInput = view.findViewById(R.id.where_from);
         mRoute = view.findViewById(R.id.route);
@@ -77,25 +124,6 @@ public class DirectionsFragment extends Fragment {
                 Path path = dijkstra.getPath(end);
 
                 // TODO Display route in a list view
-                if (path == null) {
-                    mRoute.setText("This route is not possible with your constraints.");
-                } else {
-                    mRoute.setText(path.getRunsAndLifts(mResort, mSkiAbility));
-                }
-            }
-        });
-
-        mBathroomButton = view.findViewById(R.id.bathroom);
-        mBathroomButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // Find shortest route to a bathroom
-
-                // Pretend current node is 1
-                FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
-                Path path = facilityFinder.pathToNearestBathroom(mResort.getNodes().get(1));
-
                 if (path == null) {
                     mRoute.setText("This route is not possible with your constraints.");
                 } else {

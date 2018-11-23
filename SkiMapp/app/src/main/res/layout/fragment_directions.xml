@@ -7,6 +7,26 @@
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark">
 
+    <Button
+        android:id="@+id/bathroom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bathroom"
+        android:background="#EDB147"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:layout_margin="12dp"/>
+
+    <Button
+        android:id="@+id/food"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/food"
+        android:background="#EDB147"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:layout_margin="12dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,16 +85,6 @@
         android:background="#EDB147"
         android:textColor="@color/colorPrimaryDark"
         android:text="@string/go"
-        android:textSize="20sp"
-        android:layout_margin="12dp"/>
-
-    <Button
-        android:id="@+id/bathroom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/bathroom"
-        android:background="#EDB147"
-        android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         android:layout_margin="12dp"/>
     

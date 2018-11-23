@@ -18,6 +18,15 @@ public class Facility implements Serializable {
         return mType;
     }
 
+    public boolean hasType(String type) {
+        switch (type) {
+            case "Restaurant" : return (mType.equals("Restaurant"));
+            // Restaurants assumed to have restrooms
+            case "Restrooms" :  return true;
+            default:            return false;
+        }
+    }
+
     public String getName() {
         return mName;
     }

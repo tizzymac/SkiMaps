@@ -33,5 +33,6 @@
     <string name="where_from">Where from?</string>
     <string name="go">GO</string>
     <string name="bathroom">I need to pee!</string>
+    <string name="food">I need food!</string>
 
 </resources>

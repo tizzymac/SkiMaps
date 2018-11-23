@@ -19,11 +19,16 @@ public class Path {
     }
 
     public int getDistance() {
+        if (mNodePath == null) {
+            return 0;
+        }
+
         // Temporary
         return mNodePath.size();
     }
 
     public String getRunsAndLifts(Resort resort, String mSkiAbility) {
+
         int l = mNodePath.size();
         String route = "Start: " + mNodePath.get(0) + "\n\n";
 

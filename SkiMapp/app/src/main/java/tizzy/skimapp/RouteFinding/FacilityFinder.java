@@ -18,21 +18,32 @@ public class FacilityFinder {
     }
 
     // Find nearest bathroom
-    public Path pathToNearestBathroom(Node start) {
+    public Path pathToNearestFacility(Node start, String type) {
         
         int shortest = -1;
         Path shortestPath = new Path();
 
         for (Facility facility : mResort.getFacilities()) {
-            // Calculate path from start node to that facility
-            Dijkstra dijkstra = new Dijkstra(mGraph);
-            dijkstra.execute(start);
-            Path path = dijkstra.getPath(facility.getLocation());
-            
-            // Check it's distance
-            if ((shortest > path.getDistance()) || (shortest == -1)) {
-                shortest = path.getDistance();
-                shortestPath = path;
+            if (facility.hasType(type)) {
+                // Check if there are facilities at start node
+                if (facility.getLocation() == start) {
+                    LinkedList<Node> pathList = new LinkedList<>();
+                    pathList.add(start);
+                    return new Path(pathList);
+                }
+
+                // Calculate path from start node to that facility
+                Dijkstra dijkstra = new Dijkstra(mGraph);
+                dijkstra.execute(start);
+                Path path = dijkstra.getPath(facility.getLocation());
+
+                if (path != null) {
+                    // Check it's distance
+                    if ((shortest > path.getDistance()) || (shortest == -1)) {
+                        shortest = path.getDistance();
+                        shortestPath = path;
+                    }
+                }
             }
         }
         
