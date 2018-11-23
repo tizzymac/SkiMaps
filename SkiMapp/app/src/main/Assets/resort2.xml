@@ -118,5 +118,13 @@
             type="Restaurant"
             name="Pizza Restaurant"
             location="5"/>
+        <Facility
+            type="Restaurant"
+            name="Hot Cocoa"
+            location="1" />
+        <Facility
+            type="Restrooms"
+            name=""
+            location="3" />
     </Facilities>
 </SkiResort>

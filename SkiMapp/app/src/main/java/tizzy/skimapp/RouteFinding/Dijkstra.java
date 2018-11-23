@@ -10,7 +10,9 @@ import java.util.Map;
 import java.util.Set;
 
 import tizzy.skimapp.ResortModel.Edge;
+import tizzy.skimapp.ResortModel.Facility;
 import tizzy.skimapp.ResortModel.Node;
+import tizzy.skimapp.ResortModel.Path;
 
 public class Dijkstra {
 
@@ -108,7 +110,7 @@ public class Dijkstra {
      * This method returns the path from the source to the selected target and
      * NULL if no path exists
      */
-    public LinkedList<Node> getPath(Node target) {
+    public Path getPath(Node target) {
         LinkedList<Node> path = new LinkedList<Node>();
         Node step = target;
         // check if a path exists
@@ -122,6 +124,6 @@ public class Dijkstra {
         }
         // Put it into the correct order
         Collections.reverse(path);
-        return path;
+        return new Path(path);
     }
 }

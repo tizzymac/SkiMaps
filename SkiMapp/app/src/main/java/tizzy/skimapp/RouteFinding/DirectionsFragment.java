@@ -13,8 +13,10 @@ import java.util.LinkedList;
 
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Edge;
+import tizzy.skimapp.ResortModel.Facility;
 import tizzy.skimapp.ResortModel.Lift;
 import tizzy.skimapp.ResortModel.Node;
+import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.ResortModel.Run;
 
@@ -26,7 +28,8 @@ public class DirectionsFragment extends Fragment {
     private Graph mResortGraph;
     private String mSkiAbility;
 
-    private Button setLevelButton;
+    private Button mGoButton;
+    private Button mBathroomButton;
     private EditText mToInput;
     private EditText mFromInput;
     private TextView mRoute;
@@ -58,8 +61,8 @@ public class DirectionsFragment extends Fragment {
         mFromInput = view.findViewById(R.id.where_from);
         mRoute = view.findViewById(R.id.route);
 
-        setLevelButton = view.findViewById(R.id.go_button);
-        setLevelButton.setOnClickListener(new View.OnClickListener() {
+        mGoButton = view.findViewById(R.id.go_button);
+        mGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -71,13 +74,32 @@ public class DirectionsFragment extends Fragment {
                 // Calculate route
                 Dijkstra dijkstra = new Dijkstra(mResortGraph);
                 dijkstra.execute(start);
-                LinkedList<Node> path = dijkstra.getPath(end);
+                Path path = dijkstra.getPath(end);
 
                 // TODO Display route in a list view
                 if (path == null) {
                     mRoute.setText("This route is not possible with your constraints.");
                 } else {
-                    mRoute.setText(runsAndLifts(path));
+                    mRoute.setText(path.getRunsAndLifts(mResort, mSkiAbility));
+                }
+            }
+        });
+
+        mBathroomButton = view.findViewById(R.id.bathroom);
+        mBathroomButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Find shortest route to a bathroom
+
+                // Pretend current node is 1
+                FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
+                Path path = facilityFinder.pathToNearestBathroom(mResort.getNodes().get(1));
+
+                if (path == null) {
+                    mRoute.setText("This route is not possible with your constraints.");
+                } else {
+                    mRoute.setText(path.getRunsAndLifts(mResort, mSkiAbility));
                 }
             }
         });
@@ -85,49 +107,7 @@ public class DirectionsFragment extends Fragment {
         return view;
     }
 
-    private String runsAndLifts(LinkedList<Node> path) {
-        int l = path.size();
-        String route = "Start: " + path.get(0) + "\n\n";
 
-        for (int i = 0; i < l-1; i++) {
-            // Get run/lift from pairs of nodes
-            Edge edge = getEdgeFromNodes(path.get(i), path.get(i+1));
-            if (edge != null) {
-                // TODO Edge can have multiple runs/lifts
-                //route = route + edge.getId() + "\n";
 
-                if (edge.getRuns() != null) {
-                    // Print run level
-                    for (Run r : edge.getRuns()) {
-                        if (r.isWithinLevel(mSkiAbility)) {
-                            route = route + r.getName() + " : " + r.getLevel() + " | ";
-                        }
-                    }
-                    route = route + "\n";
-                }
 
-                if (edge.getLifts() != null) {
-                    for (Lift lift : edge.getLifts()) {
-                        route = route + lift.getName() + " | ";
-                    }
-                    route = route + "\n";
-                }
-
-            }
-        }
-
-        route = route + "\nEnd: " + path.get(l-1);
-
-        return route;
-    }
-
-    private Edge getEdgeFromNodes(Node start, Node end) {
-
-        for (Edge e : mResort.getEdges()) {
-            if ((e.getSource().equals(start)) && (e.getDestination().equals(end))) {
-                return e;
-            }
-        }
-        return null;
-    }
 }

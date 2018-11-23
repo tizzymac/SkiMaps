@@ -67,6 +67,16 @@
         android:text="@string/go"
         android:textSize="20sp"
         android:layout_margin="12dp"/>
+
+    <Button
+        android:id="@+id/bathroom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bathroom"
+        android:background="#EDB147"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:layout_margin="12dp"/>
     
     <TextView
         android:id="@+id/route"

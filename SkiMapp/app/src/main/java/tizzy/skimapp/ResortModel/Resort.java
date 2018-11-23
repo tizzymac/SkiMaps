@@ -27,6 +27,7 @@ public class Resort implements Serializable {
     private tizzy.skimapp.ResortModel.Node[] mNodes;
     private List<Lift> mLifts;
     private List<Run> mRuns;
+    private List<Facility> mFacilities;
     // mountains
 
     public static Resort get(Context context) {
@@ -39,6 +40,7 @@ public class Resort implements Serializable {
     public Resort(Context context) {
         mLifts = new ArrayList<>();
         mRuns = new ArrayList<>();
+        mFacilities = new ArrayList<>();
 
         // Get Input Streams
         InputStream resortIS = null;
@@ -62,6 +64,8 @@ public class Resort implements Serializable {
     public List<Lift> getLifts() {
         return mLifts;
     }
+
+    public List<Facility> getFacilities() { return mFacilities; }
 
     private void readResortFromXML(InputStream resortIS) {
 
@@ -124,6 +128,23 @@ public class Resort implements Serializable {
                     ));
                 }
             }
+
+            // Facilities
+            NodeList nFacList = doc.getElementsByTagName("Facility");
+            for (int i = 0; i < nFacList.getLength(); i++) {
+                Node nNode = nFacList.item(i);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element facElement = (Element) nNode;
+
+                    // Add facility to list
+                    mFacilities.add(new Facility(
+                            facElement.getAttribute("type"),
+                            facElement.getAttribute("name"),
+                            mNodes[Integer.parseInt(facElement.getAttribute("location")) - 1]
+                    ));
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

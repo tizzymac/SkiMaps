@@ -15,8 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.osmdroid.config.Configuration;
+import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
+import org.osmdroid.util.MapTileIndex;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 
@@ -39,10 +41,22 @@ public class MapFragment extends Fragment {
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
         mMapView = view.findViewById(R.id.mapview);
-        mMapView.setTileSource(TileSourceFactory.MAPNIK);
+        //mMapView.setTileSource(TileSourceFactory.MAPNIK);
+        mMapView.setTileSource(new OnlineTileSourceBase("USGS Topo", 0,
+                18, 256, "",
+                new String[] { "http://basemap.nationalmap.gov/ArcGIS/rest/services/USGSTopo/MapServer/tile/" }) {
+            @Override
+            public String getTileURLString(long pMapTileIndex) {
+                return getBaseUrl()
+                        + MapTileIndex.getZoom(pMapTileIndex)
+                        + "/" + MapTileIndex.getY(pMapTileIndex)
+                        + "/" + MapTileIndex.getX(pMapTileIndex)
+                        + mImageFilenameEnding;
+            }
+        });
         mMapView.setBuiltInZoomControls(true);
         mMapController = (MapController) mMapView.getController();
-        mMapController.setZoom(13);
+        mMapController.setZoom(3);
         GeoPoint gPt = new GeoPoint(51500000, -150000);
         mMapController.setCenter(gPt);
 
