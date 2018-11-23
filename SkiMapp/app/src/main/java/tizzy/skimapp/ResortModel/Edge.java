@@ -24,6 +24,24 @@ public class Edge implements Serializable {
         this.mLifts = new HashSet<>();
     }
 
+    public String getString() {
+        String str = "";
+
+        if (mLifts != null) {
+            for (Lift lift : mLifts) {
+                str = str + "  " + lift.getName();
+            }
+        }
+
+        if (mRuns != null) {
+            for (Run run : mRuns) {
+                str = str + "  " + run.getName();
+            }
+        }
+
+        return str;
+    }
+
     public String getId() {
         return mId;
     }

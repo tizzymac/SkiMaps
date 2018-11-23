@@ -5,20 +5,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.LinkedList;
-
 import tizzy.skimapp.R;
-import tizzy.skimapp.ResortModel.Edge;
-import tizzy.skimapp.ResortModel.Facility;
-import tizzy.skimapp.ResortModel.Lift;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
-import tizzy.skimapp.ResortModel.Run;
 
 public class DirectionsFragment extends Fragment {
     private static final String ARG_RESORT = "resort";
@@ -34,6 +30,7 @@ public class DirectionsFragment extends Fragment {
     private EditText mToInput;
     private EditText mFromInput;
     private TextView mRoute;
+    private ListView mRouteListView;
 
     public static DirectionsFragment newInstance(Resort resort, String skiAbility) {
         Bundle args = new Bundle();
@@ -58,6 +55,10 @@ public class DirectionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_directions, container, false);
 
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        mRouteListView = view.findViewById(R.id.list_view);
+
         mBathroomButton = view.findViewById(R.id.bathroom);
         mBathroomButton.setOnClickListener(new View.OnClickListener() {
 
@@ -75,7 +76,8 @@ public class DirectionsFragment extends Fragment {
                     if (path.getDistance() == 1) {
                         mRoute.setText("You are already here!");
                     } else {
-                        mRoute.setText(path.getRunsAndLifts(mResort, mSkiAbility));
+                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), path, mResort));
+
                     }
                 }
             }
@@ -98,7 +100,7 @@ public class DirectionsFragment extends Fragment {
                     if (path.getDistance() == 1) {
                         mRoute.setText("You are already here!");
                     } else {
-                        mRoute.setText(path.getRunsAndLifts(mResort, mSkiAbility));
+                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), path, mResort));
                     }
                 }
             }
@@ -127,7 +129,7 @@ public class DirectionsFragment extends Fragment {
                 if (path == null) {
                     mRoute.setText("This route is not possible with your constraints.");
                 } else {
-                    mRoute.setText(path.getRunsAndLifts(mResort, mSkiAbility));
+                    mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), path, mResort));
                 }
             }
         });

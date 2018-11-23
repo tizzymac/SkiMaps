@@ -1,6 +1,8 @@
 package tizzy.skimapp.ResortModel;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Path {
 
@@ -25,6 +27,10 @@ public class Path {
 
         // Temporary
         return mNodePath.size();
+    }
+
+    public Node getNode(int i) {
+        return mNodePath.get(i);
     }
 
     public String getRunsAndLifts(Resort resort, String mSkiAbility) {
@@ -64,7 +70,20 @@ public class Path {
         return route;
     }
 
-    private Edge getEdgeFromNodes(Resort resort, Node start, Node end) {
+    public List<Edge> getRoute(Resort resort, String mSkiAbility) {
+        List<Edge> edges = new ArrayList<>();
+
+        int l = mNodePath.size();
+        for (int i = 0; i < l-1; i++) {
+            // Get run/lift from pairs of nodes
+            Edge edge = getEdgeFromNodes(resort, mNodePath.get(i), mNodePath.get(i + 1));
+            // NB edges can have multiple runs/lifts
+            edges.add(edge);
+        }
+        return edges;
+    }
+
+    public Edge getEdgeFromNodes(Resort resort, Node start, Node end) {
 
         for (Edge e : resort.getEdges()) {
             if ((e.getSource().equals(start)) && (e.getDestination().equals(end))) {

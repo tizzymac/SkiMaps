@@ -94,14 +94,14 @@
         android:layout_height="wrap_content"
         android:gravity="bottom"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:background="#7398b9"
+        android:textColor="#EDB147"
         android:textSize="24sp"/>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/list_view">
+        android:id="@+id/list_view"
+        android:background="#EDB147">
 
 
     </ListView>
