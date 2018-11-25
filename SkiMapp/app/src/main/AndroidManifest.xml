@@ -26,7 +26,7 @@
         <activity android:name=".GetInfo.RunInfoActivity"/>
         <activity android:name=".GetInfo.InfoListActivity"/>
         <activity android:name=".RouteFinding.DirectionsActivity"/>
-        <activity android:name=".MapActivity"/>
+        <activity android:name=".Map.MapActivity"/>
 
     </application>
 

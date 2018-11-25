@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import tizzy.skimapp.R;
@@ -43,16 +44,15 @@ public class RouteViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if(convertView == null){
-            convertView = mInflater.inflate(R.layout.list_item_node, null);
+            convertView = mInflater.inflate(R.layout.list_item_route, null);
             holder = new ViewHolder();
-            holder.edgeID = convertView.findViewById(R.id.node_name);
+            holder.edgeID = convertView.findViewById(R.id.name);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        //holder.edgeID.setText(mPath.getNode(position).getId());
         Edge edge = mPath.getEdgeFromNodes(mResort, mPath.getNode(position), mPath.getNode(position+1));
         holder.edgeID.setText(edge.getString());
 

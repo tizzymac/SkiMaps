@@ -28,13 +28,12 @@
 
     <Button
         android:id="@+id/set_level_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/set_level"
-        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EDB147"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
-        android:layout_margin="20dp"
-        />
+        android:textSize="24sp"
+        android:layout_margin="20dp" />
 
 </LinearLayout>

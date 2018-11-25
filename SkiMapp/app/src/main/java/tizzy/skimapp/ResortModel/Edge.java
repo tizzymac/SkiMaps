@@ -29,13 +29,13 @@ public class Edge implements Serializable {
 
         if (mLifts != null) {
             for (Lift lift : mLifts) {
-                str = str + "  " + lift.getName();
+                str = str + lift.getName() + "\n";
             }
         }
 
         if (mRuns != null) {
             for (Run run : mRuns) {
-                str = str + "  " + run.getName();
+                str = str + run.getName() + "\n";
             }
         }
 

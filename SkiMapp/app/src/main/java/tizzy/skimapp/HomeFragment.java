@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import tizzy.skimapp.GetInfo.InfoListActivity;
+import tizzy.skimapp.Map.MapActivity;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.RouteFinding.DirectionsActivity;
 import tizzy.skimapp.Settings.SettingsActivity;

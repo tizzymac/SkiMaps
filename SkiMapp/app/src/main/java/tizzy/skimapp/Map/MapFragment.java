@@ -1,4 +1,4 @@
-package tizzy.skimapp;
+package tizzy.skimapp.Map;
 
 import android.Manifest;
 import android.content.Context;
@@ -10,57 +10,86 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.osmdroid.config.Configuration;
-import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
-import org.osmdroid.util.MapTileIndex;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.OverlayItem;
+import org.osmdroid.views.overlay.ScaleBarOverlay;
+
+import java.util.ArrayList;
+
+import tizzy.skimapp.R;
 
 
 public class MapFragment extends Fragment {
 
     private MapView mMapView;
     private MapController mMapController;
-
     LocationManager locationManager;
+
+    private static final String[] LOCATION_PERMISSIONS = new String[]{
+            android.Manifest.permission.ACCESS_FINE_LOCATION,
+            android.Manifest.permission.ACCESS_COARSE_LOCATION,
+    };
+    private static final int REQUEST_LOCATION_PERMISSIONS = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-        // Handle permissions?
-
-        //load/initialize the osmdroid configuration, this can be done
         Context ctx = getActivity().getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
         mMapView = view.findViewById(R.id.mapview);
-        //mMapView.setTileSource(TileSourceFactory.MAPNIK);
-        mMapView.setTileSource(new OnlineTileSourceBase("USGS Topo", 0,
-                18, 256, "",
-                new String[] { "http://basemap.nationalmap.gov/ArcGIS/rest/services/USGSTopo/MapServer/tile/" }) {
-            @Override
-            public String getTileURLString(long pMapTileIndex) {
-                return getBaseUrl()
-                        + MapTileIndex.getZoom(pMapTileIndex)
-                        + "/" + MapTileIndex.getY(pMapTileIndex)
-                        + "/" + MapTileIndex.getX(pMapTileIndex)
-                        + mImageFilenameEnding;
-            }
-        });
+        mMapView.setTileSource(TileSourceFactory.MAPNIK);
+//        mMapView.setTileSource(new OnlineTileSourceBase("USGS Topo", 0,
+//                18, 256, "",
+//                new String[]{"http://basemap.nationalmap.gov/ArcGIS/rest/services/USGSTopo/MapServer/tile/"}) {
+//            @Override
+//            public String getTileURLString(long pMapTileIndex) {
+//                return getBaseUrl()
+//                        + MapTileIndex.getZoom(pMapTileIndex)
+//                        + "/" + MapTileIndex.getY(pMapTileIndex)
+//                        + "/" + MapTileIndex.getX(pMapTileIndex)
+//                        + mImageFilenameEnding;
+//            }
+//        });
         mMapView.setBuiltInZoomControls(true);
         mMapController = (MapController) mMapView.getController();
-        mMapController.setZoom(3);
-        GeoPoint gPt = new GeoPoint(51500000, -150000);
-        mMapController.setCenter(gPt);
+        mMapController.setZoom(18);
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        // for demo, getLastKnownLocation from GPS only, not from NETWORK
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            System.out.println("Permission not granted");
+            requestPermissions(LOCATION_PERMISSIONS, REQUEST_LOCATION_PERMISSIONS);
+        } else {
+            // Permission has already been granted
+            Location lastLocation = locationManager.getLastKnownLocation(
+                    LocationManager.GPS_PROVIDER);
+            if (lastLocation != null) {
+                updateLoc(lastLocation);
+                String loc = lastLocation.toString();
+                Toast.makeText(getActivity(), loc, Toast.LENGTH_LONG);
+            }
+
+            // TODO how to get current location?
+        }
+
+        // Add Scale Bar
+        ScaleBarOverlay myScaleBarOverlay = new ScaleBarOverlay(mMapView);
+        mMapView.getOverlays().add(myScaleBarOverlay);
 
         return view;
     }
@@ -69,25 +98,23 @@ public class MapFragment extends Fragment {
 
         @Override
         public void onLocationChanged(Location location) {
-            // TODO Auto-generated method stub
             updateLoc(location);
+            String loc = location.toString();
+            Toast.makeText(getActivity(), loc, Toast.LENGTH_LONG);
         }
 
         @Override
         public void onProviderDisabled(String provider) {
-            // TODO Auto-generated method stub
 
         }
 
         @Override
         public void onProviderEnabled(String provider) {
-            // TODO Auto-generated method stub
 
         }
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
-            // TODO Auto-generated method stub
 
         }
     };
@@ -121,6 +148,5 @@ public class MapFragment extends Fragment {
 
         mMapView.invalidate();
     }
-
-
 }
+

@@ -1,5 +1,6 @@
 package tizzy.skimapp.RouteFinding;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -32,6 +33,8 @@ public class DirectionsFragment extends Fragment {
     private TextView mRoute;
     private ListView mRouteListView;
 
+    private SkiersLocation mCurrentLocation;
+
     public static DirectionsFragment newInstance(Resort resort, String skiAbility) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_RESORT, resort);
@@ -54,8 +57,8 @@ public class DirectionsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_directions, container, false);
-
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
         mRouteListView = view.findViewById(R.id.list_view);
 

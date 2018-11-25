@@ -1,9 +1,11 @@
-package tizzy.skimapp;
+package tizzy.skimapp.Map;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+
+import tizzy.skimapp.SingleFragmentActivity;
 
 
 public class MapActivity extends SingleFragmentActivity {

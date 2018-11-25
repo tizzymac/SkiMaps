@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 
 import tizzy.skimapp.HomeActivity;
 import tizzy.skimapp.R;
@@ -17,7 +18,8 @@ import tizzy.skimapp.R;
 
 public class SettingsFragment extends PreferenceFragment {
 
-    private Button setLevelButton;
+    private Button mSetLevelButton;
+    private ListView mListView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,8 +33,10 @@ public class SettingsFragment extends PreferenceFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        setLevelButton = view.findViewById(R.id.set_level_button);
-        setLevelButton.setOnClickListener(new View.OnClickListener() {
+        mListView = view.findViewById(R.id.list_view);
+
+        mSetLevelButton = view.findViewById(R.id.set_level_button);
+        mSetLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

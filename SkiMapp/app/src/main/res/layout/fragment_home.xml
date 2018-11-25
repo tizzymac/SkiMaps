@@ -59,11 +59,11 @@
 
     <Button
         android:id="@+id/settingsButton"
+        android:text="SETTINGS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#EDB147"
         android:textColor="@color/colorPrimaryDark"
-        android:text="SETTINGS"
         android:textSize="24sp"
         android:layout_margin="20dp"/>
 
