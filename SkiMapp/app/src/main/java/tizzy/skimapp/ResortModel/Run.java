@@ -39,9 +39,9 @@ public class Run implements Serializable {
         // Distance between start and end nodes
         return (int) Math.round(
                 Math.sqrt(
-                        (mEnd.getCoords().getX() - mStart.getCoords().getX())^2 +
-                                (mEnd.getCoords().getY() - mStart.getCoords().getY())^2 +
-                                (mEnd.getCoords().getZ() - mStart.getCoords().getZ())^2 ));
+                        Math.pow((mEnd.getCoords().getX() - mStart.getCoords().getX()), 2) +
+                        Math.pow((mEnd.getCoords().getY() - mStart.getCoords().getY()), 2) +
+                        Math.pow((mEnd.getCoords().getZ() - mStart.getCoords().getZ()), 2) ));
     }
 
     public Boolean isWithinLevel(String level) {

@@ -34,5 +34,6 @@
     <string name="go">GO</string>
     <string name="bathroom">I need to pee!</string>
     <string name="food">I need food!</string>
+    <string name="get_loc">Get My Location</string>
 
 </resources>

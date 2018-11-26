@@ -45,11 +45,11 @@ public class SkiersLocation {
 
     public boolean isAtNode(Node node) {
         // Check if current location is within a radius of 5 meters of the node
-        boolean inLat = (mCurrentLocation.getLatitude() >= node.getCoords().getX() - 5) &&
-            (mCurrentLocation.getLatitude() <= node.getCoords().getX() + 5);
+        boolean inLat = (mCurrentLocation.getLatitude() >= node.getCoords().getX() - 0.005) &&
+            (mCurrentLocation.getLatitude() <= node.getCoords().getX() + 0.005);
 
-        boolean inLon = (mCurrentLocation.getLongitude() >= node.getCoords().getY() - 5) &&
-                (mCurrentLocation.getLongitude() <= node.getCoords().getY() + 5);
+        boolean inLon = (mCurrentLocation.getLongitude() >= node.getCoords().getY() - 0.005) &&
+                (mCurrentLocation.getLongitude() <= node.getCoords().getY() + 0.005);
 
         return inLat && inLon;
     }

@@ -27,7 +27,8 @@ import org.osmdroid.views.overlay.ScaleBarOverlay;
 import java.util.ArrayList;
 
 import tizzy.skimapp.R;
-
+import tizzy.skimapp.ResortModel.Coords;
+import tizzy.skimapp.ResortModel.Node;
 
 public class MapFragment extends Fragment {
 
@@ -62,6 +63,7 @@ public class MapFragment extends Fragment {
 //                        + mImageFilenameEnding;
 //            }
 //        });
+
         mMapView.setBuiltInZoomControls(true);
         mMapController = (MapController) mMapView.getController();
         mMapController.setZoom(18);
@@ -83,8 +85,6 @@ public class MapFragment extends Fragment {
                 String loc = lastLocation.toString();
                 Toast.makeText(getActivity(), loc, Toast.LENGTH_LONG);
             }
-
-            // TODO how to get current location?
         }
 
         // Add Scale Bar
@@ -94,13 +94,31 @@ public class MapFragment extends Fragment {
         return view;
     }
 
+    //--- Stolen from SkiersLocation
+    public boolean isAtNode(Location mCurrentLocation, Node node) {
+        // Check if current location is within a radius of 5 meters of the node
+        boolean inLat = (mCurrentLocation.getLatitude() >= node.getCoords().getX() - 0.005) &&
+                (mCurrentLocation.getLatitude() <= node.getCoords().getX() + 0.005);
+        boolean inLon = (mCurrentLocation.getLongitude() >= node.getCoords().getY() - 0.005) &&
+                (mCurrentLocation.getLongitude() <= node.getCoords().getY() + 0.005);
+        return inLat && inLon;
+    }
+    //---
+
     private LocationListener myLocationListener = new LocationListener() {
 
         @Override
         public void onLocationChanged(Location location) {
             updateLoc(location);
+
             String loc = location.toString();
             Toast.makeText(getActivity(), loc, Toast.LENGTH_LONG);
+
+            // Check if gets to Sam's Knob
+            Node knob = new Node("Knob", new Coords(39.187776, -106.972486, 2.0));
+            if (isAtNode(location, knob)) {
+                Toast.makeText(getActivity(), "AT THE KNOB!", Toast.LENGTH_LONG);
+            }
         }
 
         @Override

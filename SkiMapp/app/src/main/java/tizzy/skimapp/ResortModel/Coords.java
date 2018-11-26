@@ -4,35 +4,23 @@ import java.io.Serializable;
 
 public class Coords implements Serializable {
 
-    private long x, y, z;
+    private double x, y, z;
 
-    public Coords(long x, long y, long z) {
+    public Coords(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public long getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(long x) {
-        this.x = x;
-    }
-
-    public long getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(long y) {
-        this.y = y;
-    }
-
-    public long getZ() {
+    public double getZ() {
         return z;
-    }
-
-    public void setZ(long z) {
-        this.z = z;
     }
 }

@@ -88,9 +88,9 @@ public class Resort implements Serializable {
                     mNodes[i] = new tizzy.skimapp.ResortModel.Node(
                             element.getAttribute("id"),
                             new Coords(
-                                    Integer.parseInt(element.getAttribute("x")),
-                                    Integer.parseInt(element.getAttribute("y")),
-                                    Integer.parseInt(element.getAttribute("z")))
+                                    Double.parseDouble(element.getAttribute("x")),
+                                    Double.parseDouble(element.getAttribute("y")),
+                                    Double.parseDouble(element.getAttribute("z")))
                     );
                 }
             }
