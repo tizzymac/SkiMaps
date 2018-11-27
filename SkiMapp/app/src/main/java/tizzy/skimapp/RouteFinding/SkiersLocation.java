@@ -16,8 +16,8 @@ public class SkiersLocation {
     }
 
     // Update location
-    public void updateLocation() {
-        // TODO
+    public void updateLocation(Location location) {
+        mCurrentLocation = location;
 
     }
 
@@ -32,6 +32,15 @@ public class SkiersLocation {
         return null;
     }
 
+    public boolean isAtNode(Node node) {
+        // Check if current location is within a radius of 5 meters of the node
+        boolean inLat = (mCurrentLocation.getLatitude() >= node.getCoords().getX() - 0.005) &&
+                (mCurrentLocation.getLatitude() <= node.getCoords().getX() + 0.005);
+        boolean inLon = (mCurrentLocation.getLongitude() >= node.getCoords().getY() - 0.005) &&
+                (mCurrentLocation.getLongitude() <= node.getCoords().getY() + 0.005);
+        return inLat && inLon;
+    }
+
     // Return the node the skier is currently at
     // or null if not at node
     public Node getNode() {
@@ -41,16 +50,5 @@ public class SkiersLocation {
             }
         }
         return null;
-    }
-
-    public boolean isAtNode(Node node) {
-        // Check if current location is within a radius of 5 meters of the node
-        boolean inLat = (mCurrentLocation.getLatitude() >= node.getCoords().getX() - 0.005) &&
-            (mCurrentLocation.getLatitude() <= node.getCoords().getX() + 0.005);
-
-        boolean inLon = (mCurrentLocation.getLongitude() >= node.getCoords().getY() - 0.005) &&
-                (mCurrentLocation.getLongitude() <= node.getCoords().getY() + 0.005);
-
-        return inLat && inLon;
     }
 }

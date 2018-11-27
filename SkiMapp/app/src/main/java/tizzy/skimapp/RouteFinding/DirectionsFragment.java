@@ -17,10 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import tizzy.skimapp.R;
-import tizzy.skimapp.ResortModel.Coords;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
@@ -43,7 +41,7 @@ public class DirectionsFragment extends Fragment {
     private Button mGetLocButton;
     private TextView mLocTextView;
 
-    private Location mCurrentLocation;
+    private SkiersLocation mSkiersLocation;
     LocationManager locationManager;
 
     public static DirectionsFragment newInstance(Resort resort, String skiAbility) {
@@ -63,6 +61,7 @@ public class DirectionsFragment extends Fragment {
         mResort = (Resort) getArguments().getSerializable(ARG_RESORT);
         mSkiAbility = getArguments().getString(ARG_SKI_ABILITY);
         mResortGraph = new Graph(mResort.getNodes(), mResort.getEdges(), mSkiAbility);
+        mSkiersLocation = new SkiersLocation(mResort);
     }
 
     @Override
@@ -71,7 +70,6 @@ public class DirectionsFragment extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
 
         mRouteListView = view.findViewById(R.id.list_view);
 
@@ -87,7 +85,8 @@ public class DirectionsFragment extends Fragment {
                 Path path = facilityFinder.pathToNearestFacility(mResort.getNodes().get(1), "Restrooms");
 
                 if (path == null) {
-                    mRoute.setText("This route is not possible with your constraints.");
+                    mRoute.setText("This route is not possible");
+                    // TODO clear mRouteListView
                 } else {
                     if (path.getDistance() == 1) {
                         mRoute.setText("You are already here!");
@@ -111,7 +110,8 @@ public class DirectionsFragment extends Fragment {
                 Path path = facilityFinder.pathToNearestFacility(mResort.getNodes().get(1), "Restaurant");
 
                 if (path.getDistance() == 0) {
-                    mRoute.setText("This route is not possible with your constraints.");
+                    mRoute.setText("This route is not possible");
+                    // TODO clear mRouteListView
                 } else {
                     if (path.getDistance() == 1) {
                         mRoute.setText("You are already here!");
@@ -133,18 +133,20 @@ public class DirectionsFragment extends Fragment {
 
                 // Get start and end nodes
                 // temporarily taking node index as input
-                Node start = mResort.getNodes().get(Integer.parseInt(mToInput.getText().toString()));
-                Node end = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString()));
+                // TODO
+                Node end = mResort.getNodes().get(Integer.parseInt(mToInput.getText().toString())-1);
+                Node start = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString())-1);
 
                 // Calculate route
                 Dijkstra dijkstra = new Dijkstra(mResortGraph);
                 dijkstra.execute(start);
                 Path path = dijkstra.getPath(end);
 
-                // TODO Display route in a list view
                 if (path == null) {
-                    mRoute.setText("This route is not possible with your constraints.");
+                    mRoute.setText("This route is not possible");
+                    // TODO clear mRouteListView
                 } else {
+                    mRoute.setText("");
                     mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), path, mResort));
                 }
             }
@@ -156,10 +158,11 @@ public class DirectionsFragment extends Fragment {
         mGetLocButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mCurrentLocation != null) {
-                    Node currentNode = getNode(mCurrentLocation);
+                if (mSkiersLocation != null) {
+                    Node currentNode = mSkiersLocation.getNode();
                     if (currentNode != null) {
-                        mLocTextView.setText(currentNode.getId());
+                        //mLocTextView.setText(currentNode.getId());
+                        mFromInput.setText(currentNode.getId());
                     } else {
                         mLocTextView.setText("You are not currently at a node");
                     }
@@ -188,14 +191,7 @@ public class DirectionsFragment extends Fragment {
 
         @Override
         public void onLocationChanged(Location location) {
-
-            mCurrentLocation = location;
-
-            // Check if gets to Sam's Knob
-            Node knob = new Node("Knob", new Coords(39.187776, -106.972486, 2.0));
-            if (isAtNode(location, knob)) {
-                Toast.makeText(getActivity(), "AT THE KNOB!", Toast.LENGTH_LONG);
-            }
+            mSkiersLocation.updateLocation(location);
         }
 
         @Override
@@ -213,28 +209,6 @@ public class DirectionsFragment extends Fragment {
 
         }
     };
-
-    //--- Stolen from SkiersLocation
-    public boolean isAtNode(Location location, Node node) {
-        // Check if current location is within a radius of 5 meters of the node
-        boolean inLat = (location.getLatitude() >= node.getCoords().getX() - 0.005) &&
-                (location.getLatitude() <= node.getCoords().getX() + 0.005);
-        boolean inLon = (location.getLongitude() >= node.getCoords().getY() - 0.005) &&
-                (location.getLongitude() <= node.getCoords().getY() + 0.005);
-        return inLat && inLon;
-    }
-
-    // Return the node the skier is currently at
-    // or null if not at node
-    public Node getNode(Location location) {
-        for (Node node : mResort.getNodes()) {
-            if (isAtNode(location, node)) {
-                return node;
-            }
-        }
-        return null;
-    }
-    //---
 
     @Override
     public void onResume() {

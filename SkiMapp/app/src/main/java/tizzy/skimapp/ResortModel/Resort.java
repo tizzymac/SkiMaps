@@ -45,7 +45,7 @@ public class Resort implements Serializable {
         // Get Input Streams
         InputStream resortIS = null;
         try {
-            resortIS = context.getAssets().open("resort2.xml");
+            resortIS = context.getAssets().open("resort.xml");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package tizzy.skimapp.GetInfo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import tizzy.skimapp.ResortModel.Run;
 
 public class RunListFragment extends Fragment {
 
+    private static final String DIALOG_RUN_DETAIL = "DialogRunDetail";
     private static final String ARG_RESORT = "resort";
     private Resort mResort;
 
@@ -68,7 +70,10 @@ public class RunListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), mRun.getName() + " clicked!", Toast.LENGTH_SHORT).show();
+            // Open details
+            FragmentManager manager = getFragmentManager();
+            RunDetailFragment runDialog = RunDetailFragment.newInstance(mRun.getName(), mRun.getLevel());
+            runDialog.show(manager, DIALOG_RUN_DETAIL);
         }
 
         public RunHolder(LayoutInflater inflater, ViewGroup parent) {
