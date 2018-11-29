@@ -10,14 +10,13 @@ public class Lift implements Serializable {
 
     private String mName;
     private Node mStart, mEnd;  // Do we need these?
-    //private Edge mEdge;
+    private LiftStatus mStatus;
 
     public Lift(String name, Node start, Node end) {
         this.mName = name;
         this.mStart = start;
         this.mEnd = end;
-
-        // this.mEdge = new Edge(name, start, end, edgeWeight());
+        this.mStatus = new LiftStatus();
     }
 
     public String getName() {
