@@ -56,6 +56,21 @@
             y="-106.965099"
             z="4"
             desc="Start of Cabin" />
+        <Node
+            id="10"
+            x="39.192125"
+            y="-106.960572"
+            z="3"
+            desc="Sunnyside joins Banzai Ridge" />
+        <Node
+            id="11"
+            x="39.194454"
+            y="-106.958297"
+            z="2"
+            desc="Monks Hood joins Banzai" />
+        <!-- BR -->
+
+
 
     </Nodes>
     <Lifts>
@@ -89,8 +104,13 @@
         <Run
             name="Banzai Ridge"
             start="2"
-            end=""
-            midpoints="5,6,7,8,9"
+            end="11"
+            midpoints="5,6,7,8,9,10"
             level="Blue" />
+        <Run
+            name="Sunnyside"
+            start="2"
+            end="10"
+            level="Blue"/>
     </Runs>
 </SkiResort>

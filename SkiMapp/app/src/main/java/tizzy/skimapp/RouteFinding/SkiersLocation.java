@@ -1,6 +1,9 @@
 package tizzy.skimapp.RouteFinding;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.support.v4.content.ContextCompat;
 
 import tizzy.skimapp.ResortModel.Edge;
 import tizzy.skimapp.ResortModel.Node;
@@ -17,8 +20,7 @@ public class SkiersLocation {
 
     // Update location
     public void updateLocation(Location location) {
-        mCurrentLocation = location;
-
+            mCurrentLocation = location;
     }
 
     // Returns the edge the skier is currently at

@@ -23,4 +23,20 @@
         android:textSize="24sp"
         android:layout_margin="10dp"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/open"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/groomed"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        android:layout_margin="10dp"/>
+
 </LinearLayout>

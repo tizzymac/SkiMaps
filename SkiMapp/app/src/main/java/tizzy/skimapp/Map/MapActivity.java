@@ -12,7 +12,7 @@ public class MapActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new MapFragment();
+        return new MapFragment2();
     }
 
     @Override

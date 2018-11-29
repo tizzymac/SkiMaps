@@ -72,7 +72,7 @@ public class RunListFragment extends Fragment {
         public void onClick(View view) {
             // Open details
             FragmentManager manager = getFragmentManager();
-            RunDetailFragment runDialog = RunDetailFragment.newInstance(mRun.getName(), mRun.getLevel());
+            RunDetailFragment runDialog = RunDetailFragment.newInstance(mRun);
             runDialog.show(manager, DIALOG_RUN_DETAIL);
         }
 

@@ -2,6 +2,7 @@ package tizzy.skimapp.Map;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -21,20 +22,22 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import tizzy.skimapp.R;
-import tizzy.skimapp.ResortModel.Coords;
-import tizzy.skimapp.ResortModel.Node;
 
 public class MapFragment extends Fragment {
 
     private MapView mMapView;
     private MapController mMapController;
     LocationManager locationManager;
+    private static String MBTILES_DIR = "mbtiles";
 
     private static final String[] LOCATION_PERMISSIONS = new String[]{
             android.Manifest.permission.ACCESS_FINE_LOCATION,
@@ -51,18 +54,6 @@ public class MapFragment extends Fragment {
 
         mMapView = view.findViewById(R.id.mapview);
         mMapView.setTileSource(TileSourceFactory.MAPNIK);
-//        mMapView.setTileSource(new OnlineTileSourceBase("USGS Topo", 0,
-//                18, 256, "",
-//                new String[]{"http://basemap.nationalmap.gov/ArcGIS/rest/services/USGSTopo/MapServer/tile/"}) {
-//            @Override
-//            public String getTileURLString(long pMapTileIndex) {
-//                return getBaseUrl()
-//                        + MapTileIndex.getZoom(pMapTileIndex)
-//                        + "/" + MapTileIndex.getY(pMapTileIndex)
-//                        + "/" + MapTileIndex.getX(pMapTileIndex)
-//                        + mImageFilenameEnding;
-//            }
-//        });
 
         mMapView.setBuiltInZoomControls(true);
         mMapController = (MapController) mMapView.getController();
@@ -94,31 +85,11 @@ public class MapFragment extends Fragment {
         return view;
     }
 
-    //--- Stolen from SkiersLocation
-    public boolean isAtNode(Location mCurrentLocation, Node node) {
-        // Check if current location is within a radius of 5 meters of the node
-        boolean inLat = (mCurrentLocation.getLatitude() >= node.getCoords().getX() - 0.005) &&
-                (mCurrentLocation.getLatitude() <= node.getCoords().getX() + 0.005);
-        boolean inLon = (mCurrentLocation.getLongitude() >= node.getCoords().getY() - 0.005) &&
-                (mCurrentLocation.getLongitude() <= node.getCoords().getY() + 0.005);
-        return inLat && inLon;
-    }
-    //---
-
     private LocationListener myLocationListener = new LocationListener() {
 
         @Override
         public void onLocationChanged(Location location) {
             updateLoc(location);
-
-            String loc = location.toString();
-            Toast.makeText(getActivity(), loc, Toast.LENGTH_LONG);
-
-            // Check if gets to Sam's Knob
-            Node knob = new Node("Knob", new Coords(39.187776, -106.972486, 2.0));
-            if (isAtNode(location, knob)) {
-                Toast.makeText(getActivity(), "AT THE KNOB!", Toast.LENGTH_LONG);
-            }
         }
 
         @Override
@@ -166,5 +137,33 @@ public class MapFragment extends Fragment {
 
         mMapView.invalidate();
     }
+
+    private File getMbTileFile(String mbTileFilename) throws IOException {
+
+        ContextWrapper wrapper = new ContextWrapper(getActivity());
+        File mbTilesDirectory =  wrapper.getDir(MBTILES_DIR, Context.MODE_PRIVATE);
+
+        InputStream is = getActivity().getAssets().open("world_pistes_only.mbt");
+        File of = new File(mbTilesDirectory, mbTileFilename);
+
+        if (of.exists()) {
+            return of;
+        }
+
+        OutputStream os = new FileOutputStream(of);
+        byte[] mBuffer = new byte[1024];
+        int length;
+        while ((length = is.read(mBuffer))>0) {
+            os.write(mBuffer, 0, length);
+        }
+        os.flush();
+        os.close();
+        is.close();
+
+        return of;
+
+    }
+
+
 }
 

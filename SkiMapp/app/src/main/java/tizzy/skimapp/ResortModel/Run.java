@@ -11,12 +11,18 @@ public class Run implements Serializable {
     private String mName; //, mLevel;
     private SkiLevel mLevel;
     private Node mStart, mEnd;
+    private RunStatus mRunStatus;
 
     public Run(String name, String level, Node start, Node end) {
         this.mName = name;
         this.mLevel = new SkiLevel(level);
         this.mStart = start;
         this.mEnd = end;
+        this.mRunStatus = new RunStatus();
+    }
+
+    public RunStatus getStatus() {
+        return mRunStatus;
     }
 
     public String getName() {

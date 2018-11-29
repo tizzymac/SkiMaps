@@ -9,24 +9,29 @@ import android.view.View;
 import android.widget.TextView;
 
 import tizzy.skimapp.R;
+import tizzy.skimapp.ResortModel.Run;
+import tizzy.skimapp.ResortModel.RunStatus;
 
 public class RunDetailFragment extends DialogFragment {
 
-    public static final String ARG_RUN_NAME = "run_name";
-    public static final String ARG_RUN_LEVEL = "run_level";
+    public static final String ARG_RUN = "run";
 
     private static String mRunName;
     private static String mRunLevel;
+    private static RunStatus mRunStatus;
+
     private TextView mRunNameView;
     private TextView mRunLevelView;
+    private TextView mOpenView;
+    private TextView mGroomView;
 
-    public static RunDetailFragment newInstance(String name, String level) {
+    public static RunDetailFragment newInstance(Run run) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_RUN_NAME, name);
-        args.putSerializable(ARG_RUN_LEVEL, level);
+        args.putSerializable(ARG_RUN, run);
 
-        mRunName = name;
-        mRunLevel = level;
+        mRunName = run.getName();
+        mRunLevel = run.getLevel();
+        mRunStatus = run.getStatus();
 
         RunDetailFragment fragment = new RunDetailFragment();
         return fragment;
@@ -47,6 +52,19 @@ public class RunDetailFragment extends DialogFragment {
         mRunLevelView = view.findViewById(R.id.run_level);
         mRunLevelView.setText("Level: " + mRunLevel);
 
+        mOpenView = view.findViewById(R.id.open);
+        if (mRunStatus.isOpen()) {
+            mOpenView.setText("Open: Yes");
+        } else {
+            mOpenView.setText("Open: No");
+        }
+
+        mGroomView = view.findViewById(R.id.groomed);
+        if (mRunStatus.isGroomed()) {
+            mGroomView.setText("Groom Status: Groomed");
+        } else {
+            mGroomView.setText("Groom Status: Not Groomed");
+        }
 
         return alert;
     }
