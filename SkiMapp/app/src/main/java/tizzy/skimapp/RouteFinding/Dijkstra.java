@@ -10,9 +10,11 @@ import java.util.Map;
 import java.util.Set;
 
 import tizzy.skimapp.ResortModel.Edge;
-import tizzy.skimapp.ResortModel.Facility;
+import tizzy.skimapp.ResortModel._Edge;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Path;
+import tizzy.skimapp.ResortModel.Resort;
+import tizzy.skimapp.ResortModel.Run;
 
 public class Dijkstra {
 
@@ -25,15 +27,15 @@ public class Dijkstra {
 
     public Dijkstra(Graph graph) {
         // create a copy of the array so that we can operate on this array
-        this.nodes = new ArrayList<Node>(graph.getNodes());
-        this.edges = new ArrayList<Edge>(graph.getEdges());
+        this.nodes = new ArrayList<>(graph.getNodes());
+        this.edges = new ArrayList<>(graph.getEdges());
     }
 
     public void execute(Node source) {
-        settledNodes = new HashSet<Node>();
-        unSettledNodes = new HashSet<Node>();
-        distance = new HashMap<Node, Integer>();
-        predecessors = new HashMap<Node, Node>();
+        settledNodes = new HashSet<>();
+        unSettledNodes = new HashSet<>();
+        distance = new HashMap<>();
+        predecessors = new HashMap<>();
         distance.put(source, 0);
         unSettledNodes.add(source);
         while (unSettledNodes.size() > 0) {
@@ -60,8 +62,8 @@ public class Dijkstra {
 
     private int getDistance(Node node, Node target) {
         for (Edge edge : edges) {
-            if (edge.getSource().equals(node)
-                    && edge.getDestination().equals(target)) {
+            if (edge.getStart().equals(node)
+                    && edge.getEnd().equals(target)) {
                 return edge.getWeight();
             }
         }
@@ -71,9 +73,9 @@ public class Dijkstra {
     private List<Node> getNeighbors(Node node) {
         List<Node> neighbors = new ArrayList<Node>();
         for (Edge edge : edges) {
-            if (edge.getSource().equals(node)
-                    && !isSettled(edge.getDestination())) {
-                neighbors.add(edge.getDestination());
+            if (edge.getStart().equals(node)
+                    && !isSettled(edge.getEnd())) {
+                neighbors.add(edge.getEnd());
             }
         }
         return neighbors;
@@ -124,6 +126,28 @@ public class Dijkstra {
         }
         // Put it into the correct order
         Collections.reverse(path);
+        // Compress Run fragments into single run
+
         return new Path(path);
+    }
+
+    // TODO Compress Run Fragments
+    private Path compressPath(Path path, Resort resort){
+        LinkedList<Node> nodePath = path.getNodePath();
+        for (int i=0; i < nodePath.size()-2; i++) {
+            // Check if neighbor is from the same run
+            Edge e1 = path.getEdgeFromNodes(resort, path.getNodePath().get(i), path.getNodePath().get(i+1));
+            Edge e2 = path.getEdgeFromNodes(resort, path.getNodePath().get(i+1), path.getNodePath().get(i+2));
+
+//            for (Run run1 : e1.getRuns()) {
+//                for (Run run2 : e2.getRuns()) {
+//                    if (run1.equals(run2)) {
+//                        // Compress by removing the middle node
+//                        nodePath.remove(i+1);
+//                    }
+//                }
+//            }
+        }
+        return new Path(nodePath);
     }
 }

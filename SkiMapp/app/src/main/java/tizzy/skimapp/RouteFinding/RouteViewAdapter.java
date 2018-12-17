@@ -5,11 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Edge;
+import tizzy.skimapp.ResortModel._Edge;
 import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
 
@@ -54,7 +54,7 @@ public class RouteViewAdapter extends BaseAdapter {
         }
 
         Edge edge = mPath.getEdgeFromNodes(mResort, mPath.getNode(position), mPath.getNode(position+1));
-        holder.edgeID.setText(edge.getString());
+        holder.edgeID.setText(edge.getName());
 
         return convertView;
     }
@@ -62,4 +62,6 @@ public class RouteViewAdapter extends BaseAdapter {
     static class ViewHolder{
         TextView edgeID;
     }
+
+
 }

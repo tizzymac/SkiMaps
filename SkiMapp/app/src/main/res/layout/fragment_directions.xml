@@ -7,25 +7,33 @@
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark">
 
-    <Button
-        android:id="@+id/bathroom"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/bathroom"
-        android:background="#EDB147"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
-        android:layout_margin="12dp"/>
+        android:orientation="horizontal"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/food"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/food"
-        android:background="#EDB147"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
-        android:layout_margin="12dp"/>
+        <Button
+            android:id="@+id/bathroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bathroom"
+            android:background="#EDB147"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:layout_margin="12dp"/>
+
+        <Button
+            android:id="@+id/food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/food"
+            android:background="#EDB147"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:layout_margin="12dp"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,6 +49,7 @@
             android:textSize="26sp"
             android:layout_margin="10dp"/>
 
+        <!--
         <EditText
             android:id="@+id/where_to"
             android:layout_width="match_parent"
@@ -49,6 +58,34 @@
             android:layout_margin="10dp"
             android:textSize="24sp"
             android:textAlignment="viewEnd"/>
+            -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/top_bottom"
+                android:text="@string/top_bottom"/>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lift_run"
+                android:text="@string/lift_run"/>
+
+        </LinearLayout>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/to_spinner">
+
+        </Spinner>
+
     </LinearLayout>
 
 
@@ -86,15 +123,6 @@
         android:textSize="20sp"
         android:layout_margin="12dp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/location"
-        android:textColor="#ec3300"
-        android:textSize="20sp"
-        android:layout_margin="12dp"
-        android:textAlignment="center"/>
-
     <Button
         android:id="@+id/go_button"
         android:layout_gravity="center"
@@ -121,7 +149,15 @@
         android:id="@+id/list_view"
         android:background="#EDB147">
 
-
     </ListView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/location"
+        android:textColor="#ec3300"
+        android:textSize="20sp"
+        android:layout_margin="12dp"
+        android:textAlignment="center"/>
 
 </LinearLayout>

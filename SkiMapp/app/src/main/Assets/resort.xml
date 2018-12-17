@@ -68,9 +68,56 @@
             y="-106.958297"
             z="2"
             desc="Monks Hood joins Banzai" />
+        <Node
+            id="12"
+            x="39.192150"
+            y="-106.962101"
+            z="2"
+            desc="Start of Lunchline" />
         <!-- BR -->
 
-
+        <Node
+            id="13"
+            x="39.193132"
+            y="-106.963174"
+            z="2"
+            desc="Lunchline crosses Cabin" />
+        <Node
+            id="14"
+            x="39.193730"
+            y="-106.963968"
+            z="2"
+            desc="Lunchline crosses Coney Glade" />
+        <Node
+            id="15"
+            x="39.196740"
+            y="-106.967208"
+            z="2"
+            desc="End of Ute Chute" />
+        <Node
+            id="16"
+            x="39.195493"
+            y="-106.964525"
+            z="2"
+            desc="End of Moonshine" />
+        <Node
+            id="17"
+            x="39.201388"
+            y="-106.958195"
+            z="1"
+            desc="End of Coney Glade" />
+        <Node
+            id="18"
+            x="39.196798"
+            y="-106.967229"
+            z="2"
+            desc="Start of Dawdler" />
+        <Node
+            id="19"
+            x="39.204032"
+            y="-106.956629"
+            z="1"
+            desc="Dawdler becomes Fanny Hil" />
 
     </Nodes>
     <Lifts>
@@ -102,6 +149,22 @@
             midpoints="4"
             level="Black" />
         <Run
+            name="Ute Chute"
+            start="6"
+            end="15"
+            level="Blue" />
+        <Run
+            name="Moonshine"
+            start="7"
+            end="16"
+            level="Blue" />
+        <Run
+            name="Coney Glade"
+            start="8"
+            end="17"
+            midpoints="14"
+            level="Blue" />
+        <Run
             name="Banzai Ridge"
             start="2"
             end="11"
@@ -112,5 +175,24 @@
             start="2"
             end="10"
             level="Blue"/>
+        <Run
+            name="Lunchline"
+            start="12"
+            end="1"
+            midpoints="13,14,15,16,18"
+            level="Green" />
+        <!-- Fanny Hills is a bit confusing... -->
+        <Run
+            name="Fanny Hill"
+            start="17"
+            midpoints="19"
+            end="3"
+            level="Green" />
+        <Run
+            name="Dawdler"
+            start="18"
+            end="19"
+            level="Green" />
+
     </Runs>
 </SkiResort>

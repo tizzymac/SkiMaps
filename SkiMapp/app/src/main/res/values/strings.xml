@@ -35,5 +35,7 @@
     <string name="bathroom">I need to pee!</string>
     <string name="food">I need food!</string>
     <string name="get_loc">Get My Location</string>
+    <string name="top_bottom">Top | Bottom</string>
+    <string name="lift_run">Lift | Run</string>
 
 </resources>

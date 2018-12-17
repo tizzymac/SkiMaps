@@ -1,11 +1,8 @@
 package tizzy.skimapp.RouteFinding;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.location.Location;
-import android.support.v4.content.ContextCompat;
 
-import tizzy.skimapp.ResortModel.Edge;
+import tizzy.skimapp.ResortModel._Edge;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Resort;
 
@@ -24,7 +21,7 @@ public class SkiersLocation {
     }
 
     // Returns the edge the skier is currently at
-    public Edge getEdge() {
+    public _Edge getEdge() {
         // TODO
 
         // Check if user is moving to determine if they are on a lift ?

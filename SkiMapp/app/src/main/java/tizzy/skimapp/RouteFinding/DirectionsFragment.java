@@ -14,15 +14,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import tizzy.skimapp.R;
+import tizzy.skimapp.ResortModel.Edge;
+import tizzy.skimapp.ResortModel.Lift;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
+import tizzy.skimapp.ResortModel.Run;
 
 public class DirectionsFragment extends Fragment {
     private static final String ARG_RESORT = "resort";
@@ -41,7 +49,10 @@ public class DirectionsFragment extends Fragment {
     private Button mGoButton;
     private Button mBathroomButton;
     private Button mFoodButton;
-    private EditText mToInput;
+//    private EditText mToInput;
+    private Switch mTopBottomSwitch;
+    private Switch mRunLiftSwitch;
+    private Spinner mToSpinner;
     private EditText mFromInput;
     private TextView mRoute;
     private ListView mRouteListView;
@@ -98,6 +109,7 @@ public class DirectionsFragment extends Fragment {
                     if (path.getDistance() == 1) {
                         mRoute.setText("You are already here!");
                     } else {
+                        path.compressPath(mResort);
                         mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), path, mResort));
 
                     }
@@ -123,13 +135,26 @@ public class DirectionsFragment extends Fragment {
                     if (path.getDistance() == 1) {
                         mRoute.setText("You are already here!");
                     } else {
+                        path.compressPath(mResort);
                         mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), path, mResort));
                     }
                 }
             }
         });
 
-        mToInput = view.findViewById(R.id.where_to);
+        mTopBottomSwitch = view.findViewById(R.id.top_bottom);
+
+        mRunLiftSwitch = view.findViewById(R.id.lift_run);
+        mRunLiftSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mToSpinner.setAdapter(getAdapter(mRunLiftSwitch.isChecked()));
+            }
+        });
+        mToSpinner = view.findViewById(R.id.to_spinner);
+        mToSpinner.setAdapter(getAdapter(mRunLiftSwitch.isChecked()));
+
+//        mToInput = view.findViewById(R.id.where_to);
         mFromInput = view.findViewById(R.id.where_from);
         mRoute = view.findViewById(R.id.route);
 
@@ -141,7 +166,13 @@ public class DirectionsFragment extends Fragment {
                 // Get start and end nodes
                 // temporarily taking node index as input
                 // TODO
-                Node end = mResort.getNodes().get(Integer.parseInt(mToInput.getText().toString())-1);
+                Node end;
+                if (mTopBottomSwitch.isChecked()) {
+                    end = ((Edge) mToSpinner.getSelectedItem()).getStart();
+                } else {
+                    end = ((Edge) mToSpinner.getSelectedItem()).getEnd();
+                }
+
                 Node start = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString())-1);
 
                 // Calculate route
@@ -153,6 +184,7 @@ public class DirectionsFragment extends Fragment {
                     mRoute.setText("This route is not possible");
                     // TODO clear mRouteListView
                 } else {
+                    path.compressPath(mResort);
                     mRoute.setText("");
                     mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), path, mResort));
                 }
@@ -231,6 +263,25 @@ public class DirectionsFragment extends Fragment {
     public void onPause() {
         super.onPause();
         locationManager.removeUpdates(myLocationListener);
+    }
+
+    private BaseAdapter getAdapter(Boolean run) {
+
+        if (run) {
+            ArrayAdapter<Run> adapter = new ArrayAdapter<>(
+                    getActivity().getApplicationContext(),
+                    android.R.layout.simple_spinner_dropdown_item,
+                    mResort.getRuns());
+            adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+            return adapter;
+        } else {
+            ArrayAdapter<Lift> adapter = new ArrayAdapter<>(
+                    getActivity().getApplicationContext(),
+                    android.R.layout.simple_spinner_dropdown_item,
+                    mResort.getLifts());
+            adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+            return adapter;
+        }
     }
 
 }
