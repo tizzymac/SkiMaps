@@ -21,7 +21,8 @@
             android:background="#EDB147"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
-            android:layout_margin="12dp"/>
+            android:layout_margin="10dp"
+            android:padding="10dp"/>
 
         <Button
             android:id="@+id/food"
@@ -31,14 +32,18 @@
             android:background="#EDB147"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
-            android:layout_margin="12dp"/>
+            android:layout_margin="10dp"
+            android:padding="10dp"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryLight"
+        android:layout_margin="10dp"
+        android:padding="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,8 +51,8 @@
             android:text="@string/where_to"
             android:textAlignment="center"
             android:textColor="#EDB147"
-            android:textSize="26sp"
-            android:layout_margin="10dp"/>
+            android:textSize="22sp"
+            android:layout_margin="6dp"/>
 
         <!--
         <EditText
@@ -69,13 +74,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/top_bottom"
-                android:text="@string/top_bottom"/>
+                android:text="@string/top_bottom"
+                android:textColor="@color/white"/>
 
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/lift_run"
-                android:text="@string/lift_run"/>
+                android:text="@string/lift_run"
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 
@@ -92,7 +99,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryLight"
+        android:layout_margin="10dp"
+        android:padding="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,16 +110,16 @@
             android:text="@string/where_from"
             android:textAlignment="center"
             android:textColor="#EDB147"
-            android:textSize="26sp"
-            android:layout_margin="10dp"/>
+            android:textSize="22sp"
+            android:layout_margin="6dp"/>
 
         <EditText
             android:id="@+id/where_from"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
-            android:layout_margin="10dp"
-            android:textSize="24sp"
+            android:layout_margin="6dp"
+            android:textSize="22sp"
             android:textAlignment="viewEnd"/>
     </LinearLayout>
 
@@ -121,7 +131,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:text="@string/get_loc"
         android:textSize="20sp"
-        android:layout_margin="12dp"/>
+        android:layout_margin="10dp"/>
 
     <Button
         android:id="@+id/go_button"

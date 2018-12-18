@@ -270,14 +270,14 @@ public class DirectionsFragment extends Fragment {
         if (run) {
             ArrayAdapter<Run> adapter = new ArrayAdapter<>(
                     getActivity().getApplicationContext(),
-                    android.R.layout.simple_spinner_dropdown_item,
+                    R.layout.spinner_item,
                     mResort.getRuns());
             adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
             return adapter;
         } else {
             ArrayAdapter<Lift> adapter = new ArrayAdapter<>(
                     getActivity().getApplicationContext(),
-                    android.R.layout.simple_spinner_dropdown_item,
+                    R.layout.spinner_item,
                     mResort.getLifts());
             adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
             return adapter;
