@@ -98,12 +98,23 @@ public class Resort implements Serializable {
                 Element runElement = (Element) nNode;
 
                 // Add run to list
-                mRuns.add(new Run(
+                Run r = new Run(
                         runElement.getAttribute("name"),
                         runElement.getAttribute("level"),
                         mNodes[Integer.parseInt(runElement.getAttribute("start")) - 1],
                         mNodes[Integer.parseInt(runElement.getAttribute("end")) - 1]
-                ));
+                );
+                // Add midpoints
+                if (!(runElement.getAttribute("midpoints")).isEmpty()) {
+                    List<String> midpointStrs = Arrays.asList((runElement.getAttribute("midpoints")).split(","));
+                    // Convert to nodes
+                    List<tizzy.skimapp.ResortModel.Node> midpointNodes = new ArrayList<>();
+                    for (String s : midpointStrs) {
+                        midpointNodes.add(mNodes[Integer.parseInt(s) - 1]);
+                    }
+                    r.setMidpoints(midpointNodes);
+                }
+                mRuns.add(r);
             }
         }
     }

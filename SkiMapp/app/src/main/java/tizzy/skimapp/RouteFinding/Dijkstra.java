@@ -115,6 +115,7 @@ public class Dijkstra {
     public Path getPath(Node target) {
         LinkedList<Node> path = new LinkedList<Node>();
         Node step = target;
+
         // check if a path exists
         if (predecessors.get(step) == null) {
             return null;

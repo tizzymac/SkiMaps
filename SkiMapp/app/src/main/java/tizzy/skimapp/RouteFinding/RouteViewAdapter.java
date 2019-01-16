@@ -8,31 +8,26 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import tizzy.skimapp.R;
-import tizzy.skimapp.ResortModel.Edge;
-import tizzy.skimapp.ResortModel._Edge;
-import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
 
 public class RouteViewAdapter extends BaseAdapter {
 
-    private static Path mPath;
-    private Resort mResort;
+    private static SkiRoute mSkiRoute;
     private LayoutInflater mInflater;
 
-    public RouteViewAdapter(Context context, Path path, Resort resort){
-        this.mPath = path;
-        this.mResort = resort;
+    public RouteViewAdapter(Context context, SkiRoute skiRoute){
+        this.mSkiRoute = skiRoute;
         this.mInflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return mPath.getDistance() - 1; // will have to change this
+        return mSkiRoute.getNumberOfEdges();
     }
 
     @Override
     public Object getItem(int position) {
-        return mPath.getNode(position);
+        return mSkiRoute.getEdgeName(position);
     }
 
     @Override
@@ -53,8 +48,7 @@ public class RouteViewAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Edge edge = mPath.getEdgeFromNodes(mResort, mPath.getNode(position), mPath.getNode(position+1));
-        holder.edgeID.setText(edge.getName());
+        holder.edgeID.setText(mSkiRoute.getEdgeName(position));
 
         return convertView;
     }

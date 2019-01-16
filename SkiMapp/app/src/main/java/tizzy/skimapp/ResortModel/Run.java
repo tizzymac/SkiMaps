@@ -62,14 +62,20 @@ public class Run extends Edge {
         if (mMidpoints == null) {
             edgeSegments.add(this);
         } else {
-            // Cycle through midpoints
-            for (int i = 1; i < mMidpoints.size(); i++) {
+            // Add start & end nodes
+            List<Node> allNodes = new ArrayList<>();
+            allNodes.add(mStart);
+            allNodes.addAll(mMidpoints);
+            allNodes.add(mEnd);
+
+            // Cycle through nodes
+            for (int i = 1; i < allNodes.size(); i++) {
                 // Get edge segment
                 edgeSegments.add(new Run(
                         mName,
                         mLevel.getLevelString(),
-                        mMidpoints.get(i-1),
-                        mMidpoints.get(i)));
+                        allNodes.get(i-1),
+                        allNodes.get(i)));
             }
         }
 
@@ -80,22 +86,12 @@ public class Run extends Edge {
         return mEnd;
     }
 
-
     public Boolean isWithinLevel(String level) {
         SkiLevel skiersLevel = new SkiLevel(level);
         if (mLevel.getLevelNumber() <= skiersLevel.getLevelNumber()) {
             return true;
         }
         return false;
-    }
-
-    // For joining two runs
-    public void changeEnd(Node end) {
-        if (mMidpoints == null) {
-            mMidpoints = new ArrayList<>();
-        }
-        mMidpoints.add(mEnd);
-        mEnd = end;
     }
 
     @Override

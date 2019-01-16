@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import tizzy.skimapp.Emergency.EmergencyActivity;
 import tizzy.skimapp.GetInfo.InfoListActivity;
 import tizzy.skimapp.Map.MapActivity;
 import tizzy.skimapp.ResortModel.Resort;
@@ -34,6 +35,7 @@ public class HomeFragment extends Fragment {
     private Button mInfoButton;
     private Button mDirectionsButton;
     private Button mMapButton;
+    private Button mEmergencyButton;
     private SharedPreferences mSharedPref;
 
     Resort mResort;
@@ -96,6 +98,15 @@ public class HomeFragment extends Fragment {
 
                 // Open OSM Map View
                 Intent intent = MapActivity.newIntent(getActivity());
+                startActivity(intent);
+            }
+        });
+
+        mEmergencyButton = view.findViewById(R.id.emergencyButton);
+        mEmergencyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = EmergencyActivity.newIntent(getActivity());
                 startActivity(intent);
             }
         });

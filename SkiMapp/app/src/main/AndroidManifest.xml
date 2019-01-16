@@ -28,6 +28,7 @@
         <activity android:name=".GetInfo.InfoListActivity"/>
         <activity android:name=".RouteFinding.DirectionsActivity"/>
         <activity android:name=".Map.MapActivity"/>
+        <activity android:name=".Emergency.EmergencyActivity"/>
 
     </application>
 

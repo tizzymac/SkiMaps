@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import tizzy.skimapp.ResortModel.Edge;
-import tizzy.skimapp.ResortModel._Edge;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Run;
 
@@ -84,6 +82,15 @@ public class Graph implements Serializable {
 
     public List<Edge> getEdges() {
         return mEdges;
+    }
+
+    public Edge getEdgeBetweenNodes(Node start, Node end) {
+        for (Edge e : mEdges) {
+            if ((e.getStart() == start) && (e.getEnd() == end)) {
+                return e;
+            }
+        }
+        return null;
     }
 
 }

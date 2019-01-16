@@ -109,8 +109,9 @@ public class DirectionsFragment extends Fragment {
                     if (path.getDistance() == 1) {
                         mRoute.setText("You are already here!");
                     } else {
-                        path.compressPath(mResort);
-                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), path, mResort));
+                        SkiRoute skiRoute = new SkiRoute(path, mResortGraph);
+                        mRoute.setText("");
+                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 
                     }
                 }
@@ -135,8 +136,9 @@ public class DirectionsFragment extends Fragment {
                     if (path.getDistance() == 1) {
                         mRoute.setText("You are already here!");
                     } else {
-                        path.compressPath(mResort);
-                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), path, mResort));
+                        SkiRoute skiRoute = new SkiRoute(path, mResortGraph);
+                        mRoute.setText("");
+                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
                     }
                 }
             }
@@ -173,6 +175,7 @@ public class DirectionsFragment extends Fragment {
                     end = ((Edge) mToSpinner.getSelectedItem()).getEnd();
                 }
 
+                // TODO Need to check if anything was inputted!
                 Node start = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString())-1);
 
                 // Calculate route
@@ -184,9 +187,9 @@ public class DirectionsFragment extends Fragment {
                     mRoute.setText("This route is not possible");
                     // TODO clear mRouteListView
                 } else {
-                    path.compressPath(mResort);
+                    SkiRoute skiRoute = new SkiRoute(path, mResortGraph);
                     mRoute.setText("");
-                    mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), path, mResort));
+                    mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
                 }
             }
         });
