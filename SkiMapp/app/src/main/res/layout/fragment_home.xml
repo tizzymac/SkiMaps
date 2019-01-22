@@ -4,10 +4,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="left"
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark">
 
+    <!--
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,73 +17,115 @@
         android:textAlignment="center"
         android:textColor="#EDB147"
         android:textSize="40sp"/>
+        -->
 
-    <Button
-        android:id="@+id/directionsButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#EDB147"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="@string/directions"
-        android:textSize="24sp"
-        android:layout_margin="20dp"/>
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/infoButton"
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/button_round"
+            android:src="@drawable/ic_directions_foreground"
+            android:layout_margin="20dp"/>
+
+        <Button
+            android:id="@+id/directionsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/directions"
+            android:textSize="30sp"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#EDB147"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="@string/info_lookup"
-        android:textSize="24sp"
-        android:layout_margin="20dp"/>
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/emergencyButton"
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/button_round"
+            android:src="@drawable/ic_info_foreground"
+            android:layout_margin="20dp"/>
+        <Button
+            android:id="@+id/infoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/info_lookup"
+            android:textSize="30sp"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#EDB147"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="@string/emergency"
-        android:textSize="24sp"
-        android:layout_margin="20dp"/>
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/mapButton"
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/button_round"
+            android:src="@drawable/ic_emergency_foreground"
+            android:layout_margin="20dp"/>
+        <Button
+            android:id="@+id/emergencyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/emergency"
+            android:textSize="30sp"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#EDB147"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="@string/map"
-        android:textSize="24sp"
-        android:layout_margin="20dp"/>
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/settingsButton"
-        android:text="SETTINGS"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#EDB147"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="24sp"
-        android:layout_margin="20dp"/>
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/button_round"
+            android:src="@drawable/ic_settings_foreground"
+            android:layout_margin="20dp"/>
+
+        <Button
+            android:id="@+id/settingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="SETTINGS"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp"
+            android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+
+    <!--
+   <Button
+       android:id="@+id/mapButton"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="#EDB147"
+       android:textColor="@color/colorPrimaryDark"
+       android:text="@string/map"
+       android:textSize="24sp"
+       android:layout_margin="20dp"/>
+       -->
 
     <TextView
         android:id="@+id/skiAbility"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
         android:textAlignment="center"
-        android:textColor="#EDB147"
-        android:textSize="30sp"/>
-
-    <TextView
-        android:id="@+id/runLevel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textColor="#EDB147"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:textSize="30sp"/>
 
 </LinearLayout>

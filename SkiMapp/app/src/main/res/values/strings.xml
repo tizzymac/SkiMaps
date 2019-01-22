@@ -2,7 +2,7 @@
     <string name="app_name">SkiMapp</string>
 
     <!-- Home Page Buttons -->
-    <string name="directions">Get me somewhere</string>
+    <string name="directions">Directions</string>
     <string name="info_lookup">Information</string>
     <string name="emergency">Emergency</string>
     <string name="map">Map</string>
@@ -32,10 +32,13 @@
     <string name="where_to">Where to?</string>
     <string name="where_from">Where from?</string>
     <string name="go">GO</string>
-    <string name="bathroom">I need to pee!</string>
-    <string name="food">I need food!</string>
+    <string name="bathroom">Bathroom</string>
+    <string name="food">Food</string>
     <string name="get_loc">Get My Location</string>
     <string name="top_bottom">Bottom | Top</string>
     <string name="lift_run">Lift | Run</string>
+
+    <!-- Emergency -->
+    <string name="your_location">Your exact location:</string>
 
 </resources>

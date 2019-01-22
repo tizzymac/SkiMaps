@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "981567486222",
+    "firebase_url": "https://groomreport.firebaseio.com",
+    "project_id": "groomreport",
+    "storage_bucket": "groomreport.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981567486222:android:a67206ca20f48cde",
+        "android_client_info": {
+          "package_name": "tizzy.skimapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981567486222-9gg4p50jil9m8v6t6pk5ihf0k5l3bj2q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRpfznYmiEgmsjtOeuRJY0v-VfL768iHE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -30,7 +30,6 @@ public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
 
     private TextView mSkiAbility;
-    private TextView mRunLevel;
     private Button mSettingsButton;
     private Button mInfoButton;
     private Button mDirectionsButton;
@@ -50,7 +49,7 @@ public class HomeFragment extends Fragment {
 
         mSkiAbility = view.findViewById(R.id.skiAbility);
         mSharedPref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        mSkiAbility.setText(mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
+        mSkiAbility.setText("Your Level:  " + mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
 
         mDirectionsButton = view.findViewById(R.id.directionsButton);
         mDirectionsButton.setOnClickListener(new View.OnClickListener() {
@@ -85,12 +84,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        mRunLevel = view.findViewById(R.id.runLevel);
-        mRunLevel.setText(
-                // Get level from resort xml
-                ""
-        );
-
+        /*
         mMapButton = view.findViewById(R.id.mapButton);
         mMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,13 +94,13 @@ public class HomeFragment extends Fragment {
                 Intent intent = MapActivity.newIntent(getActivity());
                 startActivity(intent);
             }
-        });
+        }); */
 
         mEmergencyButton = view.findViewById(R.id.emergencyButton);
         mEmergencyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = EmergencyActivity.newIntent(getActivity());
+                Intent intent = EmergencyActivity.newIntent(getActivity(), mResort);
                 startActivity(intent);
             }
         });

@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.SingleFragmentActivity;
 
 public class EmergencyActivity extends SingleFragmentActivity {
+    private static final String EXTRA_RESORT = "tizzy.skimapp.resort";
 
     @Override
     protected Fragment createFragment() {
-        return new EmergencyFragment();
+        Resort resort = (Resort) getIntent().getSerializableExtra(EXTRA_RESORT);
+        return EmergencyFragment.newInstance(resort);
     }
 
     @Override
@@ -19,8 +22,14 @@ public class EmergencyActivity extends SingleFragmentActivity {
         super.onCreate(savedInstanceState);
     }
 
-    public static Intent newIntent(Context packageContext) {
+    @Override
+    protected int getLayoutResId() {
+        return super.getLayoutResId();
+    }
+
+    public static Intent newIntent(Context packageContext, Resort resort) {
         Intent intent = new Intent(packageContext, EmergencyActivity.class);
+        intent.putExtra(EXTRA_RESORT, resort);
         return intent;
     }
 }

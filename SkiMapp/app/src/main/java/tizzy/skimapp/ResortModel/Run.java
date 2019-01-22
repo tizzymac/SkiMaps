@@ -48,12 +48,42 @@ public class Run extends Edge {
     }
 
     @Override
-    public int getWeight() {
+    public int getSimpleWeight() {
         return (int) Math.round(
                 Math.sqrt(
                         Math.pow((mEnd.getCoords().getX() - mStart.getCoords().getX()), 2) +
-                                Math.pow((mEnd.getCoords().getY() - mStart.getCoords().getY()), 2) +
-                                Math.pow((mEnd.getCoords().getZ() - mStart.getCoords().getZ()), 2) ));
+                        Math.pow((mEnd.getCoords().getY() - mStart.getCoords().getY()), 2) +
+                        Math.pow((mEnd.getCoords().getZ() - mStart.getCoords().getZ()), 2) ));
+    }
+
+    public int getSlopeAngle() {
+        // Average angle
+
+        // Find the run in xy plane
+        // set z coord in mStart same as z coord in mEnd
+        Double run = Math.sqrt(
+                Math.pow((mEnd.getCoords().getX() - mStart.getCoords().getX()), 2) +
+                Math.pow((mEnd.getCoords().getY() - mStart.getCoords().getY()), 2)
+        );
+
+        // Find the rise
+        // Distance between z coord of mEnd to z coord of mStart
+        Double rise = Math.abs(mEnd.getCoords().getZ() - mStart.getCoords().getZ());
+
+        // Slope is rise / run
+        return (int) Math.atan(rise/run);
+        // TODO test this
+    }
+
+    @Override
+    public int getWeight(SkiLevel level) {
+        // Factors:
+        // - Length
+        // - Steepness
+        // - Skier's ability + Difficulty of slope
+
+
+        return getSimpleWeight();
     }
 
     @Override

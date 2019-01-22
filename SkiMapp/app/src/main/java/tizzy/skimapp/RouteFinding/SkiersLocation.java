@@ -50,4 +50,8 @@ public class SkiersLocation {
         }
         return null;
     }
+
+    public String getExactLocation() {
+        return mCurrentLocation.toString();
+    }
 }

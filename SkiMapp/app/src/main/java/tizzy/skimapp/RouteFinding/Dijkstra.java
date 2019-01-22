@@ -10,11 +10,9 @@ import java.util.Map;
 import java.util.Set;
 
 import tizzy.skimapp.ResortModel.Edge;
-import tizzy.skimapp.ResortModel._Edge;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
-import tizzy.skimapp.ResortModel.Run;
 
 public class Dijkstra {
 
@@ -64,7 +62,7 @@ public class Dijkstra {
         for (Edge edge : edges) {
             if (edge.getStart().equals(node)
                     && edge.getEnd().equals(target)) {
-                return edge.getWeight();
+                return edge.getSimpleWeight();
             }
         }
         throw new RuntimeException("Should not happen");
@@ -130,25 +128,5 @@ public class Dijkstra {
         // Compress Run fragments into single run
 
         return new Path(path);
-    }
-
-    // TODO Compress Run Fragments
-    private Path compressPath(Path path, Resort resort){
-        LinkedList<Node> nodePath = path.getNodePath();
-        for (int i=0; i < nodePath.size()-2; i++) {
-            // Check if neighbor is from the same run
-            Edge e1 = path.getEdgeFromNodes(resort, path.getNodePath().get(i), path.getNodePath().get(i+1));
-            Edge e2 = path.getEdgeFromNodes(resort, path.getNodePath().get(i+1), path.getNodePath().get(i+2));
-
-//            for (Run run1 : e1.getRuns()) {
-//                for (Run run2 : e2.getRuns()) {
-//                    if (run1.equals(run2)) {
-//                        // Compress by removing the middle node
-//                        nodePath.remove(i+1);
-//                    }
-//                }
-//            }
-        }
-        return new Path(nodePath);
     }
 }

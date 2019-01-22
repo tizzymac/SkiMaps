@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import tizzy.skimapp.ResortModel.Edge;
+import tizzy.skimapp.ResortModel.Lift;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Run;
 
@@ -74,6 +75,33 @@ public class Graph implements Serializable {
 
         this.mNodes = nodes;
         this.mEdges = edgeSegments;
+    }
+
+    // Graph where lifts have weight multiplied by factor i
+    public Graph(List<Node> nodes, List<Edge> edges, int i) {
+
+        // Get segments
+        List<Edge> edgeSegments = new ArrayList<>();
+
+        for (Iterator<Edge> iterator = edges.iterator(); iterator.hasNext();) {
+            Edge e = iterator.next();
+
+            // Check if this edge is a lift
+            if (e instanceof Lift) {
+                // Multiply edge weight by i
+                Lift heavyEdge = (Lift) e;
+                heavyEdge.increaseWeight(i);
+                edgeSegments.addAll(heavyEdge.getEdgeSegments());
+
+            } else {
+                // Add all run segments
+                edgeSegments.addAll(e.getEdgeSegments());
+            }
+        }
+
+        this.mNodes = nodes;
+        this.mEdges = edgeSegments;
+
     }
 
     public List<Node> getNodes() {
