@@ -32,6 +32,14 @@ public class Path {
         return mNodePath.get(i);
     }
 
+    public Path getNodes(int start, int end) {
+        LinkedList<Node> newPath = new LinkedList<>();
+        for (int i = start; i <= end; i++) {
+            newPath.add(getNode(i));
+        }
+        return new Path(newPath);
+    }
+
     public Edge getEdgeFromNodes(Resort resort, Node start, Node end) {
         // Do I need to adapt this for run segments too?
 
@@ -46,5 +54,9 @@ public class Path {
         // all with the same name (not v efficient)
 
         return null;
+    }
+
+    public void joinPath(Path secondPath) {
+        mNodePath.addAll(secondPath.mNodePath);
     }
 }

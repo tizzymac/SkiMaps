@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -20,9 +21,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import java.util.LinkedList;
 
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Edge;
@@ -31,6 +33,7 @@ import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.ResortModel.Run;
+import tizzy.skimapp.RouteFinding.KShortestPaths.Yen;
 
 public class DirectionsFragment extends Fragment {
     private static final String ARG_RESORT = "resort";
@@ -168,7 +171,7 @@ public class DirectionsFragment extends Fragment {
                 // Get start and end nodes
                 // temporarily taking node index as input
                 // TODO
-                Node end;
+                final Node end;
                 if (mTopBottomSwitch.isChecked()) {
                     end = ((Edge) mToSpinner.getSelectedItem()).getStart();
                 } else {
@@ -176,21 +179,9 @@ public class DirectionsFragment extends Fragment {
                 }
 
                 // TODO Need to check if anything was inputted!
-                Node start = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString())-1);
+                final Node start = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString())-1);
 
-                // Calculate route
-                Dijkstra dijkstra = new Dijkstra(mResortGraph);
-                dijkstra.execute(start);
-                Path path = dijkstra.getPath(end);
-
-                if (path == null) {
-                    mRoute.setText("This route is not possible");
-                    // TODO clear mRouteListView
-                } else {
-                    SkiRoute skiRoute = new SkiRoute(path, mResortGraph);
-                    mRoute.setText("");
-                    mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
-                }
+                new calculateRoute().execute(start, end);
             }
         });
 
@@ -284,6 +275,33 @@ public class DirectionsFragment extends Fragment {
                     mResort.getLifts());
             adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
             return adapter;
+        }
+    }
+
+    private class calculateRoute extends AsyncTask<Object, Integer, Path> {
+
+        @Override
+        protected Path doInBackground(Object... objects) {
+
+            Yen yen = new Yen(mResort);
+            Path path = yen.YenKSP(mResortGraph, (Node) objects[0], (Node) objects[1], 3).get(0);
+
+//            Dijkstra dijkstra = new Dijkstra(mResortGraph);
+//            dijkstra.execute((Node) objects[0]);       // start node
+//            Path path = dijkstra.getPath((Node) objects[1]);    // end node
+            return path;
+        }
+
+        @Override
+        protected void onPostExecute(Path path) {
+            if (path == null) {
+                mRoute.setText("This route is not possible");
+                // TODO clear mRouteListView
+            } else {
+                SkiRoute skiRoute = new SkiRoute(path, mResortGraph);
+                mRoute.setText("");
+                mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
+            }
         }
     }
 

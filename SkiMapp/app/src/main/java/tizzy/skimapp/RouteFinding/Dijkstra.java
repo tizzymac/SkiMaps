@@ -1,5 +1,7 @@
 package tizzy.skimapp.RouteFinding;
 
+import android.os.AsyncTask;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,7 +14,6 @@ import java.util.Set;
 import tizzy.skimapp.ResortModel.Edge;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Path;
-import tizzy.skimapp.ResortModel.Resort;
 
 public class Dijkstra {
 
@@ -25,8 +26,8 @@ public class Dijkstra {
 
     public Dijkstra(Graph graph) {
         // create a copy of the array so that we can operate on this array
-        this.nodes = new ArrayList<>(graph.getNodes());
-        this.edges = new ArrayList<>(graph.getEdges());
+        this.nodes = new LinkedList<>(graph.getNodes());
+        this.edges = new LinkedList<>(graph.getEdges());
     }
 
     public void execute(Node source) {
@@ -55,7 +56,6 @@ public class Dijkstra {
                 unSettledNodes.add(target);
             }
         }
-
     }
 
     private int getDistance(Node node, Node target) {
@@ -69,7 +69,7 @@ public class Dijkstra {
     }
 
     private List<Node> getNeighbors(Node node) {
-        List<Node> neighbors = new ArrayList<Node>();
+        List<Node> neighbors = new LinkedList<Node>();
         for (Edge edge : edges) {
             if (edge.getStart().equals(node)
                     && !isSettled(edge.getEnd())) {
@@ -129,4 +129,5 @@ public class Dijkstra {
 
         return new Path(path);
     }
+
 }
