@@ -1,8 +1,10 @@
 package tizzy.skimapp.ResortModel;
 
+import android.support.annotation.NonNull;
+
 import java.util.LinkedList;
 
-public class Path {
+public class Path implements Comparable<Path> {
 
     private LinkedList<Node> mNodePath;
 
@@ -57,6 +59,17 @@ public class Path {
     }
 
     public void joinPath(Path secondPath) {
-        mNodePath.addAll(secondPath.mNodePath);
+        // Remove duplicate nodes
+        if (secondPath.getNode(0) == mNodePath.get(0)) {
+            mNodePath.removeLast();
+            mNodePath.addAll(secondPath.getNodePath());
+        } else {
+            mNodePath.addAll(secondPath.getNodePath());
+        }
+    }
+
+    @Override
+    public int compareTo(@NonNull Path o) {
+        return Integer.compare(this.getDistance(), o.getDistance()); // ??
     }
 }

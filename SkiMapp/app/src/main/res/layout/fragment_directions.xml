@@ -42,9 +42,10 @@
             android:background="@drawable/button_rounded_corners"
             android:textColor="@color/white"
             android:text="@string/get_loc"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:padding="10dp"
-            android:layout_margin="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_gravity="right"/>
     </LinearLayout>
 
@@ -76,9 +77,10 @@
                 android:text="@string/bathroom"
                 android:background="@drawable/button_rounded_corners"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:layout_margin="10dp"
-                android:padding="10dp"
+                android:textSize="16sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:padding="8dp"
                 android:drawableLeft="@drawable/ic_bathroom_foreground"/>
 
             <Button
@@ -88,9 +90,10 @@
                 android:text="@string/food"
                 android:background="@drawable/button_rounded_corners"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:layout_margin="10dp"
-                android:padding="10dp"
+                android:textSize="16sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:padding="8dp"
                 android:drawableLeft="@drawable/ic_restaurant_foreground"/>
         </LinearLayout>
 

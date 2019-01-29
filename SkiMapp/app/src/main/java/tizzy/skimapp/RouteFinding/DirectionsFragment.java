@@ -25,6 +25,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Edge;
@@ -284,7 +285,8 @@ public class DirectionsFragment extends Fragment {
         protected Path doInBackground(Object... objects) {
 
             Yen yen = new Yen(mResort);
-            Path path = yen.YenKSP(mResortGraph, (Node) objects[0], (Node) objects[1], 3).get(0);
+            List<Path> paths = yen.YenKSP(mResortGraph, (Node) objects[0], (Node) objects[1], 3);
+            Path path = paths.get(paths.size()-1);
 
 //            Dijkstra dijkstra = new Dijkstra(mResortGraph);
 //            dijkstra.execute((Node) objects[0]);       // start node
