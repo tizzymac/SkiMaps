@@ -29,6 +29,7 @@
         <activity android:name=".RouteFinding.DirectionsActivity"/>
         <activity android:name=".Map.MapActivity"/>
         <activity android:name=".Emergency.EmergencyActivity"/>
+        <activity android:name=".RouteFinding.NavMode.NavModeActivity"/>
 
     </application>
 

@@ -5,13 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:paddingBottom="10dp"
+    android:background="@color/colorPrimary">
 
     <TextView
         android:id="@+id/edge_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:textColor="@color/white"
+        android:layout_margin="5dp"
+        android:textSize="25dp"/>
 
     <!-- Image for run level -->
     <!-- Image for type of lift -->

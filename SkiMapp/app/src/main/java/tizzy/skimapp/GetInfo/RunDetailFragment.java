@@ -59,7 +59,7 @@ public class RunDetailFragment extends DialogFragment {
                 .create();
 
         // Get reference to DB
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        //mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
 

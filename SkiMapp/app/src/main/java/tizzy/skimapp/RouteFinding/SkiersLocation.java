@@ -20,6 +20,10 @@ public class SkiersLocation {
             mCurrentLocation = location;
     }
 
+    public boolean isNull() {
+        return (mCurrentLocation == null);
+    }
+
     // Returns the edge the skier is currently at
     public _Edge getEdge() {
         // TODO

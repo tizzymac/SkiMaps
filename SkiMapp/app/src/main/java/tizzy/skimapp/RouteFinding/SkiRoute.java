@@ -1,5 +1,6 @@
 package tizzy.skimapp.RouteFinding;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import tizzy.skimapp.ResortModel.Edge;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Path;
 
-public class SkiRoute {
+public class SkiRoute implements Serializable {
 
     private LinkedList<String> mEdgeNamePath;
 

@@ -37,6 +37,8 @@
     <string name="get_loc">Get My Location</string>
     <string name="top_bottom">Bottom | Top</string>
     <string name="lift_run">Lift | Run</string>
+    <string name="your_route">Your Ski Route</string>
+    <string name="end_route">End Route</string>
 
     <!-- Emergency -->
     <string name="your_location">Your exact location:</string>

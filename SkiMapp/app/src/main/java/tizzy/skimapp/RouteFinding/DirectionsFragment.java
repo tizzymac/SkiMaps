@@ -2,6 +2,7 @@ package tizzy.skimapp.RouteFinding;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -35,6 +36,8 @@ import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.ResortModel.Run;
 import tizzy.skimapp.RouteFinding.KShortestPaths.Yen;
+import tizzy.skimapp.RouteFinding.NavMode.NavModeActivity;
+import tizzy.skimapp.Settings.SettingsActivity;
 
 public class DirectionsFragment extends Fragment {
     private static final String ARG_RESORT = "resort";
@@ -301,8 +304,12 @@ public class DirectionsFragment extends Fragment {
                 // TODO clear mRouteListView
             } else {
                 SkiRoute skiRoute = new SkiRoute(path, mResortGraph);
-                mRoute.setText("");
-                mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
+//                mRoute.setText("");
+//                mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
+
+                // Start Nav Mode
+                Intent intent = NavModeActivity.newIntent(getActivity(), mResort, skiRoute);
+                startActivity(intent);
             }
         }
     }
