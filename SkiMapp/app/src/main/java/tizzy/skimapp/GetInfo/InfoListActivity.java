@@ -15,22 +15,15 @@ public class InfoListActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
 
-//        // Where to put this?
-//        Fragment liftListFragment = new LiftListFragment();
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.detail_fragment_container, liftListFragment)
-//                .commit();
-
         Resort resort = (Resort) getIntent().getSerializableExtra(EXTRA_RESORT);
 
-        return RunListFragment.newInstance(resort);
+        return InfoListFragment.newInstance(resort);
     }
 
-    @Override
-    protected int getLayoutResId() {
-        return R.layout.activity_twopane;
-    }
+//    @Override
+//    protected int getLayoutResId() {
+//        return R.layout.activity_twopane;
+//    }
 
     public static Intent newIntent(Context packageContext, Resort resort) {
         Intent intent = new Intent(packageContext, InfoListActivity.class);

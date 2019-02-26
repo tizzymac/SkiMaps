@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorPrimary">
 
     <TextView
         android:layout_width="match_parent"
@@ -13,14 +13,14 @@
         android:layout_gravity="top"
         android:text="@string/settings"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="40sp"
-        android:layout_margin="20dp"/>
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="42sp"
+        android:layout_margin="20dp"
+        android:gravity="top"/>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
         android:textSize="24sp"
         android:layout_margin="20dp"
         android:id="@android:id/list">
@@ -31,9 +31,20 @@
         android:text="@string/set_level"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#EDB147"
-        android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/button_rounded_corners"
+        android:textColor="@color/white"
         android:textSize="24sp"
-        android:layout_margin="20dp" />
+        android:layout_margin="12dp" />
+
+    <Button
+        android:id="@+id/what_level_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/what_level"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="italic"
+        android:background="@android:color/transparent"
+        />
 
 </LinearLayout>

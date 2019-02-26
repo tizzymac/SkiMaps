@@ -8,6 +8,7 @@
         android:dialogTitle="@string/pref_ski_ability"
 
         android:entries="@array/pref_userSettings_entries"
-        android:entryValues="@array/pref_userSettings_values"/>
+        android:entryValues="@array/pref_userSettings_values"
+        />
 
 </PreferenceScreen>

@@ -124,11 +124,13 @@
         <Lift
             name="Sam's Knob"
             start="1"
-            end="2" />
+            end="2"
+            capacity="4"/>
         <Lift
             name="Village Express"
             start="3"
-            end="2" />
+            end="2"
+            capacity="6"/>
     </Lifts>
     <Runs>
         <!-- Sam's Knob -->

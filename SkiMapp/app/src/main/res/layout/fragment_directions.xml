@@ -113,14 +113,14 @@
                 <Switch
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/top_bottom"
+                    android:id="@+id/top_bottom_toggle"
                     android:text="@string/top_bottom"
                     android:textColor="@color/white"/>
 
                 <Switch
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/lift_run"
+                    android:id="@+id/lift_run_toggle"
                     android:text="@string/lift_run"
                     android:textColor="@color/white"/>
 

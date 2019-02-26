@@ -14,13 +14,15 @@ public class Lift extends Edge {
     private LiftStatus mStatus;
     private List<Node> mMidpoints = null;
     private int mWeight;
+    private int mCapacity;
 
-    public Lift(String name, Node start, Node end) {
+    public Lift(String name, Node start, Node end, int capacity) {
         this.mName = name;
         this.mStart = start;
         this.mEnd = end;
         this.mStatus = new LiftStatus();
         this.mWeight = getSimpleWeight();
+        this.mCapacity = capacity;
     }
 
     @Override
@@ -48,6 +50,10 @@ public class Lift extends Edge {
                                 Math.pow((mEnd.getCoords().getZ() - mStart.getCoords().getZ()), 2) ));
     }
 
+    public int getCapacity() {
+        return mCapacity;
+    }
+
     @Override
     public int getWeight(SkiLevel level) {
         // Factors
@@ -56,6 +62,10 @@ public class Lift extends Edge {
 
         // TODO
         return mWeight;
+    }
+
+    public LiftStatus getStatus() {
+        return mStatus;
     }
 
     @Override

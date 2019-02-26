@@ -32,7 +32,7 @@ public class RunDetailFragment extends DialogFragment {
     private TextView mRunLevelView;
     private TextView mOpenView;
     private TextView mGroomView;
-    private TextView mSteepnessView;
+    //private TextView mSteepnessView;
 
     private DatabaseReference mDatabase;
 
@@ -43,7 +43,7 @@ public class RunDetailFragment extends DialogFragment {
         mRunName = run.getName();
         mRunLevel = run.getLevel();
         mRunStatus = run.getStatus();
-        mRunSteepness = run.getSlopeAngle();
+        //mRunSteepness = run.getSlopeAngle();
 
         RunDetailFragment fragment = new RunDetailFragment();
         return fragment;
@@ -87,8 +87,8 @@ public class RunDetailFragment extends DialogFragment {
             mGroomView.setText("Groom Status: Not Groomed");
         }
 
-        mSteepnessView = view.findViewById(R.id.steepness);
-        mSteepnessView.setText("Avg Slope Angle: " + Integer.toString(mRunSteepness));
+//        mSteepnessView = view.findViewById(R.id.steepness);
+//        mSteepnessView.setText("Avg Slope Angle: " + Integer.toString(mRunSteepness));
 
         return alert;
     }

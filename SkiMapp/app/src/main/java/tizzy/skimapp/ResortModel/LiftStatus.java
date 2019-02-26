@@ -15,6 +15,9 @@ public class LiftStatus implements Serializable {
     }
 
     public boolean isOpen() {
+
+        // TODO
+
         return mOpen;
     }
 
@@ -23,6 +26,12 @@ public class LiftStatus implements Serializable {
     }
 
     public Time getOpeningTime() {
+
+        // TODO
+        if (mOpeningTime == null) {
+            return new Time(8,0,0);
+        }
+
         return mOpeningTime;
     }
 
@@ -31,6 +40,12 @@ public class LiftStatus implements Serializable {
     }
 
     public Time getClosingTime() {
+
+        // TODO
+        if (mClosingTime == null) {
+            return new Time(15,30,0);
+        }
+
         return mClosingTime;
     }
 

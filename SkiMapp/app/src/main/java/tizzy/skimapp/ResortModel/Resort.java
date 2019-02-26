@@ -131,7 +131,8 @@ public class Resort implements Serializable {
                 mLifts.add(new Lift(
                         liftElement.getAttribute("name"),
                         mNodes.get(Integer.parseInt(liftElement.getAttribute("start")) - 1),
-                        mNodes.get(Integer.parseInt(liftElement.getAttribute("end")) - 1)
+                        mNodes.get(Integer.parseInt(liftElement.getAttribute("end")) - 1),
+                        Integer.parseInt(liftElement.getAttribute("capacity"))
                 ));
             }
         }

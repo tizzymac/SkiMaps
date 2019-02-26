@@ -15,24 +15,26 @@ import android.widget.Toast;
 import java.util.List;
 
 import tizzy.skimapp.R;
+import tizzy.skimapp.ResortModel.Lift;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.ResortModel.Run;
 
-public class RunListFragment extends Fragment {
+public class InfoListFragment extends Fragment {
 
     private static final String DIALOG_RUN_DETAIL = "DialogRunDetail";
+    private static final String DIALOG_LIFT_DETAIL = "DialogLiftDetail";
     private static final String ARG_RESORT = "resort";
     private Resort mResort;
 
     private RecyclerView mRunRecyclerView;
-//    private RecyclerView mLiftRecyclerView;
+    private RecyclerView mLiftRecyclerView;
     private RunAdapter mRunAdapter;
-//    private LiftAdapter mLiftAdapter;
+    private LiftAdapter mLiftAdapter;
 
-    public static RunListFragment newInstance(Resort resort) {
+    public static InfoListFragment newInstance(Resort resort) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_RESORT, resort);
-        RunListFragment fragment = new RunListFragment();
+        InfoListFragment fragment = new InfoListFragment();
         fragment.setArguments(args);
 
         return fragment;
@@ -47,10 +49,13 @@ public class RunListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_run_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_info, container, false);
 
         mRunRecyclerView = view.findViewById(R.id.run_info_recycler_view);
         mRunRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mLiftRecyclerView = view.findViewById(R.id.lift_info_recycler_view);
+        mLiftRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
 
@@ -60,6 +65,9 @@ public class RunListFragment extends Fragment {
     private void updateUI() {
         mRunAdapter = new RunAdapter(mResort.getRuns());
         mRunRecyclerView.setAdapter(mRunAdapter);
+
+        mLiftAdapter = new LiftAdapter(mResort.getLifts());
+        mLiftRecyclerView.setAdapter(mLiftAdapter);
     }
 
     private class RunHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -121,6 +129,57 @@ public class RunListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mRuns.size();
+        }
+    }
+
+    private class LiftHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private TextView mLiftNameTextView;
+        private Lift mLift;
+
+        @Override
+        public void onClick(View view) {
+            // Open details
+            FragmentManager manager = getFragmentManager();
+            LiftDetailFragment liftDialog = LiftDetailFragment.newInstance(mLift);
+            liftDialog.show(manager, DIALOG_LIFT_DETAIL);
+        }
+
+        public LiftHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.list_item_lift, parent, false));
+            itemView.setOnClickListener(this);
+
+            mLiftNameTextView = itemView.findViewById(R.id.lift_name);
+        }
+
+        public void bind(Lift lift) {
+            mLift = lift;
+            mLiftNameTextView.setText(mLift.getName());
+        }
+    }
+
+    private class LiftAdapter extends RecyclerView.Adapter<LiftHolder> {
+        private List<Lift> mLifts;
+
+        public LiftAdapter(List<Lift> lifts) {
+            mLifts = lifts;
+        }
+
+        @Override
+        public LiftHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
+            return new LiftHolder(inflater, parent);
+        }
+
+        @Override
+        public void onBindViewHolder(LiftHolder holder, int position) {
+            Lift lift = mLifts.get(position);
+            holder.bind(lift);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mLifts.size();
         }
     }
 }
