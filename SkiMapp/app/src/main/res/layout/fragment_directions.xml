@@ -132,6 +132,18 @@
                 android:id="@+id/to_spinner">
             </Spinner>
         </LinearLayout>
+
+        <!-- Longer route checkbox -->
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Longer route"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:padding="10dp"
+            android:layout_margin="5dp"/>
+
     </LinearLayout>
 
     <Button

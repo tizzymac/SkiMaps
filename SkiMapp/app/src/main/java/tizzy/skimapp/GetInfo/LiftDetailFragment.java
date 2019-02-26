@@ -40,8 +40,8 @@ public class LiftDetailFragment extends DialogFragment {
         mLiftName = lift.getName();
         mLiftStatus = lift.getStatus();
         mLiftCapacity = "Capacity: " + String.valueOf(lift.getCapacity());
-        mOpenTime = "Opens at: " + lift.getStatus().getOpeningTime().toString();
-        mCloseTime = "Closes at: " + lift.getStatus().getClosingTime().toString();
+        mOpenTime = "Opens at: " + lift.getStatus().openingTimeStr();
+        mCloseTime = "Closes at: " + lift.getStatus().closingTimeStr();
 
         LiftDetailFragment fragment = new LiftDetailFragment();
         return fragment;

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import tizzy.skimapp.ResortModel.Resort;
+import tizzy.skimapp.ResortModel.SkiLevel;
 import tizzy.skimapp.RouteFinding.SkiRoute;
 import tizzy.skimapp.SingleFragmentActivity;
 
@@ -13,12 +14,14 @@ public class NavModeActivity extends SingleFragmentActivity {
 
     private static final String EXTRA_RESORT = "tizzy.skimapp.resort";
     private static final String EXTRA_ROUTE = "tizzy.skimapp.route";
+    private static final String EXTRA_LEVEL = "tizzy.skimapp.skiLevel";
 
     @Override
     protected Fragment createFragment() {
         Resort resort = (Resort) getIntent().getSerializableExtra(EXTRA_RESORT);
         SkiRoute route = (SkiRoute) getIntent().getSerializableExtra(EXTRA_ROUTE);
-        return NavModeFragment.newInstance(resort, route);
+        SkiLevel level = (SkiLevel) getIntent().getSerializableExtra(EXTRA_LEVEL);
+        return NavModeFragment.newInstance(resort, route, level);
     }
 
     @Override
@@ -31,10 +34,11 @@ public class NavModeActivity extends SingleFragmentActivity {
         super.onCreate(savedInstanceState);
     }
 
-    public static Intent newIntent(Context packageContext, Resort resort, SkiRoute route) {
+    public static Intent newIntent(Context packageContext, Resort resort, SkiRoute route, SkiLevel level) {
         Intent intent = new Intent(packageContext, NavModeActivity.class);
         intent.putExtra(EXTRA_RESORT, resort);
         intent.putExtra(EXTRA_ROUTE, route);
+        intent.putExtra(EXTRA_LEVEL, level);
         return intent;
     }
 }

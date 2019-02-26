@@ -1,5 +1,6 @@
 package tizzy.skimapp.ResortModel;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +17,13 @@ public class Lift extends Edge {
     private int mWeight;
     private int mCapacity;
 
-    public Lift(String name, Node start, Node end, int capacity) {
+    public Lift(String name, Node start, Node end, int capacity, String open, String close) throws ParseException {
         this.mName = name;
         this.mStart = start;
         this.mEnd = end;
-        this.mStatus = new LiftStatus();
         this.mWeight = getSimpleWeight();
         this.mCapacity = capacity;
+        this.mStatus = new LiftStatus(open, close);
     }
 
     @Override

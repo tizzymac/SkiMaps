@@ -125,12 +125,16 @@
             name="Sam's Knob"
             start="1"
             end="2"
-            capacity="4"/>
+            capacity="4"
+            open="08:00"
+            close="15:30"/>
         <Lift
             name="Village Express"
             start="3"
             end="2"
-            capacity="6"/>
+            capacity="6"
+            open="08:00"
+            close="16:00"/>
     </Lifts>
     <Runs>
         <!-- Sam's Knob -->

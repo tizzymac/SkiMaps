@@ -2,55 +2,43 @@ package tizzy.skimapp.ResortModel;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class LiftStatus implements Serializable {
 
-    private boolean mOpen;
-    private Time mOpeningTime;
-    private Time mClosingTime;
+    private Date mOpeningTime;
+    private Date mClosingTime;
     private int mQueueLength;
 
-    public LiftStatus() {
-        mOpen = true;
+    SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+
+    public LiftStatus(String open, String close) throws ParseException {
+
+        mOpeningTime = parser.parse(open);
+        mClosingTime = parser.parse(close);
     }
 
     public boolean isOpen() {
 
         // TODO
-
-        return mOpen;
-    }
-
-    public void setOpen(boolean open) {
-        mOpen = open;
-    }
-
-    public Time getOpeningTime() {
-
-        // TODO
-        if (mOpeningTime == null) {
-            return new Time(8,0,0);
+        Calendar cal = Calendar.getInstance();
+        Date timeNow = cal.getTime();
+        if (timeNow.after(mOpeningTime) && timeNow.before(mClosingTime)) {
+            return true;
         }
 
-        return mOpeningTime;
+        return false;
     }
 
-    public void setOpeningTime(Time openingTime) {
-        mOpeningTime = openingTime;
+    public String openingTimeStr() {
+        return parser.format(mOpeningTime);
     }
 
-    public Time getClosingTime() {
-
-        // TODO
-        if (mClosingTime == null) {
-            return new Time(15,30,0);
-        }
-
-        return mClosingTime;
-    }
-
-    public void setClosingTime(Time closingTime) {
-        mClosingTime = closingTime;
+    public String closingTimeStr() {
+        return parser.format(mClosingTime);
     }
 
     public int getQueueLength() {

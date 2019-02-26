@@ -19,11 +19,13 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -35,6 +37,7 @@ import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.ResortModel.Run;
+import tizzy.skimapp.ResortModel.SkiLevel;
 import tizzy.skimapp.RouteFinding.KShortestPaths.Yen;
 import tizzy.skimapp.RouteFinding.NavMode.NavModeActivity;
 import tizzy.skimapp.Settings.SettingsActivity;
@@ -65,6 +68,7 @@ public class DirectionsFragment extends Fragment {
     private ListView mRouteListView;
     private Button mGetLocButton;
     private TextView mLocTextView;
+    private CheckBox mLongerRouteCheckBox;
 
     private SkiersLocation mSkiersLocation;
     LocationManager locationManager;
@@ -130,7 +134,7 @@ public class DirectionsFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                // Find shorest route to a restaurant
+                // Find shortest route to a restaurant
 
                 // Pretend current node is 2
                 FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
@@ -151,9 +155,13 @@ public class DirectionsFragment extends Fragment {
             }
         });
 
-        mTopBottomSwitch = view.findViewById(R.id.top_bottom);
+        mLongerRouteCheckBox = view.findViewById(R.id.checkbox);
 
-        mRunLiftSwitch = view.findViewById(R.id.lift_run);
+        mTopBottomSwitch = view.findViewById(R.id.top_bottom_toggle);
+        mTopBottomSwitch.setChecked(false);
+
+        mRunLiftSwitch = view.findViewById(R.id.lift_run_toggle);
+        mRunLiftSwitch.setChecked(false);
         mRunLiftSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,10 +190,13 @@ public class DirectionsFragment extends Fragment {
                     end = ((Edge) mToSpinner.getSelectedItem()).getEnd();
                 }
 
-                // TODO Need to check if anything was inputted!
-                final Node start = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString())-1);
-
-                new calculateRoute().execute(start, end);
+                // Check if anything was inputted
+                if (mFromInput.getText().toString().equals("")) {
+                    Toast.makeText(getActivity(), "No start inputted!", Toast.LENGTH_LONG).show();
+                } else {
+                    final Node start = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString()) - 1);
+                    new calculateRoute().execute(start, end, mLongerRouteCheckBox.isChecked());
+                }
             }
         });
 
@@ -255,6 +266,10 @@ public class DirectionsFragment extends Fragment {
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, myLocationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, myLocationListener);
+
+        // Reset toggles
+        mTopBottomSwitch.setChecked(false);
+        mRunLiftSwitch.setChecked(false);
     }
 
     @Override
@@ -287,13 +302,23 @@ public class DirectionsFragment extends Fragment {
         @Override
         protected Path doInBackground(Object... objects) {
 
-            Yen yen = new Yen(mResort);
-            List<Path> paths = yen.YenKSP(mResortGraph, (Node) objects[0], (Node) objects[1], 3);
-            Path path = paths.get(paths.size()-1);
+            Path path = new Path();
 
-//            Dijkstra dijkstra = new Dijkstra(mResortGraph);
-//            dijkstra.execute((Node) objects[0]);       // start node
-//            Path path = dijkstra.getPath((Node) objects[1]);    // end node
+            // If longer route is checked ...
+            if ((boolean) objects[2]) {
+
+                Yen yen = new Yen(mResort);
+                List<Path> paths = yen.YenKSP(mResortGraph, (Node) objects[0], (Node) objects[1], 3);
+                path = paths.get(paths.size() - 1);
+
+            } else {
+
+                Dijkstra dijkstra = new Dijkstra(mResortGraph);
+                dijkstra.execute((Node) objects[0]);       // start node
+                path = dijkstra.getPath((Node) objects[1]);    // end node
+
+            }
+
             return path;
         }
 
@@ -308,7 +333,7 @@ public class DirectionsFragment extends Fragment {
 //                mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 
                 // Start Nav Mode
-                Intent intent = NavModeActivity.newIntent(getActivity(), mResort, skiRoute);
+                Intent intent = NavModeActivity.newIntent(getActivity(), mResort, skiRoute, new SkiLevel(mSkiAbility));
                 startActivity(intent);
             }
         }

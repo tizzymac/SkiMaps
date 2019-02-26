@@ -3,6 +3,7 @@ package tizzy.skimapp.Settings;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,10 @@ import tizzy.skimapp.R;
 
 public class SettingsFragment extends PreferenceFragment {
 
+    private static final String DIALOG_LEVEL_EXPLANATIONS = "DialogLevelExplanations";
+
     private Button mSetLevelButton;
+    private Button mWhatLevelButton;
     private ListView mListView;
 
     @Override
@@ -43,6 +47,18 @@ public class SettingsFragment extends PreferenceFragment {
                 // Return home
                 Intent intent = HomeActivity.newIntent(getActivity());
                 startActivity(intent);
+            }
+        });
+
+        mWhatLevelButton = view.findViewById(R.id.what_level_button);
+        mWhatLevelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Open level explanations
+//                FragmentManager manager = getFragmentManager();
+//                LevelExplanationFragment runDialog = LevelExplanationFragment.newInstance();
+//                runDialog.show(manager, DIALOG_LEVEL_EXPLANATIONS);
             }
         });
 

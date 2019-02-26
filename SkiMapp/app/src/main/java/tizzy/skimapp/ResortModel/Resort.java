@@ -11,6 +11,7 @@ import org.w3c.dom.NodeList;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -120,7 +121,7 @@ public class Resort implements Serializable {
         }
     }
 
-    private void readLifts(Document doc) {
+    private void readLifts(Document doc) throws ParseException {
         NodeList nLiftList = doc.getElementsByTagName("Lift");
         for (int i = 0; i < nLiftList.getLength(); i++) {
             Node nNode = nLiftList.item(i);
@@ -132,7 +133,9 @@ public class Resort implements Serializable {
                         liftElement.getAttribute("name"),
                         mNodes.get(Integer.parseInt(liftElement.getAttribute("start")) - 1),
                         mNodes.get(Integer.parseInt(liftElement.getAttribute("end")) - 1),
-                        Integer.parseInt(liftElement.getAttribute("capacity"))
+                        Integer.parseInt(liftElement.getAttribute("capacity")),
+                        liftElement.getAttribute("open"),
+                        liftElement.getAttribute("close")
                 ));
             }
         }
