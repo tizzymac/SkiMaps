@@ -30,6 +30,7 @@ public class Resort implements Serializable {
     private LinkedList<Lift> mLifts;
     private LinkedList<Run> mRuns;
     private LinkedList<Facility> mFacilities;
+    private String mEmergencyNumber;
     // mountains
 
     public static Resort get(Context context) {
@@ -64,6 +65,7 @@ public class Resort implements Serializable {
             readRuns(doc);
             readLifts(doc);
             readFacilities(doc);
+            readEmergency(doc);
 
         } catch (Exception e) {
             // TODO
@@ -158,6 +160,13 @@ public class Resort implements Serializable {
         }
     }
 
+    private void readEmergency(Document doc) {
+        NodeList nFacList = doc.getElementsByTagName("SkiPatrol");
+        Element emergencyElement = (Element) nFacList.item(0);
+        String number = emergencyElement.getAttribute("number");
+        mEmergencyNumber = number;
+    }
+
     public LinkedList<tizzy.skimapp.ResortModel.Node> getNodes() {
         return mNodes;
     }
@@ -178,5 +187,9 @@ public class Resort implements Serializable {
         edges.addAll(mLifts);
         edges.addAll(mRuns);
         return edges;
+    }
+
+    public String getEmergencyNumber() {
+        return mEmergencyNumber;
     }
 }

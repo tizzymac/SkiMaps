@@ -43,6 +43,7 @@
 
     <!-- Emergency -->
     <string name="your_location">Your exact location:</string>
+    <string name="call_this">Call Ski Patrol:</string>
 
     <!-- Ski level explanations -->
     <string name="green_ability">Green / Beginner\nYou have never skied or you are a confident novice.</string>

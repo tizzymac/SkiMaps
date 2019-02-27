@@ -7,14 +7,55 @@
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/your_location"/>
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/call_this"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:textStyle="bold"/>
 
-    <TextView
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/patrol_number"
+            android:textColor="@color/colorAccent"
+            android:textSize="34dp"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/your_location"/>
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/your_location"
+            android:textColor="@color/white"
+            android:textSize="28dp"
+            android:textAlignment="center"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/your_location"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="32dp"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
 
 </LinearLayout>

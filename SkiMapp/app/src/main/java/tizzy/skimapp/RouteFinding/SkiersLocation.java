@@ -2,6 +2,9 @@ package tizzy.skimapp.RouteFinding;
 
 import android.location.Location;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 import tizzy.skimapp.ResortModel._Edge;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Resort;
@@ -57,5 +60,13 @@ public class SkiersLocation {
 
     public String getExactLocation() {
         return mCurrentLocation.toString();
+    }
+
+    public String getReadableLocation() {
+        DecimalFormat df = new DecimalFormat("#.###");
+        df.setRoundingMode(RoundingMode.CEILING);
+        String loc = "Lat: " + df.format(mCurrentLocation.getLatitude())
+                + "\nLon: " +  df.format(mCurrentLocation.getLongitude());
+        return loc;
     }
 }

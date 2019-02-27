@@ -201,7 +201,6 @@
             level="Green" />
 
     </Runs>
-    <SkiPatrol>
-        number="970-923-0530"
-    </SkiPatrol>
+    <SkiPatrol
+        number="970-923-0530"/>
 </SkiResort>

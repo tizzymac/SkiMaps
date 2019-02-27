@@ -30,6 +30,7 @@ public class EmergencyFragment extends Fragment {
 
     private TextView mSkiersLocationTextView;
     private SkiersLocation mSkiersLocation;
+    private TextView mSkiPatrolNumberTextView;
     private LocationManager locationManager;
     private Resort mResort;
 
@@ -47,6 +48,7 @@ public class EmergencyFragment extends Fragment {
 
         mResort = (Resort) getArguments().getSerializable(ARG_RESORT);
         mSkiersLocation = new SkiersLocation(mResort);
+
     }
 
     @Override
@@ -54,6 +56,9 @@ public class EmergencyFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_emergency, container, false);
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        mSkiPatrolNumberTextView = view.findViewById(R.id.patrol_number);
+        mSkiPatrolNumberTextView.setText(mResort.getEmergencyNumber());
 
         mSkiersLocationTextView = view.findViewById(R.id.your_location);
 
@@ -65,7 +70,7 @@ public class EmergencyFragment extends Fragment {
         @Override
         public void onLocationChanged(Location location) {
             mSkiersLocation.updateLocation(location);
-            mSkiersLocationTextView.setText(mSkiersLocation.getExactLocation());
+            mSkiersLocationTextView.setText(mSkiersLocation.getReadableLocation());
         }
 
         @Override
