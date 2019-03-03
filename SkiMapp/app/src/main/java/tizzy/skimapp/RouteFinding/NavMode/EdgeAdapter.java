@@ -1,6 +1,7 @@
 package tizzy.skimapp.RouteFinding.NavMode;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,12 @@ public class EdgeAdapter extends RecyclerView.Adapter<EdgeAdapter.ViewHolder> {
         // Set item views based on your views and data model
         TextView textView = holder.nameTextView;
         textView.setText(mSkiRoute.getEdgeName(position));
+
+        if (mSkiRoute.isSegmentCompleted(position)) {
+            textView.setTextColor(Color.GRAY);
+        } else {
+            textView.setTextColor(Color.WHITE);
+        }
     }
 
     @Override
@@ -58,7 +65,7 @@ public class EdgeAdapter extends RecyclerView.Adapter<EdgeAdapter.ViewHolder> {
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            nameTextView = (TextView) itemView.findViewById(R.id.edge_name);
+            nameTextView = itemView.findViewById(R.id.edge_name);
         }
     }
 }

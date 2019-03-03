@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Node;
+import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.ResortModel.SkiLevel;
 import tizzy.skimapp.RouteFinding.DirectionsActivity;
@@ -32,12 +33,6 @@ public class NavModeFragment extends Fragment {
     private static final String ARG_ROUTE = "route";
     private static final String ARG_LEVEL = "skiLevel";
 
-    private static final String[] LOCATION_PERMISSIONS = new String[]{
-            android.Manifest.permission.ACCESS_FINE_LOCATION,
-            android.Manifest.permission.ACCESS_COARSE_LOCATION,
-    };
-    private static final int REQUEST_LOCATION_PERMISSIONS = 0;
-
     private Resort mResort;
     private SkiersLocation mSkiersLocation;
     LocationManager locationManager;
@@ -47,6 +42,9 @@ public class NavModeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private TextView mCurrentLocationTextView;
     private Button mEndRouteButton;
+
+    private int mCurrentSegment;
+    EdgeAdapter mAdapter;
 
     public static NavModeFragment newInstance(Resort resort, SkiRoute route, SkiLevel skiLevel) {
         Bundle args = new Bundle();
@@ -74,38 +72,27 @@ public class NavModeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_nav_mode, container, false);
         mRecyclerView = view.findViewById(R.id.rv_nav_mode);
 
+        mCurrentSegment = 0;
+
         // Skier's current location
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
         mCurrentLocationTextView = view.findViewById(R.id.current_location);
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted
-            System.out.println("Permission not granted");
-            requestPermissions(LOCATION_PERMISSIONS, REQUEST_LOCATION_PERMISSIONS);
+        if (mSkiersLocation.isNull()) {
+            // TODO
+            mCurrentLocationTextView.setText("Unable to locate skier");
         } else {
-            // Permission has already been granted
-            if (mSkiersLocation.isNull()) {
-                // TODO
-                mCurrentLocationTextView.setText("Cannot locate skier");
-            } else {
-                Node currentNode = mSkiersLocation.getNode();
-                if (currentNode != null) {
-                    //mLocTextView.setText(currentNode.getId());
-                    mCurrentLocationTextView.setText(currentNode.getId());
-                } else {
-                    mCurrentLocationTextView.setText("You are not currently at a node");
-                }
-            }
+            getSkiersNode();
         }
 
+
         // Create adapter passing in the sample user data
-        EdgeAdapter adapter = new EdgeAdapter(mSkiRoute);
+        mAdapter = new EdgeAdapter(mSkiRoute);
         // Attach the adapter to the recycler view to populate items
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(mAdapter);
         // Set layout manager to position the items
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // TODO Test changing color of first run
 
         mEndRouteButton = view.findViewById(R.id.end_route);
         mEndRouteButton.setOnClickListener(new View.OnClickListener() {
@@ -125,22 +112,34 @@ public class NavModeFragment extends Fragment {
         @Override
         public void onLocationChanged(Location location) {
             mSkiersLocation.updateLocation(location);
+            Node currNode = getSkiersNode();
+
+            if ((currNode != null) && (mCurrentSegment < mSkiRoute.length())) {
+                // Check if current segment has been completed
+                if (currNode.equals(mSkiRoute.getEndNodeAt(mCurrentSegment))) {
+                    // change text color of completed segment
+                    mSkiRoute.setCompleted(mCurrentSegment);
+                    mCurrentSegment++;
+
+                    // Check if route completed
+                    if (mCurrentSegment == mSkiRoute.length()-1) {
+                        mCurrentLocationTextView.setText("You've arrived!");
+                    }
+
+                    // refresh recycler view
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
         }
 
         @Override
-        public void onProviderDisabled(String provider) {
-
-        }
+        public void onProviderDisabled(String provider) { }
 
         @Override
-        public void onProviderEnabled(String provider) {
-
-        }
+        public void onProviderEnabled(String provider) { }
 
         @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
+        public void onStatusChanged(String provider, int status, Bundle extras) { }
     };
 
     @Override
@@ -164,6 +163,18 @@ public class NavModeFragment extends Fragment {
     public void onPause() {
         super.onPause();
         locationManager.removeUpdates(myLocationListener);
+    }
+
+    private Node getSkiersNode() {
+        Node currentNode = mSkiersLocation.getNode();
+        if (currentNode != null) {
+            //mLocTextView.setText(currentNode.getId());
+            mCurrentLocationTextView.setText(currentNode.getId());
+            return currentNode;
+        } else {
+            mCurrentLocationTextView.setText("You are not currently at a node");
+            return null;
+        }
     }
 
 }

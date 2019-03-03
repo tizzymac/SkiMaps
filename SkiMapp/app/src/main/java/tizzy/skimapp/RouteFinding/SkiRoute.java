@@ -1,6 +1,7 @@
 package tizzy.skimapp.RouteFinding;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,10 +12,13 @@ import tizzy.skimapp.ResortModel.Path;
 public class SkiRoute implements Serializable {
 
     private LinkedList<String> mEdgeNamePath;
+    private LinkedList<Node> mEndNodes;
+    private boolean[] mCompleted;
 
     // Create SkiRoute from Path
     public SkiRoute(Path path, Graph resortGraph) {
         mEdgeNamePath = new LinkedList<>();
+        mEndNodes = new LinkedList<>();
 
         // Rejoin adjacent segments from same run
 
@@ -41,6 +45,7 @@ public class SkiRoute implements Serializable {
                     // set end of current edge as i
                     // add edge to SkiRoute
                     mEdgeNamePath.add(edgeFromStart);
+                    mEndNodes.add(path.getNode(i));
 
                     // set startNode to node at i
                     startNode = path.getNode(i);
@@ -51,6 +56,7 @@ public class SkiRoute implements Serializable {
                 // check if at final node
                 if (j == path.getNodePath().size()-1) {
                     mEdgeNamePath.add(edgeFromStart);
+                    mEndNodes.add(path.getNode(j));
                     startNode = path.getNode(j);
                 }
             }
@@ -58,9 +64,13 @@ public class SkiRoute implements Serializable {
             if (startNode == penultimateNodeInPath) {
                 String finalEdge = resortGraph.getEdgeBetweenNodes(penultimateNodeInPath, finalNodeInPath).getName();
                 mEdgeNamePath.add(finalEdge);
+                mEndNodes.add(finalNodeInPath);
+
                 // exit while loop
                 startNode = finalNodeInPath;
             }
+
+            mCompleted = new boolean[mEdgeNamePath.size()];
         }
 
     }
@@ -70,6 +80,22 @@ public class SkiRoute implements Serializable {
     }
 
     public int getNumberOfEdges() {
+        return mEdgeNamePath.size();
+    }
+
+    public Node getEndNodeAt(int index) {
+        return mEndNodes.get(index);
+    }
+
+    public void setCompleted(int i) {
+        mCompleted[i] = true;
+    }
+
+    public Boolean isSegmentCompleted(int i) {
+        return mCompleted[i];
+    }
+
+    public int length() {
         return mEdgeNamePath.size();
     }
 }

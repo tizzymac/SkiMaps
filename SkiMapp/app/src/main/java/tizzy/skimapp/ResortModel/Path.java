@@ -2,9 +2,10 @@ package tizzy.skimapp.ResortModel;
 
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Path implements Comparable<Path> {
+public class Path implements Comparable<Path>, Serializable {
 
     private LinkedList<Node> mNodePath;
 
