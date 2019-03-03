@@ -48,6 +48,6 @@
     <!-- Ski level explanations -->
     <string name="green_ability">Green / Beginner\nYou have never skied or you are a confident novice.</string>
     <string name="blue_ability">Blue / Intermediate\nYou can make parallel turns.</string>
-    <string name="black_ability">Blue / Expert\nYou can ski anything on the mountain.</string>
-
+    <string name="black_ability">Black / Expert\nYou can ski anything on the mountain.</string>
+    <string name="all_abilities">Green / Beginner\nYou have never skied or you are a confident novice.\n\nBlue / Intermediate\nYou can make parallel turns.\n\nBlack / Expert\nYou can ski anything on the mountain.</string>
 </resources>

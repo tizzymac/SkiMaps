@@ -34,7 +34,7 @@ public class RunDetailFragment extends DialogFragment {
     private TextView mGroomView;
     //private TextView mSteepnessView;
 
-    private DatabaseReference mDatabase;
+    //private DatabaseReference mDatabase;
 
     public static RunDetailFragment newInstance(Run run) {
         Bundle args = new Bundle();
@@ -82,9 +82,9 @@ public class RunDetailFragment extends DialogFragment {
 
         mGroomView = view.findViewById(R.id.groomed);
         if (mRunStatus.isGroomed()) {
-            mGroomView.setText("Groom Status: Groomed");
+            mGroomView.setText("Groomed: Yes");
         } else {
-            mGroomView.setText("Groom Status: Not Groomed");
+            mGroomView.setText("Groomed: No");
         }
 
 //        mSteepnessView = view.findViewById(R.id.steepness);

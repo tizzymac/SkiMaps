@@ -1,14 +1,15 @@
 package tizzy.skimapp.Settings;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import tizzy.skimapp.HomeActivity;
 import tizzy.skimapp.R;
@@ -24,6 +25,7 @@ public class SettingsFragment extends PreferenceFragment {
     private Button mSetLevelButton;
     private Button mWhatLevelButton;
     private ListView mListView;
+    private TextView mLevelExplanations;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,8 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
+        mLevelExplanations = view.findViewById(R.id.level_explanations);
+
         mWhatLevelButton = view.findViewById(R.id.what_level_button);
         mWhatLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +63,9 @@ public class SettingsFragment extends PreferenceFragment {
 //                FragmentManager manager = getFragmentManager();
 //                LevelExplanationFragment runDialog = LevelExplanationFragment.newInstance();
 //                runDialog.show(manager, DIALOG_LEVEL_EXPLANATIONS);
+
+                // Show explanations
+                mLevelExplanations.setTextColor(Color.parseColor("#304f86"));
             }
         });
 

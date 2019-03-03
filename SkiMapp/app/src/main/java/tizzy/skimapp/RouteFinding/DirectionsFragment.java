@@ -329,6 +329,7 @@ public class DirectionsFragment extends Fragment {
                 // TODO clear mRouteListView
             } else {
                 SkiRoute skiRoute = new SkiRoute(path, mResortGraph);
+
 //                mRoute.setText("");
 //                mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 

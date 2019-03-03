@@ -31,7 +31,7 @@ public class LiftDetailFragment extends DialogFragment {
     private TextView mOpenTimeView;
     private TextView mCloseTimeView;
 
-    private DatabaseReference mDatabase;
+    //private DatabaseReference mDatabase;
 
     public static LiftDetailFragment newInstance(Lift lift) {
         Bundle args = new Bundle();

@@ -39,6 +39,7 @@ public class SkiersLocation {
     }
 
     public boolean isAtNode(Node node) {
+
         // Check if current location is within a radius of 5 meters of the node
         boolean inLat = (mCurrentLocation.getLatitude() >= node.getCoords().getX() - 0.005) &&
                 (mCurrentLocation.getLatitude() <= node.getCoords().getX() + 0.005);
@@ -50,6 +51,9 @@ public class SkiersLocation {
     // Return the node the skier is currently at
     // or null if not at node
     public Node getNode() {
+
+        if (isNull()) { return null; }
+
         for (Node node : mResort.getNodes()) {
             if (isAtNode(node)) {
                 return node;

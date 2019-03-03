@@ -1,0 +1,493 @@
+<?xml version="1.0"?>
+<SkiResort>
+    <Nodes>
+
+        <!-- Summit Express -->
+        <Node
+            id="1"
+            x="39.205337"
+            y="-106.860311"
+            z="0"
+            desc="Bottom of SE"/>
+        <Node
+            id="2"
+            x="39.182587"
+            y="-106.875589"
+            z="6"
+            desc="Top of SE"/>
+        <!-- Panda Express -->
+        <Node
+            id="3"
+            x="39.202610"
+            y="-106.861169"
+            z="2"
+            desc="Top of PE"/>
+
+        <!-- Tiehack Express -->
+        <Node
+            id="4"
+            x="39.191136"
+            y="-106.854732"
+            z="1"
+            desc="Bottom of Tiehack"/>
+        <Node
+            id="5"
+            x="39.182338"
+            y="-106.874988"
+            z="6"
+            desc="Top of Tiehack"/>
+
+        <!-- Ridge Trail -->
+        <Node
+            id="6"
+            x="39.188808"
+            y="-106.873958"
+            z="5"
+            desc="Ridge Trail Midpoint"/>
+        <Node
+            id="7"
+            x="39.191269"
+            y="-106.871555"
+            z="4"
+            desc="Ridge Trail joins Lover's Lane"/>
+
+        <!-- No Problem -->
+        <Node
+            id="8"
+            x="39.187145"
+            y="-106.873100"
+            z="5"
+            desc="No Problem joins Lover's Lane"/>
+
+        <!-- Buckskin -->
+        <Node
+            id="9"
+            x="39.187876"
+            y="-106.870911"
+            z="4"
+            desc="Bottom of Buckskin"/>
+        <Node
+            id="10"
+            x="39.188043"
+            y="-106.873014"
+            z="4"
+            desc="Top of Buckskin"/>
+
+        <!-- Midway Ave -->
+        <Node
+            id="11"
+            x="39.192333"
+            y="-106.870396"
+            z="3"
+            desc="Top of Midway Ave"/>
+        <Node
+            id="12"
+            x="39.194861"
+            y="-106.869237"
+            z="2"
+            desc="Bottom of Midway Ave"/>
+        <Node
+            id="13"
+            x="39.186080"
+            y="-106.874473"
+            z="4"
+            desc="Friedl's joins NP"/>
+        <Node
+            id="14"
+            x="39.193996"
+            y="-106.870997"
+            z="3"
+            desc="End of lovers lane, becomes Jacob's ladder"/>
+
+        <!-- Tiehack -->
+        <Node
+            id="15"
+            x="39.185016"
+            y="-106.864195"
+            z="4"
+            desc="Tiehack Pkwy becomes Racer's Edge"/>
+        <Node
+            id="16"
+            x="39.183951"
+            y="-106.867885"
+            z="4"
+            desc="Start of Tiehack trail"/>
+        <Node
+            id="17"
+            x="39.183086"
+            y="-106.871190"
+            z="4"
+            desc="Start of Timber Doodle"/>
+        <Node
+            id="18"
+            x="39.182754"
+            y="-106.872220"
+            z="4"
+            desc="Start of Sterner"/>
+        <Node
+            id="19"
+            x="39.182687"
+            y="-106.874065"
+            z="4"
+            desc="Start of Ptarmigan Glade"/>
+        <Node
+            id="20"
+            x="39.184550"
+            y="-106.870246"
+            z="4"
+            desc="Ptar Glade joins Sterner"/>
+
+        <!-- Sterner Gulch -->
+        <Node
+            id="21"
+            x="39.188176"
+            y="-106.870718"
+            z="4"
+            desc="Start of SG"/>
+        <Node
+            id="22"
+            x="39.188592"
+            y="-106.868379"
+            z="3"
+            desc="End of Ptar"/>
+        <Node
+            id="23"
+            x="39.188816"
+            y="-106.866909"
+            z="3"
+            desc="End of Sterner"/>
+        <Node
+            id="24"
+            x="39.189980"
+            y="-106.864077"
+            z="3"
+            desc="End of SternerG, Start of Magic Carpet"/>
+
+        <!-- Bottom of Tiehack -->
+        <Node
+            id="25"
+            x="39.189548"
+            y="-106.862403"
+            z="2"
+            desc="TDoodle joins T Trail"/>
+        <Node
+            id="26"
+            x="39.190313"
+            y="-106.861673"
+            z="2"
+            desc="T Trail joins Buckskin"/>
+        <Node
+            id="27"
+            x="39.189747"
+            y="-106.859056"
+            z="2"
+            desc="Jav becomes blue"/>
+        <Node
+            id="28"
+            x="39.190512"
+            y="-106.857639"
+            z="2"
+            desc="Racer's joins Jav"/>
+        <Node
+            id="29"
+            x="39.191743"
+            y="-106.856438"
+            z="2"
+            desc="Magic C joins Oregon T"/>
+
+        <!-- Sterner Catwalk -->
+        <Node
+            id="30"
+            x="39.199426"
+            y="-106.863519"
+            z="2"
+            desc="start of Oregon T"/>
+        <Node
+            id="31"
+            x="39.189681"
+            y="-106.866909"
+            z="3"
+            desc="start of Sterner Cat"/>
+        <Node
+            id="32"
+            x="39.200158"
+            y="-106.863175"
+            z="2"
+            desc="Sterner cat joins Homestead"/>
+
+        <Node
+            id="33"
+            x="39.192408"
+            y="-106.868883"
+            z="4"
+            desc="Start of Bear"/>
+        <Node
+            id="34"
+            x="39.200058"
+            y="-106.863606"
+            z="2"
+            desc="Bear becomes Columbine"/>
+        <Node
+            id="35"
+            x="39.202652"
+            y="-106.862703"
+            z="1"
+            desc="Columbine joins Homestead"/>
+        <Node
+            id="36"
+            x="39.195867"
+            y="-106.866866"
+            z="3"
+            desc="L Savio joins Homestead"/>
+
+        <!-- Homestead Crossings -->
+        <Node
+            id="37"
+            x="39.193148"
+            y="-106.867671"
+            z="3"
+            desc="H crosses Bear"/>
+        <Node
+            id="38"
+            x="39.193780"
+            y="-106.868014"
+            z="3"
+            desc="H crosses L Savio"/>
+        <Node
+            id="39"
+            x="39.188093"
+            y="-106.872499"
+            z="4"
+            desc="H crosses Lover's"/>
+        <Node
+            id="40"
+            x="39.193930"
+            y="-106.870031"
+            z="3"
+            desc="Midway Ave midpoint"/>
+        <Node
+            id="41"
+            x="39.183319"
+            y="-106.877713"
+            z="6"
+            desc="Homestead crosses Westward Ho 1"/>
+        <Node
+            id="42"
+            x="39.185066"
+            y="-106.880932"
+            z="5"
+            desc="Homestead crosses Big Face 1"/>
+        <Node
+            id="43"
+            x="39.185498"
+            y="-106.880953"
+            z="5"
+            desc="Homestead crosses Big Face 2"/>
+        <Node
+            id="44"
+            x="39.186296"
+            y="-106.878764"
+            z="4"
+            desc="Homestead crosses Westward Ho 2"/>
+        <Node
+            id="45"
+            x="39.187793"
+            y="-106.878636"
+            z="4"
+            desc="Start of Blue Grouse"/>
+        <Node
+            id="46"
+            x="39.187910"
+            y="-106.876747"
+            z="4"
+            desc="Homestead crosses Teaser"/>
+        <Node
+            id="47"
+            x="39.187943"
+            y="-106.876340"
+            z="4"
+            desc="Homestead crosses Little Teaser"/>
+        <Node
+            id="48"
+            x="39.197073"
+            y="-106.866426"
+            z="3"
+            desc="Start of Baby Doe"/>
+        <Node
+            id="49"
+            x="39.199235"
+            y="-106.865954"
+            z="2"
+            desc="End of Baby Doe"/>
+
+    </Nodes>
+    <Lifts>
+        <Lift
+            name="Summit Express"
+            start="1"
+            end="2"
+            capacity="4"
+            open="08:00"
+            close="15:30"/>
+        <Lift
+            name="Panda Express"
+            start="1"
+            end="3"
+            capacity="2"
+            open="08:00"
+            close="15:00"/>
+        <Lift
+            name="Tiehack Express"
+            start="4"
+            end="5"
+            capacity="4"
+            open="08:00"
+            close="16:00"/>
+    </Lifts>
+    <Runs>
+        <!-- Main Face -->
+        <Run
+            name="No Problem"
+            start="2"
+            end="8"
+            level="Blue" />
+        <Run
+            name="Lover's Lane"
+            start="2"
+            midpoints="40,39,7"
+            end="14"
+            level="Blue" />
+
+        <!-- Homestead -->
+        <Run
+            name="Homestead Road"
+            start="2"
+            midpoints="41,42,43,44,45,46,47,6,10,39,11,33,37,38,12,36,48,49,34,32,35"
+            end="1"
+            level="Green" />
+
+        <!-- Ridge Trail -->
+        <Run
+            name="Ridge Trail"
+            start="2"
+            end="6"
+            level="Green" />
+        <Run
+            name="Ridge Trail"
+            start="6"
+            end="7"
+            level="Blue" />
+
+        <Run
+            name="Buckskin"
+            start="2"
+            midpoints="40,9,21,24"
+            end="4"
+            level="Blue" />
+        <Run
+            name="Friedl's"
+            start="2"
+            midpoints="8"
+            end="13"
+            level="Blue" />
+        <Run
+            name="Sterner Gulch"
+            start="21"
+            midpoints="22,23"
+            end="24"
+            level="Blue" />
+        <Run
+            name="Ptarmigan"
+            start="2"
+            end="22"
+            level="Blue" />
+        <Run
+            name="Sterner"
+            start="18"
+            end="23"
+            level="Black" />
+        <Run
+            name="Ptarmigan Glade"
+            start="19"
+            end="20"
+            level="Black" />
+        <Run
+            name="Timber Doodle Glade"
+            start="17"
+            end="25"
+            level="Black" />
+        <Run
+            name="Tiehack Trail"
+            start="16"
+            midpoints="25"
+            end="26"
+            level="Black" />
+        <Run
+            name="Javelin"
+            start="15"
+            end="27"
+            level="Black" />
+        <Run
+            name="Javelin"
+            start="27"
+            midpoints="28"
+            end="4"
+            level="Blue" />
+        <Run
+            name="Magic Carpet"
+            start="24"
+            end="29"
+            level="Blue" />
+        <Run
+            name="Savio"
+            start="2"
+            end="9"
+            level="Blue" />
+
+        <!-- Oregon T & Sterner Cat -->
+        <Run
+            name="Oregon Trail"
+            start="30"
+            midpoints="24"
+            end="4"
+            level="Green" />
+        <Run
+            name="Sterner Catwalk"
+            start="31"
+            midpoints="30"
+            end="32"
+            level="Green" />
+
+        <Run
+            name="Bear"
+            start="33"
+            midpoints="37"
+            end="34"
+            level="Blue" />
+        <Run
+            name="Columbine"
+            start="34"
+            end="35"
+            level="Blue" />
+        <Run
+            name="Lower Savio"
+            start="33"
+            midpoints="38"
+            end="36"
+            level="Blue" />
+        <Run
+            name="Baby Doe"
+            start="48"
+            end="49"
+            level="Blue" />
+        <Run
+            name="Midway Ave"
+            start="11"
+            midpoints="40"
+            end="12"
+            level="Blue" />
+
+    </Runs>
+    <SkiPatrol
+        number="970-923-0530"/>
+</SkiResort>
