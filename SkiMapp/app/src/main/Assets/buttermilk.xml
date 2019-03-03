@@ -339,7 +339,7 @@
         <Lift
             name="Tiehack Express"
             start="4"
-            end="5"
+            end="2"
             capacity="4"
             open="08:00"
             close="16:00"/>
@@ -381,7 +381,7 @@
         <Run
             name="Buckskin"
             start="2"
-            midpoints="40,9,21,24"
+            midpoints="40,9,21,31,24"
             end="4"
             level="Blue" />
         <Run
@@ -442,6 +442,12 @@
             name="Savio"
             start="2"
             end="9"
+            level="Blue" />
+        <Run
+            name="Tiehack Parkway"
+            start="2"
+            midpoints="19,18,17,16"
+            end="15"
             level="Blue" />
 
         <!-- Oregon T & Sterner Cat -->

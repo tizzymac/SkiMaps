@@ -34,7 +34,8 @@ public class SkiRoute implements Serializable {
 
             // Compare the name of this first edge to the name of its adjacent edges
             for (int i = currStartIndex+1; i < path.getNodePath().size()-1; i++) {
-                String nextEdge = resortGraph.getEdgeBetweenNodes(path.getNode(i), path.getNode(i+1)).getName();
+                int j = i+1;
+                String nextEdge = resortGraph.getEdgeBetweenNodes(path.getNode(i), path.getNode(j)).getName();
 
                 if (!nextEdge.equals(edgeFromStart)) {
                     // set end of current edge as i
@@ -45,6 +46,12 @@ public class SkiRoute implements Serializable {
                     startNode = path.getNode(i);
 
                     break; // exit the for loop
+                }
+
+                // check if at final node
+                if (j == path.getNodePath().size()-1) {
+                    mEdgeNamePath.add(edgeFromStart);
+                    startNode = path.getNode(j);
                 }
             }
 

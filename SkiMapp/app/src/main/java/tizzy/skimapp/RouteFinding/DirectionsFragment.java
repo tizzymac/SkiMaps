@@ -1,6 +1,7 @@
 package tizzy.skimapp.RouteFinding;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,9 @@ import android.widget.Toast;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Edge;
@@ -195,7 +200,7 @@ public class DirectionsFragment extends Fragment {
                     Toast.makeText(getActivity(), "No start inputted!", Toast.LENGTH_LONG).show();
                 } else {
                     final Node start = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString()) - 1);
-                    new calculateRoute().execute(start, end, mLongerRouteCheckBox.isChecked());
+                    new calculateRoute(getActivity(), 3000, TimeUnit.MILLISECONDS).execute(start, end, mLongerRouteCheckBox.isChecked());
                 }
             }
         });
@@ -297,22 +302,24 @@ public class DirectionsFragment extends Fragment {
         }
     }
 
-    private class calculateRoute extends AsyncTask<Object, Integer, Path> {
+    private class calculateRoute extends AsyncTaskWithTimeout<Object, Integer, Path> {
+
+        public calculateRoute(Activity context, long timeout, TimeUnit units) {
+            super(context, timeout, units);
+        }
 
         @Override
-        protected Path doInBackground(Object... objects) {
-
+        protected Path runInBackground(Object... objects) {
             Path path = new Path();
 
-            // If longer route is checked ...
+            // If longer route is checked
             if ((boolean) objects[2]) {
-
                 Yen yen = new Yen(mResort);
                 List<Path> paths = yen.YenKSP(mResortGraph, (Node) objects[0], (Node) objects[1], 3);
                 path = paths.get(paths.size() - 1);
 
+                // Shortest route
             } else {
-
                 Dijkstra dijkstra = new Dijkstra(mResortGraph);
                 dijkstra.execute((Node) objects[0]);       // start node
                 path = dijkstra.getPath((Node) objects[1]);    // end node
