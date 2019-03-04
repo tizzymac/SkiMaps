@@ -320,6 +320,94 @@
             z="2"
             desc="End of Baby Doe"/>
 
+        <!-- West Buttermilk -->
+        <Node
+            id="50"
+            x="39.179481"
+            y="-106.880476"
+            z="6"
+            desc="West Summit"/>
+        <Node
+            id="51"
+            x="39.194816"
+            y="-106.881506"
+            z="1"
+            desc="Base of West B"/>
+        <Node
+            id="52"
+            x="39.189760"
+            y="-106.881248"
+            z="3"
+            desc="Midway loading station"/>
+        <Node
+            id="53"
+            x="39.183764"
+            y="-106.877912"
+            z="5"
+            desc="Start of Campbird"/>
+        <Node
+            id="54"
+            x="39.186176"
+            y="-106.877268"
+            z="4"
+            desc="Start of Teaser"/>
+        <Node
+            id="55"
+            x="39.191456"
+            y="-106.878062"
+            z="2"
+            desc="End of both Teasers"/>
+        <Node
+            id="56"
+            x="39.187440"
+            y="-106.876796"
+            z="2"
+            desc="Start of Little Teaser"/>
+        <Node
+            id="57"
+            x="39.189286"
+            y="-106.876216"
+            z="2"
+            desc="Start of Uncle Chuck's"/>
+        <Node
+            id="58"
+            x="39.193361"
+            y="-106.881152"
+            z="1"
+            desc="End of L Larkspur"/>
+        <Node
+            id="59"
+            x="39.190533"
+            y="-106.879542"
+            z="2"
+            desc="Campbird crosses RR"/>
+
+        <!-- Blacks in Park -->
+        <Node
+            id="60"
+            x="39.194042"
+            y="-106.870981"
+            z="2"
+            desc="Uncle C joins Jacob's"/>
+        <Node
+            id="61"
+            x="39.203255"
+            y="-106.862634"
+            z="1"
+            desc="Start of Superpipe"/>
+        <Node
+            id="62"
+            x="39.203355"
+            y="-106.864243"
+            z="1"
+            desc="Start of Spruce Face"/>
+        <Node
+            id="63"
+            x="39.200594"
+            y="-106.864930"
+            z="1"
+            desc="Start of Government"/>
+
     </Nodes>
     <Lifts>
         <Lift
@@ -340,6 +428,14 @@
             name="Tiehack Express"
             start="4"
             end="2"
+            capacity="4"
+            open="08:00"
+            close="16:00"/>
+        <Lift
+            name="West Buttermilk Express"
+            start="51"
+            end="50"
+            midway_load="52"
             capacity="4"
             open="08:00"
             close="16:00"/>
@@ -493,7 +589,116 @@
             end="12"
             level="Blue" />
 
+        <!-- West Buttermilk -->
+        <Run
+            name="Red's Rover"
+            start="50"
+            midpoints="59"
+            end="52"
+            level="Green" />
+        <Run
+            name="Larkspur"
+            start="50"
+            end="52"
+            level="Green" />
+        <Run
+            name="Tom's Thumb"
+            start="50"
+            end="2"
+            level="Green" />
+        <Run
+            name="Westward Ho"
+            start="50"
+            midpoints="41,44,53"
+            end="52"
+            level="Green" />
+        <Run
+            name="Campbird"
+            start="53"
+            midpoints="54,45,59"
+            end="51"
+            level="Blue" />
+        <Run
+            name="Teaser"
+            start="54"
+            midpoints="46"
+            end="55"
+            level="Blue" />
+        <Run
+            name="Blue Grouse"
+            start="45"
+            end="52"
+            level="Green" />
+        <Run
+            name="Little Teaser"
+            start="56"
+            midpoints="47,57"
+            end="55"
+            level="Black" />
+        <Run
+            name="Lower Larkspur"
+            start="52"
+            end="58"
+            level="Black" />
+        <Run
+            name="Big Face Hollow"
+            start="50"
+            midpoints="42,43,52,58"
+            end="51"
+            level="Blue" />
+
+        <!-- Blacks in Park -->
+        <Run
+            name="Uncle Chuck's Glade"
+            start="57"
+            end="60"
+            level="Black" />
+        <Run
+            name="Jacob's Ladder"
+            start="14"
+            midpoints="57"
+            end="49"
+            level="Black" />
+        <Run
+            name="Spruce"
+            start="49"
+            midpoints="62"
+            end="61"
+            level="Black" />
+        <Run
+            name="Spruce Face"
+            start="62"
+            end="1"
+            level="Black" />
+        <Run
+            name="Superpipe"
+            start="61"
+            end="1"
+            level="Black" />
+
     </Runs>
+    <Facilities>
+        <Facility
+            type="Restaurant"
+            name="The Cliffhouse"
+            location="2"/>
+        <Facility
+            type="Restaurant"
+            name="Bumps"
+            location="1" />
+        <Facility
+            type="Restrooms"
+            name="West Summit"
+            location="3" />
+        <Facility
+            type="Restrooms"
+            name="West Buttermilk"
+            location="3" />
+        <Facility
+            type="Restrooms"
+            name="Tiehack"
+            location="4" />
+    </Facilities>
     <SkiPatrol
         number="970-923-0530"/>
 </SkiResort>
