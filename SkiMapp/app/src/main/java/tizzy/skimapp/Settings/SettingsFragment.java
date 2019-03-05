@@ -1,9 +1,11 @@
 package tizzy.skimapp.Settings;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +55,7 @@ public class SettingsFragment extends PreferenceFragment {
         });
 
         mLevelExplanations = view.findViewById(R.id.level_explanations);
+        mLevelExplanations.setTextColor(Color.parseColor("#304f86"));
 
         mWhatLevelButton = view.findViewById(R.id.what_level_button);
         mWhatLevelButton.setOnClickListener(new View.OnClickListener() {

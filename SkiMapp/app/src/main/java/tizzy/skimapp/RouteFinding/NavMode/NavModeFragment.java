@@ -17,8 +17,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import tizzy.skimapp.Emergency.EmergencyActivity;
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Path;
@@ -42,6 +44,7 @@ public class NavModeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private TextView mCurrentLocationTextView;
     private Button mEndRouteButton;
+    private ImageButton mEmergencyButton;
 
     private int mCurrentSegment;
     EdgeAdapter mAdapter;
@@ -100,6 +103,15 @@ public class NavModeFragment extends Fragment {
             public void onClick(View v) {
                 // Return to directions fragment
                 Intent intent = DirectionsActivity.newIntent(getActivity(), mResort, mSkiLevel.getLevelString());
+                startActivity(intent);
+            }
+        });
+
+        mEmergencyButton = view.findViewById(R.id.emergency_button);
+        mEmergencyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = EmergencyActivity.newIntent(getActivity(), mResort);
                 startActivity(intent);
             }
         });

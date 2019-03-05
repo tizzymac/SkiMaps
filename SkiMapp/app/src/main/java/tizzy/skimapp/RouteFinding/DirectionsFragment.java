@@ -114,21 +114,28 @@ public class DirectionsFragment extends Fragment {
             public void onClick(View v) {
                 // Find shortest route to a bathroom
 
-                // Pretend current node is 2
-                FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
-                Path path = facilityFinder.pathToNearestFacility(mResort.getNodes().get(1), "Restrooms");
-
-                if (path == null) {
-                    mRoute.setText("This route is not possible");
-                    // TODO clear mRouteListView
+                // Check if anything was inputted
+                if (mFromInput.getText().toString().equals("")) {
+                    Toast.makeText(getActivity(), "No start inputted!", Toast.LENGTH_LONG).show();
                 } else {
-                    if (path.getDistance() == 1) {
-                        mRoute.setText("You are already here!");
-                    } else {
-                        SkiRoute skiRoute = new SkiRoute(path, mResortGraph);
-                        mRoute.setText("");
-                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
+                    final Node start = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString()) - 1);
+                    FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
+                    Path path = facilityFinder.pathToNearestFacility(start, "Restrooms");
 
+                    if (path == null) {
+                        mRoute.setText("This route is not possible");
+                    } else {
+                        if (path.getDistance() == 1) {
+                            mRoute.setText("You are already here!");
+                        } else {
+                            SkiRoute skiRoute = new SkiRoute(path, mResortGraph);
+                            mRoute.setText("");
+//                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
+
+                            // Start Nav Mode
+                            Intent intent = NavModeActivity.newIntent(getActivity(), mResort, skiRoute, new SkiLevel(mSkiAbility));
+                            startActivity(intent);
+                        }
                     }
                 }
             }
@@ -141,20 +148,29 @@ public class DirectionsFragment extends Fragment {
             public void onClick(View v) {
                 // Find shortest route to a restaurant
 
-                // Pretend current node is 2
-                FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
-                Path path = facilityFinder.pathToNearestFacility(mResort.getNodes().get(1), "Restaurant");
-
-                if (path.getDistance() == 0) {
-                    mRoute.setText("This route is not possible");
-                    // TODO clear mRouteListView
+                // Check if anything was inputted
+                if (mFromInput.getText().toString().equals("")) {
+                    Toast.makeText(getActivity(), "No start inputted!", Toast.LENGTH_LONG).show();
                 } else {
-                    if (path.getDistance() == 1) {
-                        mRoute.setText("You are already here!");
+
+                    final Node start = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString()) - 1);
+                    FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
+                    Path path = facilityFinder.pathToNearestFacility(start, "Restaurant");
+
+                    if (path.getDistance() == 0) {
+                        mRoute.setText("This route is not possible");
                     } else {
-                        SkiRoute skiRoute = new SkiRoute(path, mResortGraph);
-                        mRoute.setText("");
-                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
+                        if (path.getDistance() == 1) {
+                            mRoute.setText("You are already here!");
+                        } else {
+                            SkiRoute skiRoute = new SkiRoute(path, mResortGraph);
+                            mRoute.setText("");
+//                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
+
+                            // Start Nav Mode
+                            Intent intent = NavModeActivity.newIntent(getActivity(), mResort, skiRoute, new SkiLevel(mSkiAbility));
+                            startActivity(intent);
+                        }
                     }
                 }
             }

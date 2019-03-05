@@ -689,16 +689,16 @@
         <Facility
             type="Restrooms"
             name="West Summit"
-            location="3" />
+            location="50" />
         <Facility
             type="Restrooms"
             name="West Buttermilk"
-            location="3" />
+            location="51" />
         <Facility
             type="Restrooms"
             name="Tiehack"
             location="4" />
     </Facilities>
     <SkiPatrol
-        number="970-923-0530"/>
+        number="970-920-0969"/>
 </SkiResort>
