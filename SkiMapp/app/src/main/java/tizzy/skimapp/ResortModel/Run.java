@@ -1,5 +1,7 @@
 package tizzy.skimapp.ResortModel;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ import java.util.List;
  * Created by tizzy on 10/15/18.
  */
 
-public class Run extends Edge {
+public class Run extends Edge implements Comparable<Run> {
 
     private String mName; // should be unique
     private SkiLevel mLevel;
@@ -128,5 +130,10 @@ public class Run extends Edge {
     public String toString() {
         // Need to override this for the Spinner Adapter
         return mName;
+    }
+
+    @Override
+    public int compareTo(@NonNull Run otherRun) {
+        return this.mName.compareTo(otherRun.getName());
     }
 }

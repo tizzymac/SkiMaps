@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -121,6 +122,9 @@ public class Resort implements Serializable {
                 mRuns.add(r);
             }
         }
+
+        // alphabetize
+        Collections.sort(mRuns);
     }
 
     private void readLifts(Document doc) throws ParseException {
@@ -141,6 +145,8 @@ public class Resort implements Serializable {
                 ));
             }
         }
+        // alphabetize
+        Collections.sort(mLifts);
     }
 
     private void readFacilities(Document doc) {

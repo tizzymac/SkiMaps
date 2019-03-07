@@ -1,5 +1,7 @@
 package tizzy.skimapp.ResortModel;
 
+import android.support.annotation.NonNull;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
  * Created by tizzy on 10/15/18.
  */
 
-public class Lift extends Edge {
+public class Lift extends Edge implements Comparable<Lift> {
 
     private String mName;
     private Node mStart, mEnd;
@@ -91,4 +93,8 @@ public class Lift extends Edge {
         mWeight = mWeight * i;
     }
 
+    @Override
+    public int compareTo(@NonNull Lift otherLift) {
+        return this.mName.compareTo(otherLift.getName());
+    }
 }

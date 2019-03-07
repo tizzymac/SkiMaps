@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import tizzy.skimapp.Emergency.EmergencyActivity;
@@ -29,14 +30,18 @@ public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment";
 
-    private TextView mSkiAbility;
-    private Button mSettingsButton;
-    private Button mInfoButton;
     private Button mDirectionsButton;
-    private Button mMapButton;
+    private ImageButton mDirectionsIcon;
+    private Button mInfoButton;
+    private ImageButton mInfoIcon;
+    // private Button mMapButton;
     private Button mEmergencyButton;
-    private SharedPreferences mSharedPref;
+    private ImageButton mEmergencyIcon;
+    private Button mSettingsButton;
+    private ImageButton mSettingsIcon;
 
+    private SharedPreferences mSharedPref;
+    private TextView mSkiAbility;
     Resort mResort;
 
     @Override
@@ -61,6 +66,16 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        mDirectionsIcon = view.findViewById(R.id.directions_icon);
+        mDirectionsIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open Route Finder
+                Intent intent = DirectionsActivity.newIntent(getActivity(), mResort,
+                        mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
+                startActivity(intent);
+            }
+        });
 
         mSettingsButton = view.findViewById(R.id.settingsButton);
         mSettingsButton.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +87,27 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        mSettingsIcon = view.findViewById(R.id.settings_icon);
+        mSettingsIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                // Open Settings
+                Intent intent = SettingsActivity.newIntent(getActivity());
+                startActivity(intent);
+            }
+        });
+
+        mInfoIcon = view.findViewById(R.id.info_icon);
+        mInfoIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Open RunInfo for now
+                Intent intent = InfoListActivity.newIntent(getActivity(), mResort);
+                startActivity(intent);
+            }
+        });
         mInfoButton = view.findViewById(R.id.infoButton);
         mInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +133,14 @@ public class HomeFragment extends Fragment {
 
         mEmergencyButton = view.findViewById(R.id.emergencyButton);
         mEmergencyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = EmergencyActivity.newIntent(getActivity(), mResort);
+                startActivity(intent);
+            }
+        });
+        mEmergencyIcon = view.findViewById(R.id.emergency_icon);
+        mEmergencyIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = EmergencyActivity.newIntent(getActivity(), mResort);

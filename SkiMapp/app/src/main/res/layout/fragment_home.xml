@@ -26,6 +26,7 @@
         android:background="@color/colorPrimaryDark">
 
         <ImageButton
+            android:id="@+id/directions_icon"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/button_round"
@@ -49,6 +50,7 @@
         android:background="@color/colorPrimaryDark">
 
         <ImageButton
+            android:id="@+id/info_icon"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/button_round"
@@ -71,6 +73,7 @@
         android:background="@color/colorPrimaryDark">
 
         <ImageButton
+            android:id="@+id/emergency_icon"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/button_round"
@@ -93,6 +96,7 @@
         android:background="@color/colorPrimaryDark">
 
         <ImageButton
+            android:id="@+id/settings_icon"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/button_round"
