@@ -1,10 +1,12 @@
-package tizzy.skimapp;
+package tizzy.skimapp.Home;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,11 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import tizzy.skimapp.Emergency.EmergencyActivity;
 import tizzy.skimapp.GetInfo.InfoListActivity;
-import tizzy.skimapp.Map.MapActivity;
+import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.RouteFinding.DirectionsActivity;
 import tizzy.skimapp.Settings.SettingsActivity;
@@ -26,7 +29,7 @@ import tizzy.skimapp.Settings.SettingsActivity;
  * Created by tizzy on 10/13/18.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends PreferenceFragment {
 
     private static final String TAG = "HomeFragment";
 
@@ -42,8 +45,18 @@ public class HomeFragment extends Fragment {
 
     private SharedPreferences mSharedPref;
     private TextView mSkiAbility;
+    private ListView mListView;
     Resort mResort;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Load the preferences from an XML resource
+        addPreferencesFromResource(R.xml.preferences);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -52,14 +65,15 @@ public class HomeFragment extends Fragment {
         mResort = Resort.get(getActivity());
             // TODO only want to create it once when app is first opened
 
-        mSkiAbility = view.findViewById(R.id.skiAbility);
+//        mSkiAbility = view.findViewById(R.id.skiAbility);
         mSharedPref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        mSkiAbility.setText("Your Level:  " + mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
+//        mSkiAbility.setText("Your Level:  " + mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
 
         mDirectionsButton = view.findViewById(R.id.directionsButton);
         mDirectionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // Open Route Finder
                 Intent intent = DirectionsActivity.newIntent(getActivity(), mResort,
                         mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
@@ -147,6 +161,8 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        mListView = view.findViewById(R.id.list_view);
 
         return view;
     }

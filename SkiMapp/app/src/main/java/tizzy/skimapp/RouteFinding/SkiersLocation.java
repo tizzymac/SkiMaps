@@ -5,7 +5,7 @@ import android.location.Location;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
-import tizzy.skimapp.ResortModel._Edge;
+import tizzy.skimapp.ResortModel.Edge;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Resort;
 
@@ -28,7 +28,7 @@ public class SkiersLocation {
     }
 
     // Returns the edge the skier is currently at
-    public _Edge getEdge() {
+    public Edge getEdge() {
         // TODO
 
         // Check if user is moving to determine if they are on a lift ?

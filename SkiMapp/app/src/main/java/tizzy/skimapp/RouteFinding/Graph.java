@@ -18,19 +18,7 @@ public class Graph implements Serializable {
     private List<Node> mRemovedNodes;
     private List<Edge> mRemovedEdges;
 
-    public Graph(LinkedList<Node> nodes, LinkedList<Edge> edges) {
-
-        mNodes = new LinkedList<>();
-        mEdges = new LinkedList<>();
-        mRemovedNodes = new LinkedList<>();
-        mRemovedEdges = new LinkedList<>();
-
-        this.mNodes = nodes;
-        // Need to split into segments
-        this.mEdges = edges;
-    }
-
-    // IDEA : Level restricted graph
+    // Level restricted graph
     public Graph(LinkedList<Node> nodes, LinkedList<Edge> edges, String maxLevel) {
 
         mNodes = new LinkedList<>();
@@ -91,35 +79,39 @@ public class Graph implements Serializable {
         this.mEdges = (LinkedList<Edge>) edgeSegments;
     }
 
-    // Graph where lifts have weight multiplied by factor i
-    public Graph(LinkedList<Node> nodes, LinkedList<Edge> edges, int i) {
+    public void harderRunsPrefered() {
 
-        mNodes = new LinkedList<>();
-        mEdges = new LinkedList<>();
-        mRemovedNodes = new LinkedList<>();
-        mRemovedEdges = new LinkedList<>();
-
-        // Get segments
-        List<Edge> edgeSegments = new LinkedList<>();
-
-        for (Iterator<Edge> iterator = edges.iterator(); iterator.hasNext();) {
+        // Add weight to lower level runs
+        for (Iterator<Edge> iterator = mEdges.iterator(); iterator.hasNext();) {
             Edge e = iterator.next();
 
-            // Check if this edge is a lift
-            if (e instanceof Lift) {
-                // Multiply edge weight by i
-                Lift heavyEdge = (Lift) e;
-                heavyEdge.increaseWeight(i);
-                edgeSegments.addAll(heavyEdge.getEdgeSegments());
-
-            } else {
-                // Add all run segments
-                edgeSegments.addAll(e.getEdgeSegments());
+            // Check if this edge is a run
+            if (e instanceof Run) {
+                // Multiply edge weight
+                if (((Run) e).getLevel().equals("Green")) {
+                    ((Run) e).setWeight(8);
+                }
+                if (((Run) e).getLevel().equals("Blue")) {
+                    ((Run) e).setWeight(4);
+                }
             }
         }
 
-        this.mNodes = nodes;
-        this.mEdges = (LinkedList<Edge>) edgeSegments;
+    }
+
+    public void groomersOnly() {
+        // Remove ungroomed runs
+        for (Iterator<Edge> iterator = mEdges.iterator(); iterator.hasNext();) {
+            Edge e = iterator.next();
+
+            // Check if this edge is a run
+            if (e instanceof Run) {
+                if (!((Run) e).getStatus().isGroomed()) {
+                    // remove
+                    iterator.remove(); // prevent concurrent modification by using an iterator
+                }
+            }
+        }
     }
 
     public List<Node> getNodes() {

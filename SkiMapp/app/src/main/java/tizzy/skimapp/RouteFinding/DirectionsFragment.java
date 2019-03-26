@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +28,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Edge;
@@ -45,7 +41,6 @@ import tizzy.skimapp.ResortModel.Run;
 import tizzy.skimapp.ResortModel.SkiLevel;
 import tizzy.skimapp.RouteFinding.KShortestPaths.Yen;
 import tizzy.skimapp.RouteFinding.NavMode.NavModeActivity;
-import tizzy.skimapp.Settings.SettingsActivity;
 
 public class DirectionsFragment extends Fragment {
     private static final String ARG_RESORT = "resort";
@@ -58,7 +53,7 @@ public class DirectionsFragment extends Fragment {
     private static final int REQUEST_LOCATION_PERMISSIONS = 0;
 
     private Resort mResort;
-    private Graph mResortGraph;
+    private Graph mBasicResortGraph;
     private String mSkiAbility;
 
     private Button mGoButton;
@@ -73,7 +68,11 @@ public class DirectionsFragment extends Fragment {
     private ListView mRouteListView;
     private Button mGetLocButton;
     private TextView mLocTextView;
+
+    // route options
     private CheckBox mLongerRouteCheckBox;
+    private CheckBox mHarderRouteCheckBox;
+    private CheckBox mGroomersRouteCheckBox;
 
     private SkiersLocation mSkiersLocation;
     LocationManager locationManager;
@@ -94,7 +93,7 @@ public class DirectionsFragment extends Fragment {
 
         mResort = (Resort) getArguments().getSerializable(ARG_RESORT);
         mSkiAbility = getArguments().getString(ARG_SKI_ABILITY);
-        mResortGraph = new Graph(mResort.getNodes(), mResort.getEdges(), mSkiAbility);
+        mBasicResortGraph = new Graph(mResort.getNodes(), mResort.getEdges(), mSkiAbility);
         mSkiersLocation = new SkiersLocation(mResort);
     }
 
@@ -128,7 +127,7 @@ public class DirectionsFragment extends Fragment {
                         if (path.getDistance() == 1) {
                             mRoute.setText("You are already here!");
                         } else {
-                            SkiRoute skiRoute = new SkiRoute(path, mResortGraph);
+                            SkiRoute skiRoute = new SkiRoute(path, mBasicResortGraph);
                             mRoute.setText("");
 //                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 
@@ -163,7 +162,7 @@ public class DirectionsFragment extends Fragment {
                         if (path.getDistance() == 1) {
                             mRoute.setText("You are already here!");
                         } else {
-                            SkiRoute skiRoute = new SkiRoute(path, mResortGraph);
+                            SkiRoute skiRoute = new SkiRoute(path, mBasicResortGraph);
                             mRoute.setText("");
 //                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 
@@ -176,7 +175,10 @@ public class DirectionsFragment extends Fragment {
             }
         });
 
-        mLongerRouteCheckBox = view.findViewById(R.id.checkbox);
+        // Route options
+        mLongerRouteCheckBox = view.findViewById(R.id.longer_checkbox);
+        mHarderRouteCheckBox = view.findViewById(R.id.harder_checkbox);
+        mGroomersRouteCheckBox = view.findViewById(R.id.groomers_checkbox);
 
         mTopBottomSwitch = view.findViewById(R.id.top_bottom_toggle);
         mTopBottomSwitch.setChecked(false);
@@ -197,9 +199,14 @@ public class DirectionsFragment extends Fragment {
         mRoute = view.findViewById(R.id.route);
 
         mGoButton = view.findViewById(R.id.go_button);
+        mGoButton.setEnabled(true);
         mGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // Disable button
+                mGoButton.setText("...");
+                mGoButton.setEnabled(false);
 
                 // Get start and end nodes
                 // temporarily taking node index as input
@@ -216,7 +223,11 @@ public class DirectionsFragment extends Fragment {
                     Toast.makeText(getActivity(), "No start inputted!", Toast.LENGTH_LONG).show();
                 } else {
                     final Node start = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString()) - 1);
-                    new calculateRoute(getActivity(), 3000, TimeUnit.MILLISECONDS).execute(start, end, mLongerRouteCheckBox.isChecked());
+                    if (mHarderRouteCheckBox.isChecked() || mGroomersRouteCheckBox.isChecked()) {
+                        new modifyGraphRoute().execute(start, end, mLongerRouteCheckBox.isChecked(), mHarderRouteCheckBox.isChecked(), mGroomersRouteCheckBox.isChecked());
+                    } else {
+                        new calculateRoute(getActivity(), 3000, TimeUnit.MILLISECONDS).execute(start, end, mLongerRouteCheckBox.isChecked(), mBasicResortGraph);
+                    }
                 }
             }
         });
@@ -318,6 +329,39 @@ public class DirectionsFragment extends Fragment {
         }
     }
 
+    private class modifyGraphRoute extends AsyncTask<Object, Integer, Graph> {
+
+        Node start;
+        Node end;
+        Boolean longer;
+
+        @Override
+        protected Graph doInBackground(Object... objects) {
+            start = (Node) objects[0];
+            end = (Node) objects[1];
+            longer = (Boolean) objects[2];
+            Boolean harder = (boolean) objects[3];
+            Boolean onlyGroomers = (boolean) objects[4];
+
+            // If harder and/or only groomers selected, we need to build a new resort graph
+            Graph modifiedGraph = mBasicResortGraph;
+            if (harder) {
+                modifiedGraph.harderRunsPrefered();
+            }
+            if (onlyGroomers) {
+                modifiedGraph.groomersOnly();
+            }
+
+            return modifiedGraph;
+        }
+
+        @Override
+        protected void onPostExecute(Graph graph) {
+            // now calculate route
+            new calculateRoute(getActivity(), 3000, TimeUnit.MILLISECONDS).execute(start, end, longer, graph);
+        }
+    }
+
     private class calculateRoute extends AsyncTaskWithTimeout<Object, Integer, Path> {
 
         public calculateRoute(Activity context, long timeout, TimeUnit units) {
@@ -326,17 +370,19 @@ public class DirectionsFragment extends Fragment {
 
         @Override
         protected Path runInBackground(Object... objects) {
-            Path path = new Path();
+            Path path;
+            Boolean longer = (boolean) objects[2];
+            Graph graph = (Graph) objects[3];
 
             // If longer route is checked
-            if ((boolean) objects[2]) {
+            if (longer) {
                 Yen yen = new Yen(mResort);
-                List<Path> paths = yen.YenKSP(mResortGraph, (Node) objects[0], (Node) objects[1], 3);
+                List<Path> paths = yen.YenKSP(graph, (Node) objects[0], (Node) objects[1], 3);
                 path = paths.get(paths.size() - 1);
 
                 // Shortest route
             } else {
-                Dijkstra dijkstra = new Dijkstra(mResortGraph);
+                Dijkstra dijkstra = new Dijkstra(graph);
                 dijkstra.execute((Node) objects[0]);       // start node
                 path = dijkstra.getPath((Node) objects[1]);    // end node
 
@@ -351,7 +397,7 @@ public class DirectionsFragment extends Fragment {
                 mRoute.setText("This route is not possible");
                 // TODO clear mRouteListView
             } else {
-                SkiRoute skiRoute = new SkiRoute(path, mResortGraph);
+                SkiRoute skiRoute = new SkiRoute(path, mBasicResortGraph);
 
 //                mRoute.setText("");
 //                mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));

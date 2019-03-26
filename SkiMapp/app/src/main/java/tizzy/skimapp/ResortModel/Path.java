@@ -69,6 +69,20 @@ public class Path implements Comparable<Path>, Serializable {
         }
     }
 
+    public boolean equals(Path secondPath) {
+        if (secondPath.getNodePath().size() != mNodePath.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < mNodePath.size(); i++) {
+            if (!mNodePath.get(i).getId().equals(secondPath.getNodePath().get(i).getId())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     @Override
     public int compareTo(@NonNull Path o) {
         return Integer.compare(this.getDistance(), o.getDistance()); // ??

@@ -1,8 +1,5 @@
 package tizzy.skimapp.RouteFinding;
 
-import android.os.AsyncTask;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -62,7 +59,7 @@ public class Dijkstra {
         for (Edge edge : edges) {
             if (edge.getStart().equals(node)
                     && edge.getEnd().equals(target)) {
-                return edge.getSimpleWeight();
+                return edge.getWeight();
             }
         }
         throw new RuntimeException("Should not happen");

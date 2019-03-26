@@ -58,7 +58,7 @@ public class Lift extends Edge implements Comparable<Lift> {
     }
 
     @Override
-    public int getWeight(SkiLevel level) {
+    public int getWeight() {
         // Factors
         // - Lift speed
         // - Length

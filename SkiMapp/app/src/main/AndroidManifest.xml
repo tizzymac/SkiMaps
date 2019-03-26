@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_snowflake"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity">
+        <activity android:name=".Home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -24,8 +24,10 @@
         </activity>
 
         <activity android:name=".Settings.SettingsActivity"/>
-        <activity android:name=".GetInfo.InfoListActivity"/>
-        <activity android:name=".RouteFinding.DirectionsActivity"/>
+        <activity android:name=".GetInfo.InfoListActivity"
+                  android:parentActivityName=".Home.HomeActivity"/>
+        <activity android:name=".RouteFinding.DirectionsActivity"
+                  android:parentActivityName=".Home.HomeActivity" />
         <activity android:name=".Map.MapActivity"/>
         <activity android:name=".Emergency.EmergencyActivity"/>
         <activity android:name=".RouteFinding.NavMode.NavModeActivity"/>

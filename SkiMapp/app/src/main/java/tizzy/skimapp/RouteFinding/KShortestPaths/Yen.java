@@ -47,7 +47,7 @@ public class Yen {
                 Path rootPath = shortestPaths.get(k - 1).getNodes(0, i);
 
                 for (Path p : shortestPaths) {
-                    if (rootPath == p.getNodes(0, i)) {
+                    if (rootPath.equals(p.getNodes(0, i))) {
                         // Remove the links that are part of the previous shortest paths
                         // which share the same root path.
                         graph.temporarilyRemoveEdge(p.getEdgeFromNodes(mResort, p.getNode(i), p.getNode(i + 1)));
@@ -97,6 +97,11 @@ public class Yen {
             // Add the lowest cost path becomes the k-shortest path.
             shortestPaths.add(potentialPaths.poll());
         }
+
+        // Restore everything
+        graph.restoreNodes();
+        graph.restoreEdges();
+
         return shortestPaths;
     }
 

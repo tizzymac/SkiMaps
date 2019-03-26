@@ -9,7 +9,7 @@ public class RunStatus implements Serializable {
 
     public RunStatus() {
         mOpen = true;
-        mGroomed = false;
+        mGroomed = true;
     }
 
     public boolean isOpen() {

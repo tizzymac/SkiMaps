@@ -16,6 +16,7 @@ public class Run extends Edge implements Comparable<Run> {
     private Node mStart, mEnd;
     private List<Node> mMidpoints = null;
     private RunStatus mRunStatus;
+    private int mWeight;
 
     public Run(String name, String level, Node start, Node end) {
         this.mName = name;
@@ -23,6 +24,11 @@ public class Run extends Edge implements Comparable<Run> {
         this.mStart = start;
         this.mEnd = end;
         this.mRunStatus = new RunStatus();
+        this.mWeight = 1;
+
+        if (mLevel.getLevelString().equals("Black")) {
+            mRunStatus.setGroomed(false);
+        }
     }
 
     public void setMidpoints(List<Node> midpoints) {
@@ -58,6 +64,11 @@ public class Run extends Edge implements Comparable<Run> {
                         Math.pow((mEnd.getCoords().getZ() - mStart.getCoords().getZ()), 2) ));
     }
 
+    @Override
+    public int getWeight() {
+        return mWeight;
+    }
+
     public int getSlopeAngle() {
         // Average angle
 
@@ -77,15 +88,8 @@ public class Run extends Edge implements Comparable<Run> {
         // TODO test this
     }
 
-    @Override
-    public int getWeight(SkiLevel level) {
-        // Factors:
-        // - Length
-        // - Steepness
-        // - Skier's ability + Difficulty of slope
-
-
-        return getSimpleWeight();
+    public void setWeight(int weight) {
+        this.mWeight = weight;
     }
 
     @Override
