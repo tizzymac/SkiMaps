@@ -15,7 +15,7 @@ public class FacilityFinder {
 
     public FacilityFinder(Resort resort, String skiAbility) {
         this.mResort = resort;
-        this.mGraph = new Graph((LinkedList<Node>) mResort.getNodes(), (LinkedList<Edge>) mResort.getEdges(), skiAbility);
+        this.mGraph = new Graph(mResort.getNodes(), mResort.getEdges(), skiAbility);
     }
 
     // Find nearest bathroom

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.SingleFragmentActivity;
 

@@ -27,7 +27,7 @@ public class Run extends Edge implements Comparable<Run> {
         this.mWeight = 1;
 
         if (mLevel.getLevelString().equals("Black")) {
-            mRunStatus.setGroomed(false);
+            mRunStatus.Groomed(false);
         }
     }
 
@@ -86,6 +86,10 @@ public class Run extends Edge implements Comparable<Run> {
         // Slope is rise / run
         return (int) Math.atan(rise/run);
         // TODO test this
+    }
+
+    public void setRunStatus(RunStatus runStatus) {
+        mRunStatus = runStatus;
     }
 
     public void setWeight(int weight) {

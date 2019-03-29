@@ -2,6 +2,7 @@ package tizzy.skimapp.GetInfo;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -34,8 +35,6 @@ public class RunDetailFragment extends DialogFragment {
     private TextView mGroomView;
     //private TextView mSteepnessView;
 
-    //private DatabaseReference mDatabase;
-
     public static RunDetailFragment newInstance(Run run) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_RUN, run);
@@ -58,8 +57,7 @@ public class RunDetailFragment extends DialogFragment {
                 .setCancelable(true)
                 .create();
 
-        // Get reference to DB
-        //mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
 
 

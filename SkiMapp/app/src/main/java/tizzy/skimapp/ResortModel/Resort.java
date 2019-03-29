@@ -30,6 +30,7 @@ public class Resort implements Serializable {
     private LinkedList<tizzy.skimapp.ResortModel.Node> mNodes;
     private LinkedList<Lift> mLifts;
     private LinkedList<Run> mRuns;
+
     private LinkedList<Facility> mFacilities;
     private String mEmergencyNumber;
     // mountains
@@ -197,5 +198,14 @@ public class Resort implements Serializable {
 
     public String getEmergencyNumber() {
         return mEmergencyNumber;
+    }
+
+    public void updateRunStatus(String runName, RunStatus runStatus) {
+        for (Run r : mRuns) {
+            if (r.getName().equals(runName)) {
+                r.setRunStatus(runStatus);
+                break;
+            }
+        }
     }
 }

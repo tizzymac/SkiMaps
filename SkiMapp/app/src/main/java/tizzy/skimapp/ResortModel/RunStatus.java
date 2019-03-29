@@ -4,27 +4,40 @@ import java.io.Serializable;
 
 public class RunStatus implements Serializable {
 
-    private boolean mOpen;
-    private boolean mGroomed;
+    private boolean Open;
+    private boolean Groomed;
 
     public RunStatus() {
-        mOpen = true;
-        mGroomed = true;
+        Open = true;
+        Groomed = true;
+    }
+
+    public RunStatus(boolean Open, boolean Groomed) {
+        this.Open = Open;
+        this.Groomed = Groomed;
     }
 
     public boolean isOpen() {
-        return mOpen;
+        return Open;
     }
 
-    public void setOpen(boolean open) {
-        mOpen = open;
+    public void Open(boolean open) {
+        Open = open;
     }
 
     public boolean isGroomed() {
-        return mGroomed;
+        return Groomed;
     }
 
-    public void setGroomed(boolean groomed) {
-        mGroomed = groomed;
+    public void Groomed(boolean groomed) {
+        Groomed = groomed;
+    }
+
+    public String groomStatus() {
+        return (Groomed) ? "Groomed" : "Not Groomed";
+    }
+
+    public String openStatus() {
+        return (Open) ? "Open" : "Closed";
     }
 }

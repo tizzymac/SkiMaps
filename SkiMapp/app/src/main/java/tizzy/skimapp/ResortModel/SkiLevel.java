@@ -17,7 +17,9 @@ public class SkiLevel implements Serializable {
                             break;
             case "Green" : mLevelNumber = 1;
                             break;
-            default : mLevelNumber = 3;
+            default :
+                mLevelString = "Black";
+                mLevelNumber = 3;
         }
     }
 

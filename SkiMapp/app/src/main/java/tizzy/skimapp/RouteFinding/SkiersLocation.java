@@ -11,6 +11,12 @@ import tizzy.skimapp.ResortModel.Resort;
 
 public class SkiersLocation {
 
+    private static final String[] LOCATION_PERMISSIONS = new String[]{
+            android.Manifest.permission.ACCESS_FINE_LOCATION,
+            android.Manifest.permission.ACCESS_COARSE_LOCATION,
+    };
+    private static final int REQUEST_LOCATION_PERMISSIONS = 0;
+
     private Location mCurrentLocation;
     private Resort mResort;
 

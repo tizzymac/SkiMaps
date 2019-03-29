@@ -2,13 +2,18 @@ package tizzy.skimapp.GetInfo;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Lift;
@@ -31,7 +36,7 @@ public class LiftDetailFragment extends DialogFragment {
     private TextView mOpenTimeView;
     private TextView mCloseTimeView;
 
-    //private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase;
 
     public static LiftDetailFragment newInstance(Lift lift) {
         Bundle args = new Bundle();
@@ -56,8 +61,7 @@ public class LiftDetailFragment extends DialogFragment {
                 .setCancelable(true)
                 .create();
 
-        // Get reference to DB
-        //mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
 
         mLiftNameView = view.findViewById(R.id.lift_name);
