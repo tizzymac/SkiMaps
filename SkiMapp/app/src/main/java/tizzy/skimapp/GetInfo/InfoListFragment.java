@@ -1,23 +1,15 @@
 package tizzy.skimapp.GetInfo;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -25,25 +17,20 @@ import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Lift;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.ResortModel.Run;
-import tizzy.skimapp.ResortModel.RunStatus;
 
 public class InfoListFragment extends Fragment {
 
     private static final String DIALOG_RUN_DETAIL = "DialogRunDetail";
     private static final String DIALOG_LIFT_DETAIL = "DialogLiftDetail";
-    private static final String ARG_RESORT = "resort";
-    private Resort mResort;
 
+    private Resort mResort;
     private RecyclerView mRunRecyclerView;
     private RecyclerView mLiftRecyclerView;
     private RunAdapter mRunAdapter;
     private LiftAdapter mLiftAdapter;
 
-    private DatabaseReference mDatabase;
-
-    public static InfoListFragment newInstance(Resort resort) {
+    public static InfoListFragment newInstance() {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_RESORT, resort);
         InfoListFragment fragment = new InfoListFragment();
         fragment.setArguments(args);
 
@@ -54,16 +41,13 @@ public class InfoListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mResort = (Resort) getArguments().getSerializable(ARG_RESORT);
+        // Get reference to Resort
+        mResort = Resort.get(getActivity());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info, container, false);
-
-        // Read groom & open status from DB
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.addValueEventListener(postListener);
 
         mRunRecyclerView = view.findViewById(R.id.run_info_recycler_view);
         mRunRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -83,22 +67,6 @@ public class InfoListFragment extends Fragment {
         mLiftAdapter = new LiftAdapter(mResort.getLifts());
         mLiftRecyclerView.setAdapter(mLiftAdapter);
     }
-
-    private ValueEventListener postListener = new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot snapshot) {
-            for (DataSnapshot child : snapshot.getChildren()) {
-
-                String runName = child.getKey();
-                RunStatus runStatus = child.getValue(RunStatus.class);
-                mResort.updateRunStatus(runName, runStatus);
-            }
-        }
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-            Log.e("Firebase", "DatabaseError" + databaseError);
-        }
-    };
 
     private class RunHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 

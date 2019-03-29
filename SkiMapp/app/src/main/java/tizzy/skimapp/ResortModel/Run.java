@@ -1,7 +1,15 @@
 package tizzy.skimapp.ResortModel;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +17,7 @@ import java.util.List;
  * Created by tizzy on 10/15/18.
  */
 
-public class Run extends Edge implements Comparable<Run> {
+public class Run extends Edge implements Comparable<Run>, Serializable {
 
     private String mName; // should be unique
     private SkiLevel mLevel;
@@ -17,6 +25,8 @@ public class Run extends Edge implements Comparable<Run> {
     private List<Node> mMidpoints = null;
     private RunStatus mRunStatus;
     private int mWeight;
+
+    private transient DatabaseReference mDatabase;
 
     public Run(String name, String level, Node start, Node end) {
         this.mName = name;
@@ -29,7 +39,26 @@ public class Run extends Edge implements Comparable<Run> {
         if (mLevel.getLevelString().equals("Black")) {
             mRunStatus.Groomed(false);
         }
+
+        // Get reference to DB
+        mDatabase = FirebaseDatabase.getInstance().getReference().child(mName);
+        mDatabase.addValueEventListener(postListener);
     }
+
+    private ValueEventListener postListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot snapshot) {
+            // update run status
+            if (!(snapshot.getValue(RunStatus.class) == null)) {
+                mRunStatus = snapshot.getValue(RunStatus.class);
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+            Log.e("Firebase", "DatabaseError" + databaseError);
+        }
+    };
 
     public void setMidpoints(List<Node> midpoints) {
         mMidpoints = midpoints;

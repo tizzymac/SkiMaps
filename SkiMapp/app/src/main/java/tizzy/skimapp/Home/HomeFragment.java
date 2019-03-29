@@ -75,7 +75,7 @@ public class HomeFragment extends PreferenceFragment {
             public void onClick(View v) {
 
                 // Open Route Finder
-                Intent intent = DirectionsActivity.newIntent(getActivity(), mResort,
+                Intent intent = DirectionsActivity.newIntent(getActivity(),
                         mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
                 startActivity(intent);
             }
@@ -85,7 +85,7 @@ public class HomeFragment extends PreferenceFragment {
             @Override
             public void onClick(View v) {
                 // Open Route Finder
-                Intent intent = DirectionsActivity.newIntent(getActivity(), mResort,
+                Intent intent = DirectionsActivity.newIntent(getActivity(),
                         mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
                 startActivity(intent);
             }
@@ -118,7 +118,7 @@ public class HomeFragment extends PreferenceFragment {
             public void onClick(View v) {
 
                 // Open RunInfo for now
-                Intent intent = InfoListActivity.newIntent(getActivity(), mResort);
+                Intent intent = InfoListActivity.newIntent(getActivity());
                 startActivity(intent);
             }
         });
@@ -128,28 +128,16 @@ public class HomeFragment extends PreferenceFragment {
             public void onClick(View v) {
 
                 // Open RunInfo for now
-                Intent intent = InfoListActivity.newIntent(getActivity(), mResort);
+                Intent intent = InfoListActivity.newIntent(getActivity());
                 startActivity(intent);
             }
         });
-
-        /*
-        mMapButton = view.findViewById(R.id.mapButton);
-        mMapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // Open OSM Map View
-                Intent intent = MapActivity.newIntent(getActivity());
-                startActivity(intent);
-            }
-        }); */
 
         mEmergencyButton = view.findViewById(R.id.emergencyButton);
         mEmergencyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = EmergencyActivity.newIntent(getActivity(), mResort);
+                Intent intent = EmergencyActivity.newIntent(getActivity());
                 startActivity(intent);
             }
         });
@@ -157,7 +145,7 @@ public class HomeFragment extends PreferenceFragment {
         mEmergencyIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = EmergencyActivity.newIntent(getActivity(), mResort);
+                Intent intent = EmergencyActivity.newIntent(getActivity());
                 startActivity(intent);
             }
         });

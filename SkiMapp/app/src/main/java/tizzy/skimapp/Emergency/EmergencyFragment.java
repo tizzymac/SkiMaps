@@ -26,7 +26,6 @@ public class EmergencyFragment extends Fragment {
             android.Manifest.permission.ACCESS_COARSE_LOCATION,
     };
     private static final int REQUEST_LOCATION_PERMISSIONS = 0;
-    private static final String ARG_RESORT = "resort";
 
     private TextView mSkiersLocationTextView;
     private SkiersLocation mSkiersLocation;
@@ -34,9 +33,8 @@ public class EmergencyFragment extends Fragment {
     private LocationManager locationManager;
     private Resort mResort;
 
-    public static EmergencyFragment newInstance(Resort resort) {
+    public static EmergencyFragment newInstance() {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_RESORT, resort);
         EmergencyFragment fragment = new EmergencyFragment();
         fragment.setArguments(args);
         return fragment;
@@ -46,7 +44,7 @@ public class EmergencyFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mResort = (Resort) getArguments().getSerializable(ARG_RESORT);
+        mResort = Resort.get(getActivity());
         mSkiersLocation = new SkiersLocation(mResort);
 
     }

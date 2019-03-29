@@ -199,13 +199,4 @@ public class Resort implements Serializable {
     public String getEmergencyNumber() {
         return mEmergencyNumber;
     }
-
-    public void updateRunStatus(String runName, RunStatus runStatus) {
-        for (Run r : mRuns) {
-            if (r.getName().equals(runName)) {
-                r.setRunStatus(runStatus);
-                break;
-            }
-        }
-    }
 }

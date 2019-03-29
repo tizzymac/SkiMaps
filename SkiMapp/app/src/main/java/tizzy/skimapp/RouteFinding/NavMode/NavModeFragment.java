@@ -31,7 +31,6 @@ import tizzy.skimapp.RouteFinding.SkiRoute;
 import tizzy.skimapp.RouteFinding.SkiersLocation;
 
 public class NavModeFragment extends Fragment {
-    private static final String ARG_RESORT = "resort";
     private static final String ARG_ROUTE = "route";
     private static final String ARG_LEVEL = "skiLevel";
 
@@ -49,9 +48,8 @@ public class NavModeFragment extends Fragment {
     private int mCurrentSegment;
     EdgeAdapter mAdapter;
 
-    public static NavModeFragment newInstance(Resort resort, SkiRoute route, SkiLevel skiLevel) {
+    public static NavModeFragment newInstance(SkiRoute route, SkiLevel skiLevel) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_RESORT, resort);
         args.putSerializable(ARG_ROUTE, route);
         args.putSerializable(ARG_LEVEL, skiLevel);
         NavModeFragment fragment = new NavModeFragment();
@@ -64,7 +62,7 @@ public class NavModeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mResort = (Resort) getArguments().getSerializable(ARG_RESORT);
+        mResort = Resort.get(getActivity());
         mSkiRoute = (SkiRoute) getArguments().getSerializable(ARG_ROUTE);
         mSkiersLocation = new SkiersLocation(mResort);
         mSkiLevel = (SkiLevel) getArguments().getSerializable(ARG_LEVEL);
@@ -102,7 +100,7 @@ public class NavModeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Return to directions fragment
-                Intent intent = DirectionsActivity.newIntent(getActivity(), mResort, mSkiLevel.getLevelString());
+                Intent intent = DirectionsActivity.newIntent(getActivity(), mSkiLevel.getLevelString());
                 startActivity(intent);
             }
         });
@@ -111,7 +109,7 @@ public class NavModeFragment extends Fragment {
         mEmergencyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = EmergencyActivity.newIntent(getActivity(), mResort);
+                Intent intent = EmergencyActivity.newIntent(getActivity());
                 startActivity(intent);
             }
         });

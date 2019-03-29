@@ -9,14 +9,12 @@ import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.SingleFragmentActivity;
 
 public class DirectionsActivity extends SingleFragmentActivity {
-    private static final String EXTRA_RESORT = "tizzy.skimapp.resort";
     private static final String EXTRA_SKI_ABILITY = "tizzy.skimapp.ski_ability";
 
     @Override
     protected Fragment createFragment() {
-        Resort resort = (Resort) getIntent().getSerializableExtra(EXTRA_RESORT);
         String skiAbility = (String) getIntent().getSerializableExtra(EXTRA_SKI_ABILITY);
-        return DirectionsFragment.newInstance(resort, skiAbility);
+        return DirectionsFragment.newInstance(skiAbility);
     }
 
     @Override
@@ -29,9 +27,8 @@ public class DirectionsActivity extends SingleFragmentActivity {
         super.onCreate(savedInstanceState);
     }
 
-    public static Intent newIntent(Context packageContext, Resort resort, String skiAbility) {
+    public static Intent newIntent(Context packageContext, String skiAbility) {
         Intent intent = new Intent(packageContext, DirectionsActivity.class);
-        intent.putExtra(EXTRA_RESORT, resort);
         intent.putExtra(EXTRA_SKI_ABILITY, skiAbility);
         return intent;
     }

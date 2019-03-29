@@ -9,12 +9,10 @@ import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.SingleFragmentActivity;
 
 public class EmergencyActivity extends SingleFragmentActivity {
-    private static final String EXTRA_RESORT = "tizzy.skimapp.resort";
 
     @Override
     protected Fragment createFragment() {
-        Resort resort = (Resort) getIntent().getSerializableExtra(EXTRA_RESORT);
-        return EmergencyFragment.newInstance(resort);
+        return EmergencyFragment.newInstance();
     }
 
     @Override
@@ -27,9 +25,8 @@ public class EmergencyActivity extends SingleFragmentActivity {
         return super.getLayoutResId();
     }
 
-    public static Intent newIntent(Context packageContext, Resort resort) {
+    public static Intent newIntent(Context packageContext) {
         Intent intent = new Intent(packageContext, EmergencyActivity.class);
-        intent.putExtra(EXTRA_RESORT, resort);
         return intent;
     }
 }

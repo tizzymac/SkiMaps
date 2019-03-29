@@ -10,11 +10,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +27,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -46,13 +37,11 @@ import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.ResortModel.Run;
-import tizzy.skimapp.ResortModel.RunStatus;
 import tizzy.skimapp.ResortModel.SkiLevel;
 import tizzy.skimapp.RouteFinding.KShortestPaths.Yen;
 import tizzy.skimapp.RouteFinding.NavMode.NavModeActivity;
 
 public class DirectionsFragment extends Fragment {
-    private static final String ARG_RESORT = "resort";
     private static final String ARG_SKI_ABILITY = "ski_ability";
 
     private Resort mResort;
@@ -80,11 +69,8 @@ public class DirectionsFragment extends Fragment {
     private SkiersLocation mSkiersLocation;
     LocationManager locationManager;
 
-    private DatabaseReference mDatabase;
-
-    public static DirectionsFragment newInstance(Resort resort, String skiAbility) {
+    public static DirectionsFragment newInstance(String skiAbility) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_RESORT, resort);
         args.putString(ARG_SKI_ABILITY, skiAbility);
         DirectionsFragment fragment = new DirectionsFragment();
         fragment.setArguments(args);
@@ -96,7 +82,7 @@ public class DirectionsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mResort = (Resort) getArguments().getSerializable(ARG_RESORT);
+        mResort = Resort.get(getActivity());
         mSkiAbility = getArguments().getString(ARG_SKI_ABILITY);
         mBasicResortGraph = new Graph(mResort.getNodes(), mResort.getEdges(), mSkiAbility);
         mSkiersLocation = new SkiersLocation(mResort);
@@ -108,10 +94,6 @@ public class DirectionsFragment extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-        // Get reference to DB
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.addValueEventListener(postListener);
 
         mRouteListView = view.findViewById(R.id.list_view);
 
@@ -141,7 +123,7 @@ public class DirectionsFragment extends Fragment {
 //                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 
                             // Start Nav Mode
-                            Intent intent = NavModeActivity.newIntent(getActivity(), mResort, skiRoute, new SkiLevel(mSkiAbility));
+                            Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility));
                             startActivity(intent);
                         }
                     }
@@ -176,7 +158,7 @@ public class DirectionsFragment extends Fragment {
 //                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 
                             // Start Nav Mode
-                            Intent intent = NavModeActivity.newIntent(getActivity(), mResort, skiRoute, new SkiLevel(mSkiAbility));
+                            Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility));
                             startActivity(intent);
                         }
                     }
@@ -261,49 +243,8 @@ public class DirectionsFragment extends Fragment {
 
         mLocTextView = view.findViewById(R.id.location);
 
-//        mGetLocButton = view.findViewById(R.id.get_location);
-//        mGetLocButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
-//                        != PackageManager.PERMISSION_GRANTED) {
-//                    // Permission is not granted
-//                    System.out.println("Permission not granted");
-//                    requestPermissions(LOCATION_PERMISSIONS, REQUEST_LOCATION_PERMISSIONS);
-//                } else {
-//                    // Permission has already been granted
-//                    Node currentNode = mSkiersLocation.getNode();
-//                    if (currentNode != null) {
-//                        //mLocTextView.setText(currentNode.getId());
-//                        mFromInput.setText(currentNode.getId());
-//                    } else {
-//                        mLocTextView.setText("You are not currently at a node");
-//                    }
-//                }
-//            }
-//
-//        });
-
         return view;
     }
-
-    private ValueEventListener postListener = new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot snapshot) {
-            for (DataSnapshot child : snapshot.getChildren()) {
-
-                String runName = child.getKey();
-                RunStatus runStatus = child.getValue(RunStatus.class);
-                mResort.updateRunStatus(runName, runStatus);
-            }
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-            Log.e("Firebase", "DatabaseError" + databaseError);
-        }
-    };
-
 
     private LocationListener myLocationListener = new LocationListener() {
 
@@ -450,7 +391,7 @@ public class DirectionsFragment extends Fragment {
 //                mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 
                 // Start Nav Mode
-                Intent intent = NavModeActivity.newIntent(getActivity(), mResort, skiRoute, new SkiLevel(mSkiAbility));
+                Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility));
                 startActivity(intent);
             }
         }
