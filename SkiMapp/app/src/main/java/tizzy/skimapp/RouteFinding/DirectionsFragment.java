@@ -21,7 +21,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -51,15 +50,12 @@ public class DirectionsFragment extends Fragment {
     private Button mGoButton;
     private Button mBathroomButton;
     private Button mFoodButton;
-//    private EditText mToInput;
+    //    private EditText mToInput;
     private Switch mTopBottomSwitch;
     private Switch mRunLiftSwitch;
     private Spinner mToSpinner;
     private EditText mFromInput;
     private TextView mRoute;
-    private ListView mRouteListView;
-    private Button mGetLocButton;
-    private TextView mLocTextView;
 
     // route options
     private CheckBox mLongerRouteCheckBox;
@@ -95,8 +91,6 @@ public class DirectionsFragment extends Fragment {
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
-        mRouteListView = view.findViewById(R.id.list_view);
-
         mBathroomButton = view.findViewById(R.id.bathroom);
         mBathroomButton.setOnClickListener(new View.OnClickListener() {
 
@@ -104,27 +98,27 @@ public class DirectionsFragment extends Fragment {
             public void onClick(View v) {
                 // Find shortest route to a bathroom
 
-                // Check if anything was inputted
-                if (mFromInput.getText().toString().equals("")) {
-                    Toast.makeText(getActivity(), "No start inputted!", Toast.LENGTH_LONG).show();
-                } else {
-                    final Node start = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString()) - 1);
-                    FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
-                    Path path = facilityFinder.pathToNearestFacility(start, "Restrooms");
+                // Get start node
+                Node start = getStartNode();
+                if (start != null) {
+                    if (start != null) {
+                        FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
+                        Path path = facilityFinder.pathToNearestFacility(start, "Restrooms");
 
-                    if (path == null) {
-                        mRoute.setText("This route is not possible");
-                    } else {
-                        if (path.getDistance() == 1) {
-                            mRoute.setText("You are already here!");
+                        if (path == null) {
+                            mRoute.setText("This route is not possible");
                         } else {
-                            SkiRoute skiRoute = new SkiRoute(path, mBasicResortGraph);
-                            mRoute.setText("");
+                            if (path.getDistance() == 1) {
+                                mRoute.setText("You are already here!");
+                            } else {
+                                SkiRoute skiRoute = new SkiRoute(path, mBasicResortGraph);
+                                mRoute.setText("");
 //                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 
-                            // Start Nav Mode
-                            Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility));
-                            startActivity(intent);
+                                // Start Nav Mode
+                                Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility));
+                                startActivity(intent);
+                            }
                         }
                     }
                 }
@@ -143,23 +137,25 @@ public class DirectionsFragment extends Fragment {
                     Toast.makeText(getActivity(), "No start inputted!", Toast.LENGTH_LONG).show();
                 } else {
 
-                    final Node start = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString()) - 1);
-                    FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
-                    Path path = facilityFinder.pathToNearestFacility(start, "Restaurant");
+                    Node start = getStartNode();
+                    if (start != null) {
+                        FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
+                        Path path = facilityFinder.pathToNearestFacility(start, "Restaurant");
 
-                    if (path.getDistance() == 0) {
-                        mRoute.setText("This route is not possible");
-                    } else {
-                        if (path.getDistance() == 1) {
-                            mRoute.setText("You are already here!");
+                        if (path.getDistance() == 0) {
+                            mRoute.setText("This route is not possible");
                         } else {
-                            SkiRoute skiRoute = new SkiRoute(path, mBasicResortGraph);
-                            mRoute.setText("");
+                            if (path.getDistance() == 1) {
+                                mRoute.setText("You are already here!");
+                            } else {
+                                SkiRoute skiRoute = new SkiRoute(path, mBasicResortGraph);
+                                mRoute.setText("");
 //                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 
-                            // Start Nav Mode
-                            Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility));
-                            startActivity(intent);
+                                // Start Nav Mode
+                                Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility));
+                                startActivity(intent);
+                            }
                         }
                     }
                 }
@@ -211,37 +207,16 @@ public class DirectionsFragment extends Fragment {
                 }
 
                 // Get start node
-                // Check if input is empty
-                if (mFromInput.getText().toString().equals("")) {
-                    Toast.makeText(getActivity(), "No start inputted!", Toast.LENGTH_LONG).show();
-                } else {
-                    // Current location
-                    if (mFromInput.getText().toString().equals("Current Location")) {
-                        Node currentNode = mSkiersLocation.getNode();
-                        if (currentNode != null) {
-                            if (mHarderRouteCheckBox.isChecked() || mGroomersRouteCheckBox.isChecked()) {
-                                new modifyGraphRoute().execute(currentNode, end, mLongerRouteCheckBox.isChecked(), mHarderRouteCheckBox.isChecked(), mGroomersRouteCheckBox.isChecked());
-                            } else {
-                                new calculateRoute(getActivity(), 3000, TimeUnit.MILLISECONDS).execute(currentNode, end, mLongerRouteCheckBox.isChecked(), mBasicResortGraph);
-                            }
-                        } else {
-                            mLocTextView.setText("You are not currently at a node");
-                        }
-
-                    // Use inputted location
+                Node start = getStartNode();
+                if (start != null) {
+                    if (mHarderRouteCheckBox.isChecked() || mGroomersRouteCheckBox.isChecked()) {
+                        new modifyGraphRoute().execute(start, end, mLongerRouteCheckBox.isChecked(), mHarderRouteCheckBox.isChecked(), mGroomersRouteCheckBox.isChecked());
                     } else {
-                        final Node start = mResort.getNodes().get(Integer.parseInt(mFromInput.getText().toString()) - 1);
-                        if (mHarderRouteCheckBox.isChecked() || mGroomersRouteCheckBox.isChecked()) {
-                            new modifyGraphRoute().execute(start, end, mLongerRouteCheckBox.isChecked(), mHarderRouteCheckBox.isChecked(), mGroomersRouteCheckBox.isChecked());
-                        } else {
-                            new calculateRoute(getActivity(), 3000, TimeUnit.MILLISECONDS).execute(start, end, mLongerRouteCheckBox.isChecked(), mBasicResortGraph);
-                        }
+                        new calculateRoute(getActivity(), 3000, TimeUnit.MILLISECONDS).execute(start, end, mLongerRouteCheckBox.isChecked(), mBasicResortGraph);
                     }
                 }
             }
         });
-
-        mLocTextView = view.findViewById(R.id.location);
 
         return view;
     }
@@ -250,7 +225,7 @@ public class DirectionsFragment extends Fragment {
 
         @Override
         public void onLocationChanged(Location location) {
-            mSkiersLocation.updateLocation(location);
+            mSkiersLocation.updateLocation(getActivity(), location);
         }
 
         @Override
@@ -395,6 +370,52 @@ public class DirectionsFragment extends Fragment {
                 startActivity(intent);
             }
         }
+    }
+
+    private Node getStartNode() {
+        // Check if input is empty
+        if (mFromInput.getText().toString().equals("")) {
+            Toast.makeText(getActivity(), "No start inputted!", Toast.LENGTH_LONG).show();
+        } else {
+            // Current location
+            if (mFromInput.getText().toString().equals("Current Location")) {
+                Node currentNode = mSkiersLocation.getNode();
+                if (currentNode != null) {
+                    // Return current location node
+                    return currentNode;
+                } else {
+                    Toast.makeText(getActivity(), "Unable to locate you.", Toast.LENGTH_LONG).show();
+                    mGoButton.setText("GO");
+                    mGoButton.setEnabled(true);
+                    return null;
+                }
+
+                // Use inputted location
+            } else {
+                // Check if input is a valid node id
+                int input;
+                try {
+                    input = Integer.parseInt(mFromInput.getText().toString());
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getActivity(), "Invalid input.", Toast.LENGTH_LONG).show();
+                    mGoButton.setText("GO");
+                    mGoButton.setEnabled(true);
+                    return null;
+                }
+                if (input > mResort.getNodes().size()) {
+                    Toast.makeText(getActivity(), "Invalid input.", Toast.LENGTH_LONG).show();
+                    mGoButton.setText("GO");
+                    mGoButton.setEnabled(true);
+                    return null;
+                } else {
+                    return mResort.getNodes().get(input - 1);
+                }
+            }
+        }
+        Toast.makeText(getActivity(), "Invalid input.", Toast.LENGTH_LONG).show();
+        mGoButton.setText("GO");
+        mGoButton.setEnabled(true);
+        return null;
     }
 
 }

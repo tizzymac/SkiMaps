@@ -1,6 +1,10 @@
 package tizzy.skimapp.RouteFinding;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.support.v4.app.ActivityCompat;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -10,11 +14,6 @@ import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Resort;
 
 public class SkiersLocation {
-
-    private static final String[] LOCATION_PERMISSIONS = new String[]{
-            android.Manifest.permission.ACCESS_FINE_LOCATION,
-            android.Manifest.permission.ACCESS_COARSE_LOCATION,
-    };
     private static final int REQUEST_LOCATION_PERMISSIONS = 0;
 
     private Location mCurrentLocation;
@@ -25,7 +24,16 @@ public class SkiersLocation {
     }
 
     // Update location
-    public void updateLocation(Location location) {
+    public void updateLocation(Activity activity, Location location) {
+
+        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Request Permissions
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission.READ_CONTACTS},
+                    REQUEST_LOCATION_PERMISSIONS);
+            return;
+        }
+
             mCurrentLocation = location;
     }
 

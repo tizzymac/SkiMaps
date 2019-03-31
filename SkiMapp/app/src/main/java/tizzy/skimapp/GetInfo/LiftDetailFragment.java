@@ -36,8 +36,6 @@ public class LiftDetailFragment extends DialogFragment {
     private TextView mOpenTimeView;
     private TextView mCloseTimeView;
 
-    private DatabaseReference mDatabase;
-
     public static LiftDetailFragment newInstance(Lift lift) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_LIFT, lift);
@@ -60,9 +58,6 @@ public class LiftDetailFragment extends DialogFragment {
                 .setView(view)
                 .setCancelable(true)
                 .create();
-
-
-
 
         mLiftNameView = view.findViewById(R.id.lift_name);
         mLiftNameView.setText(mLiftName);

@@ -10,7 +10,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import android.widget.TextView;
 import tizzy.skimapp.Emergency.EmergencyActivity;
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Node;
-import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.ResortModel.SkiLevel;
 import tizzy.skimapp.RouteFinding.DirectionsActivity;
@@ -78,14 +76,14 @@ public class NavModeFragment extends Fragment {
         // Skier's current location
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
-        mCurrentLocationTextView = view.findViewById(R.id.current_location);
-        if (mSkiersLocation.isNull()) {
-            // TODO
-            mCurrentLocationTextView.setText("Unable to locate skier");
-        } else {
-            getSkiersNode();
-        }
-
+        // For debugging
+//        mCurrentLocationTextView = view.findViewById(R.id.current_location);
+//        if (mSkiersLocation.isNull()) {
+//            // TODO
+//            mCurrentLocationTextView.setText("Unable to locate skier");
+//        } else {
+//            getSkiersNode();
+//        }
 
         // Create adapter passing in the sample user data
         mAdapter = new EdgeAdapter(mSkiRoute);
@@ -121,7 +119,7 @@ public class NavModeFragment extends Fragment {
 
         @Override
         public void onLocationChanged(Location location) {
-            mSkiersLocation.updateLocation(location);
+            mSkiersLocation.updateLocation(getActivity(), location);
             Node currNode = getSkiersNode();
 
             if ((currNode != null) && (mCurrentSegment < mSkiRoute.length())) {
@@ -177,6 +175,8 @@ public class NavModeFragment extends Fragment {
 
     private Node getSkiersNode() {
         Node currentNode = mSkiersLocation.getNode();
+
+        // For debugging
         if (currentNode != null) {
             //mLocTextView.setText(currentNode.getId());
             mCurrentLocationTextView.setText(currentNode.getId());

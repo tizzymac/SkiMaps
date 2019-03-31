@@ -80,9 +80,9 @@ public class RunDetailFragment extends DialogFragment {
 
         mGroomView = view.findViewById(R.id.groomed);
         if (mRunStatus.isGroomed()) {
-            mGroomView.setText("Groomed: Yes");
+            mGroomView.setText("setGroomed: Yes");
         } else {
-            mGroomView.setText("Groomed: No");
+            mGroomView.setText("setGroomed: No");
         }
 
 //        mSteepnessView = view.findViewById(R.id.steepness);

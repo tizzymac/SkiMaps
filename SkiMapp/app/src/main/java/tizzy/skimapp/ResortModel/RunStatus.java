@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class RunStatus implements Serializable {
 
-    // These must match by Firebase schema
     private boolean Open;
     private boolean Groomed;
 
@@ -17,23 +16,15 @@ public class RunStatus implements Serializable {
         return Open;
     }
 
-    public void Open(boolean open) {
-        Open = open;
-    }
-
     public boolean isGroomed() {
         return Groomed;
     }
 
-    public void Groomed(boolean groomed) {
+    public void setGroomed(boolean groomed) {
         Groomed = groomed;
     }
 
-    public String groomStatus() {
-        return (Groomed) ? "Groomed" : "Not Groomed";
-    }
-
-    public String openStatus() {
-        return (Open) ? "Open" : "Closed";
+    public void setOpen(boolean open) {
+        Open = open;
     }
 }

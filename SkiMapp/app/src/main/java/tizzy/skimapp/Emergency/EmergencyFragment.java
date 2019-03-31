@@ -67,7 +67,7 @@ public class EmergencyFragment extends Fragment {
 
         @Override
         public void onLocationChanged(Location location) {
-            mSkiersLocation.updateLocation(location);
+            mSkiersLocation.updateLocation(getActivity(), location);
             mSkiersLocationTextView.setText(mSkiersLocation.getReadableLocation());
         }
 

@@ -37,7 +37,7 @@ public class Run extends Edge implements Comparable<Run>, Serializable {
         this.mWeight = 1;
 
         if (mLevel.getLevelString().equals("Black")) {
-            mRunStatus.Groomed(false);
+            mRunStatus.setGroomed(false);
         }
 
         // Get reference to DB
