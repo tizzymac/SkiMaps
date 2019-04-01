@@ -701,4 +701,6 @@
     </Facilities>
     <SkiPatrol
         number="970-920-0969"/>
+    <Region
+        region="USA"/>
 </SkiResort>

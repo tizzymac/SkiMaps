@@ -42,10 +42,11 @@ import tizzy.skimapp.RouteFinding.NavMode.NavModeActivity;
 
 public class DirectionsFragment extends Fragment {
     private static final String ARG_SKI_ABILITY = "ski_ability";
+    private static final String ARG_REGION = "region";
 
     private Resort mResort;
     private Graph mBasicResortGraph;
-    private String mSkiAbility;
+    private SkiLevel mSkiAbility;
 
     private Button mGoButton;
     private Button mBathroomButton;
@@ -79,8 +80,8 @@ public class DirectionsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mResort = Resort.get(getActivity());
-        mSkiAbility = getArguments().getString(ARG_SKI_ABILITY);
-        mBasicResortGraph = new Graph(mResort.getNodes(), mResort.getEdges(), mSkiAbility);
+        mSkiAbility = new SkiLevel(getArguments().getString(ARG_SKI_ABILITY), mResort.getRegion());
+        mBasicResortGraph = new Graph(mResort.getNodes(), mResort.getEdges(), mSkiAbility.getLevelNumber());
         mSkiersLocation = new SkiersLocation(mResort);
     }
 
@@ -116,7 +117,7 @@ public class DirectionsFragment extends Fragment {
 //                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 
                                 // Start Nav Mode
-                                Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility));
+                                Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility.getLevelString(), mResort.getRegion()));
                                 startActivity(intent);
                             }
                         }
@@ -153,7 +154,7 @@ public class DirectionsFragment extends Fragment {
 //                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 
                                 // Start Nav Mode
-                                Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility));
+                                Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility.getLevelString(), mResort.getRegion()));
                                 startActivity(intent);
                             }
                         }
@@ -366,7 +367,7 @@ public class DirectionsFragment extends Fragment {
 //                mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 
                 // Start Nav Mode
-                Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility));
+                Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility.getLevelString(), mResort.getRegion()));
                 startActivity(intent);
             }
         }

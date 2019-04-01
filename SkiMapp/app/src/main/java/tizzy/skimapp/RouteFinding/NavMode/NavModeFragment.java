@@ -36,7 +36,7 @@ public class NavModeFragment extends Fragment {
     private SkiersLocation mSkiersLocation;
     LocationManager locationManager;
     private SkiRoute mSkiRoute;
-    private SkiLevel mSkiLevel;
+    private SkiLevel mSkiLevelUSA;
 
     private RecyclerView mRecyclerView;
     private TextView mCurrentLocationTextView;
@@ -46,10 +46,10 @@ public class NavModeFragment extends Fragment {
     private int mCurrentSegment;
     EdgeAdapter mAdapter;
 
-    public static NavModeFragment newInstance(SkiRoute route, SkiLevel skiLevel) {
+    public static NavModeFragment newInstance(SkiRoute route, SkiLevel skiLevelUSA) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_ROUTE, route);
-        args.putSerializable(ARG_LEVEL, skiLevel);
+        args.putSerializable(ARG_LEVEL, skiLevelUSA);
         NavModeFragment fragment = new NavModeFragment();
         fragment.setArguments(args);
 
@@ -63,7 +63,7 @@ public class NavModeFragment extends Fragment {
         mResort = Resort.get(getActivity());
         mSkiRoute = (SkiRoute) getArguments().getSerializable(ARG_ROUTE);
         mSkiersLocation = new SkiersLocation(mResort);
-        mSkiLevel = (SkiLevel) getArguments().getSerializable(ARG_LEVEL);
+        mSkiLevelUSA = (SkiLevel) getArguments().getSerializable(ARG_LEVEL);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class NavModeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Return to directions fragment
-                Intent intent = DirectionsActivity.newIntent(getActivity(), mSkiLevel.getLevelString());
+                Intent intent = DirectionsActivity.newIntent(getActivity(), mSkiLevelUSA.getLevelString());
                 startActivity(intent);
             }
         });

@@ -40,7 +40,7 @@ public class RunDetailFragment extends DialogFragment {
         args.putSerializable(ARG_RUN, run);
 
         mRunName = run.getName();
-        mRunLevel = run.getLevel();
+        mRunLevel = run.getLevel().getLevelString();
         mRunStatus = run.getStatus();
         //mRunSteepness = run.getSlopeAngle();
 

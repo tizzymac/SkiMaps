@@ -28,9 +28,9 @@ public class Run extends Edge implements Comparable<Run>, Serializable {
 
     private transient DatabaseReference mDatabase;
 
-    public Run(String name, String level, Node start, Node end) {
+    public Run(String name, String level, String region, Node start, Node end) {
         this.mName = name;
-        this.mLevel = new SkiLevel(level);
+        this.mLevel = new SkiLevel(level, region);
         this.mStart = start;
         this.mEnd = end;
         this.mRunStatus = new RunStatus();
@@ -76,8 +76,8 @@ public class Run extends Edge implements Comparable<Run>, Serializable {
         return mName;
     }
 
-    public String getLevel() {
-        return mLevel.getLevelString();
+    public SkiLevel getLevel() {
+        return mLevel;
     }
 
     public Node getStart() {
@@ -143,6 +143,7 @@ public class Run extends Edge implements Comparable<Run>, Serializable {
                 edgeSegments.add(new Run(
                         mName,
                         mLevel.getLevelString(),
+                        mLevel.getRegion(),
                         allNodes.get(i-1),
                         allNodes.get(i)));
             }
@@ -155,8 +156,8 @@ public class Run extends Edge implements Comparable<Run>, Serializable {
         return mEnd;
     }
 
-    public Boolean isWithinLevel(String level) {
-        SkiLevel skiersLevel = new SkiLevel(level);
+    public Boolean isWithinLevel(String level, String region) {
+        SkiLevel skiersLevel = new SkiLevel(level, region);
         if (mLevel.getLevelNumber() <= skiersLevel.getLevelNumber()) {
             return true;
         }

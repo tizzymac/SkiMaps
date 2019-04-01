@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.ResortModel.SkiLevel;
 import tizzy.skimapp.RouteFinding.SkiRoute;
 import tizzy.skimapp.SingleFragmentActivity;

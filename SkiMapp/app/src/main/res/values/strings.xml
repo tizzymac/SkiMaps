@@ -7,28 +7,59 @@
     <string name="emergency">Emergency</string>
     <string name="map">Map</string>
 
-    <!-- Preferences: Ski Ability -->
+    <!-- Preferences: Ski Ability USA -->
     <string name="pref_ski_ability">Your Level</string>
     <string name="ski_level_summary">Select your ski ability</string>
     <string name="pref_green">Green</string>
     <string name="pref_blue">Blue</string>
+    <string name="pref_red">Red</string>
     <string name="pref_black">Black</string>
 
-    <string-array name="pref_userSettings_entries">
+    <string-array name="pref_userSettings_entries_USA">
         <item>Green</item>
         <item>Blue</item>
         <item>Black</item>
     </string-array>
-    <string-array name="pref_userSettings_values">
+    <string-array name="pref_userSettings_values_USA">
         <item>Green</item>
         <item>Blue</item>
+        <item>Black</item>
+    </string-array>
+    <string-array name="pref_userSettings_entries_EU">
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Black</item>
+    </string-array>
+    <string-array name="pref_userSettings_values_EU">
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Red</item>
         <item>Black</item>
     </string-array>
     <string name="pref_userSettings_default">Default</string>
 
+
+
     <string name="settings">Settings</string>
     <string name="set_level"> Set My Level </string>
     <string name="what_level">What is my level?</string>
+
+    <!-- Preferences: Region -->
+    <string name="pref_region">Your Region</string>
+    <string name="region_summary">Select your region</string>
+    <string name="pref_usa">USA</string>
+    <string name="pref_europe">Europe</string>
+
+    <string-array name="pref_region_entries">
+        <item>USA</item>
+        <item>Europe</item>
+    </string-array>
+    <string-array name="pref_region_values">
+        <item>USA</item>
+        <item>Europe</item>
+    </string-array>
+    <string name="pref_region_default">USA</string>
 
     <!-- Route Finding -->
     <string name="where_to">Where to?</string>
@@ -49,6 +80,7 @@
     <!-- Ski level explanations -->
     <string name="green_ability">Green / Beginner\nYou have never skied or you are a confident novice.</string>
     <string name="blue_ability">Blue / Intermediate\nYou can make parallel turns.</string>
+    <string name="red_ability">Red / Advanced\nYou are a confident skier.</string>
     <string name="black_ability">Black / Expert\nYou can ski anything on the mountain.</string>
     <string name="all_abilities">Green / Beginner\nYou have never skied or you are a confident novice.\n\nBlue / Intermediate\nYou can make parallel turns.\n\nBlack / Expert\nYou can ski anything on the mountain.</string>
 </resources>

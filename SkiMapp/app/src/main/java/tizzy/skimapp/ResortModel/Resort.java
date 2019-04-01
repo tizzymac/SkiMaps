@@ -30,6 +30,7 @@ public class Resort implements Serializable {
     private LinkedList<tizzy.skimapp.ResortModel.Node> mNodes;
     private LinkedList<Lift> mLifts;
     private LinkedList<Run> mRuns;
+    private static String mRegion;
 
     private LinkedList<Facility> mFacilities;
     private String mEmergencyNumber;
@@ -63,6 +64,7 @@ public class Resort implements Serializable {
             doc.getDocumentElement().normalize();
 
             // Read in Resort data from xml
+            readRegion(doc);
             readNodes(doc);
             readRuns(doc);
             readLifts(doc);
@@ -70,8 +72,8 @@ public class Resort implements Serializable {
             readEmergency(doc);
 
         } catch (Exception e) {
-            // TODO
             e.printStackTrace();
+            throw new IllegalStateException();
         }
     }
 
@@ -107,6 +109,7 @@ public class Resort implements Serializable {
                 Run r = new Run(
                         runElement.getAttribute("name"),
                         runElement.getAttribute("level"),
+                        mRegion,
                         mNodes.get(Integer.parseInt(runElement.getAttribute("start")) - 1),
                         mNodes.get(Integer.parseInt(runElement.getAttribute("end")) - 1)
                 );
@@ -174,6 +177,13 @@ public class Resort implements Serializable {
         mEmergencyNumber = number;
     }
 
+    private void readRegion(Document doc) {
+        NodeList nFacList = doc.getElementsByTagName("Region");
+        Element regionElement = (Element) nFacList.item(0);
+        String region = regionElement.getAttribute("region");
+        mRegion = region;
+    }
+
     public LinkedList<tizzy.skimapp.ResortModel.Node> getNodes() {
         return mNodes;
     }
@@ -198,5 +208,9 @@ public class Resort implements Serializable {
 
     public String getEmergencyNumber() {
         return mEmergencyNumber;
+    }
+
+    public static String getRegion() {
+        return mRegion;
     }
 }

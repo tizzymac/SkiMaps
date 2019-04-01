@@ -22,6 +22,7 @@ import tizzy.skimapp.Emergency.EmergencyActivity;
 import tizzy.skimapp.GetInfo.InfoListActivity;
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Resort;
+import tizzy.skimapp.ResortModel.SkiLevel;
 import tizzy.skimapp.RouteFinding.DirectionsActivity;
 import tizzy.skimapp.Settings.SettingsActivity;
 
@@ -51,9 +52,6 @@ public class HomeFragment extends PreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.preferences);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -62,12 +60,18 @@ public class HomeFragment extends PreferenceFragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         // Create the resort
-        mResort = Resort.get(getActivity());
+        //mResort = Resort.get(getActivity());
             // TODO only want to create it once when app is first opened
 
-//        mSkiAbility = view.findViewById(R.id.skiAbility);
+        // Load the preferences from an XML resource
+        if (mResort.getRegion().equals("USA")) {
+            addPreferencesFromResource(R.xml.preferences_usa);
+        }
+        if (mResort.getRegion().equals("Europe")) {
+            addPreferencesFromResource(R.xml.preferences_eu);
+        }
+
         mSharedPref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-//        mSkiAbility.setText("Your Level:  " + mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
 
         mDirectionsButton = view.findViewById(R.id.directionsButton);
         mDirectionsButton.setOnClickListener(new View.OnClickListener() {
@@ -75,8 +79,7 @@ public class HomeFragment extends PreferenceFragment {
             public void onClick(View v) {
 
                 // Open Route Finder
-                Intent intent = DirectionsActivity.newIntent(getActivity(),
-                        mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
+                Intent intent = DirectionsActivity.newIntent(getActivity(), mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
                 startActivity(intent);
             }
         });

@@ -7,15 +7,16 @@ import tizzy.skimapp.ResortModel.Facility;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
+import tizzy.skimapp.ResortModel.SkiLevel;
 
 public class FacilityFinder {
 
     private Resort mResort;
     private Graph mGraph;
 
-    public FacilityFinder(Resort resort, String skiAbility) {
+    public FacilityFinder(Resort resort, SkiLevel skiAbility) {
         this.mResort = resort;
-        this.mGraph = new Graph(mResort.getNodes(), mResort.getEdges(), skiAbility);
+        this.mGraph = new Graph(mResort.getNodes(), mResort.getEdges(), skiAbility.getLevelNumber());
     }
 
     // Find nearest bathroom

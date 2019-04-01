@@ -2,14 +2,14 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListPreference
-        android:key="pref_ski_ability"
+        android:key="pref_ski_ability_EU"
         android:defaultValue="@string/pref_black"
         android:title="@string/pref_ski_ability"
         android:summary="%s"
         android:dialogTitle="@string/pref_ski_ability"
 
-        android:entries="@array/pref_userSettings_entries"
-        android:entryValues="@array/pref_userSettings_values"
+        android:entries="@array/pref_userSettings_entries_EU"
+        android:entryValues="@array/pref_userSettings_values_EU"
 
         android:theme="@style/PrefTheme"
         />

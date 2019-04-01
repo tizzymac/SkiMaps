@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:key="pref_ski_ability_USA"
+        android:defaultValue="@string/pref_black"
+        android:title="@string/pref_ski_ability"
+        android:summary="%s"
+        android:dialogTitle="@string/pref_ski_ability"
+
+        android:entries="@array/pref_userSettings_entries_USA"
+        android:entryValues="@array/pref_userSettings_values_USA"
+
+        android:theme="@style/PrefTheme"
+        />
+
+</PreferenceScreen>

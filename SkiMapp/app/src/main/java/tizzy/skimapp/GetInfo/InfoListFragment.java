@@ -93,7 +93,7 @@ public class InfoListFragment extends Fragment {
         public void bind(Run run) {
             mRun = run;
             mRunNameTextView.setText(mRun.getName());
-            switch (mRun.getLevel()) {
+            switch (mRun.getLevel().getLevelString()) {
                 case ("Green"): mRunLevelImageView.setImageResource(R.drawable.ic_green);
                                 break;
                 case ("Blue"):  mRunLevelImageView.setImageResource(R.drawable.ic_blue);

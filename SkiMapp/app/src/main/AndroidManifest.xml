@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_snowflake"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Home.HomeActivity">
+        <activity android:name=".Loading.LoadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".Home.HomeActivity"/>
         <activity android:name=".Settings.SettingsActivity"/>
         <activity android:name=".GetInfo.InfoListActivity"
                   android:parentActivityName=".Home.HomeActivity"/>
