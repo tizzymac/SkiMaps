@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <SkiResort>
+    <Region
+        region="USA"/>
     <Nodes>
-
         <!-- Summit Express -->
         <Node
             id="1"
@@ -701,6 +702,4 @@
     </Facilities>
     <SkiPatrol
         number="970-920-0969"/>
-    <Region
-        region="USA"/>
 </SkiResort>

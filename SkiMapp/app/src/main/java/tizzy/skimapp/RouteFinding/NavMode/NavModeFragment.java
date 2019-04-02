@@ -8,16 +8,20 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 import tizzy.skimapp.Emergency.EmergencyActivity;
 import tizzy.skimapp.R;
@@ -31,17 +35,21 @@ import tizzy.skimapp.RouteFinding.SkiersLocation;
 public class NavModeFragment extends Fragment {
     private static final String ARG_ROUTE = "route";
     private static final String ARG_LEVEL = "skiLevel";
+    private static final String ARG_REGION = "region";
 
     private Resort mResort;
     private SkiersLocation mSkiersLocation;
     LocationManager locationManager;
     private SkiRoute mSkiRoute;
-    private SkiLevel mSkiLevelUSA;
+    private SkiLevel mSkiLevel;
 
     private RecyclerView mRecyclerView;
     private TextView mCurrentLocationTextView;
     private Button mEndRouteButton;
     private ImageButton mEmergencyButton;
+
+    private TextToSpeech mTextToSpeech;
+    private Node mLastNode;
 
     private int mCurrentSegment;
     EdgeAdapter mAdapter;
@@ -63,7 +71,27 @@ public class NavModeFragment extends Fragment {
         mResort = Resort.get(getActivity());
         mSkiRoute = (SkiRoute) getArguments().getSerializable(ARG_ROUTE);
         mSkiersLocation = new SkiersLocation(mResort);
-        mSkiLevelUSA = (SkiLevel) getArguments().getSerializable(ARG_LEVEL);
+        mSkiLevel = (SkiLevel) getArguments().getSerializable(ARG_LEVEL);
+
+        mTextToSpeech = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status == TextToSpeech.SUCCESS){
+                    int result;
+                    if (mSkiLevel.getRegion().equals("Europe")) {
+                        result = mTextToSpeech.setLanguage(Locale.UK);
+                    } else {
+                        result = mTextToSpeech.setLanguage(Locale.US);
+                    }
+                    if (result == TextToSpeech.LANG_MISSING_DATA ||
+                            result==TextToSpeech.LANG_NOT_SUPPORTED){
+                        Log.e("error", "This Language is not supported");
+                    }
+                }
+                else
+                    Log.e("error", "Initilization Failed!");
+            }
+        });
     }
 
     @Override
@@ -76,8 +104,10 @@ public class NavModeFragment extends Fragment {
         // Skier's current location
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
+        mCurrentLocationTextView = view.findViewById(R.id.current_location);
+        mTextToSpeech.speak("Starting Route.", TextToSpeech.QUEUE_FLUSH, null);
+
         // For debugging
-//        mCurrentLocationTextView = view.findViewById(R.id.current_location);
 //        if (mSkiersLocation.isNull()) {
 //            // TODO
 //            mCurrentLocationTextView.setText("Unable to locate skier");
@@ -92,13 +122,12 @@ public class NavModeFragment extends Fragment {
         // Set layout manager to position the items
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
         mEndRouteButton = view.findViewById(R.id.end_route);
         mEndRouteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Return to directions fragment
-                Intent intent = DirectionsActivity.newIntent(getActivity(), mSkiLevelUSA.getLevelString());
+                Intent intent = DirectionsActivity.newIntent(getActivity(), mSkiLevel.getLevelString());
                 startActivity(intent);
             }
         });
@@ -129,15 +158,37 @@ public class NavModeFragment extends Fragment {
                     mSkiRoute.setCompleted(mCurrentSegment);
                     mCurrentSegment++;
 
+                    // Speak next direction
+                    if (mLastNode != currNode) {
+                        mTextToSpeech.speak("Take " + mSkiRoute.getEdgeName(mCurrentSegment), TextToSpeech.QUEUE_ADD, null);
+                    }
                     // Check if route completed
                     if (mCurrentSegment == mSkiRoute.length()-1) {
                         mCurrentLocationTextView.setText("You've arrived!");
+                        if (mLastNode != currNode) {
+                            mTextToSpeech.speak("You have arrived!", TextToSpeech.QUEUE_FLUSH, null);
+                        }
                     }
 
                     // refresh recycler view
                     mAdapter.notifyDataSetChanged();
+                } else {
+                    // Skier has reached a different route and is therefore off course
+                    mCurrentLocationTextView.setText("You've taken a wrong turn!");
+                    if (mLastNode != currNode) {
+                        mTextToSpeech.speak("You took a wrong turn.", TextToSpeech.QUEUE_FLUSH, null);
+                    }
+
+                    // Take the start node as their current node
+                    // Take the same end node
+                    // Calculate new route
+                    // What about variables?
+
+                    mEndRouteButton.setText("REROUTE");
                 }
             }
+
+            mLastNode = currNode;
         }
 
         @Override

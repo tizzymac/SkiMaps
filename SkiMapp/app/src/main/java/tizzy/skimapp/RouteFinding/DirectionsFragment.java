@@ -42,7 +42,7 @@ import tizzy.skimapp.RouteFinding.NavMode.NavModeActivity;
 
 public class DirectionsFragment extends Fragment {
     private static final String ARG_SKI_ABILITY = "ski_ability";
-    private static final String ARG_REGION = "region";
+    private static final int REQUEST_LOCATION_PERMISSIONS = 0;
 
     private Resort mResort;
     private Graph mBasicResortGraph;
@@ -198,8 +198,7 @@ public class DirectionsFragment extends Fragment {
                 mGoButton.setEnabled(false);
 
                 // Get start and end nodes
-                // temporarily taking node index as input
-                // TODO
+                // taking node index as input
                 final Node end;
                 if (mTopBottomSwitch.isChecked()) {
                     end = ((Edge) mToSpinner.getSelectedItem()).getStart();
@@ -249,13 +248,10 @@ public class DirectionsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+            // Request Permissions
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_LOCATION_PERMISSIONS);
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, myLocationListener);

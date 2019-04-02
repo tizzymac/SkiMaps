@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -59,11 +60,11 @@ public class HomeFragment extends PreferenceFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // Create the resort
-        //mResort = Resort.get(getActivity());
-            // TODO only want to create it once when app is first opened
-
         // Load the preferences from an XML resource
+        if (mResort.getRegion() == null) {
+            Log.e("Resort", "Invalid region.");
+            throw new IllegalStateException();
+        }
         if (mResort.getRegion().equals("USA")) {
             addPreferencesFromResource(R.xml.preferences_usa);
         }

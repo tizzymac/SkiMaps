@@ -3,7 +3,10 @@ package tizzy.skimapp.RouteFinding.NavMode;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
+
+import java.util.Locale;
 
 import tizzy.skimapp.ResortModel.SkiLevel;
 import tizzy.skimapp.RouteFinding.SkiRoute;
@@ -13,6 +16,7 @@ public class NavModeActivity extends SingleFragmentActivity {
 
     private static final String EXTRA_ROUTE = "tizzy.skimapp.route";
     private static final String EXTRA_LEVEL = "tizzy.skimapp.skiLevel";
+    private static final int MY_DATA_CHECK_CODE = 0;
 
     @Override
     protected Fragment createFragment() {
@@ -29,6 +33,10 @@ public class NavModeActivity extends SingleFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        Intent checkIntent = new Intent();
+//        checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+//        startActivityForResult(checkIntent, MY_DATA_CHECK_CODE);
     }
 
     public static Intent newIntent(Context packageContext, SkiRoute route, SkiLevel level) {
