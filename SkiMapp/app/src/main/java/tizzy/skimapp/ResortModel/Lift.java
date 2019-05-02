@@ -97,4 +97,9 @@ public class Lift extends Edge implements Comparable<Lift> {
     public int compareTo(@NonNull Lift otherLift) {
         return this.mName.compareTo(otherLift.getName());
     }
+
+    @Override
+    public void setWeight(int weight) {
+        this.mWeight = weight;
+    }
 }

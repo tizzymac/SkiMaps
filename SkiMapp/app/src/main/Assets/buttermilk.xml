@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <SkiResort>
-    <Region
+    <Resort
+        name="Buttermilk"
         region="USA"/>
     <Nodes>
         <!-- Summit Express -->

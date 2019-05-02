@@ -1,5 +1,7 @@
 package tizzy.skimapp.RouteFinding;
 
+import android.util.Log;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -68,9 +70,13 @@ public class Dijkstra {
     private List<Node> getNeighbors(Node node) {
         List<Node> neighbors = new LinkedList<Node>();
         for (Edge edge : edges) {
-            if (edge.getStart().equals(node)
-                    && !isSettled(edge.getEnd())) {
-                neighbors.add(edge.getEnd());
+            if (edge == null) {
+                Log.i("Dijkstras", "Null Edge.");
+            } else {
+                if (edge.getStart().equals(node)
+                        && !isSettled(edge.getEnd())) {
+                    neighbors.add(edge.getEnd());
+                }
             }
         }
         return neighbors;

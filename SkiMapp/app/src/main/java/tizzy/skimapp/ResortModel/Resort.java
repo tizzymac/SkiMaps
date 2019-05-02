@@ -178,7 +178,7 @@ public class Resort implements Serializable {
     }
 
     private void readRegion(Document doc) {
-        NodeList nFacList = doc.getElementsByTagName("Region");
+        NodeList nFacList = doc.getElementsByTagName("Resort");
         Element regionElement = (Element) nFacList.item(0);
         String region = regionElement.getAttribute("region");
         mRegion = region;
@@ -212,5 +212,14 @@ public class Resort implements Serializable {
 
     public static String getRegion() {
         return mRegion;
+    }
+
+    public Run getRun(String runName) {
+        for (Run r : mRuns) {
+            if (runName.equals(r.getName())) {
+                return r;
+            }
+        }
+        return null;
     }
 }

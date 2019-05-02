@@ -57,10 +57,6 @@ public class RunDetailFragment extends DialogFragment {
                 .setCancelable(true)
                 .create();
 
-
-
-
-
         mRunNameView = view.findViewById(R.id.run_name);
         mRunNameView.setText(mRunName);
 
@@ -80,9 +76,9 @@ public class RunDetailFragment extends DialogFragment {
 
         mGroomView = view.findViewById(R.id.groomed);
         if (mRunStatus.isGroomed()) {
-            mGroomView.setText("setGroomed: Yes");
+            mGroomView.setText("Groomed: Yes");
         } else {
-            mGroomView.setText("setGroomed: No");
+            mGroomView.setText("Groomed: No");
         }
 
 //        mSteepnessView = view.findViewById(R.id.steepness);

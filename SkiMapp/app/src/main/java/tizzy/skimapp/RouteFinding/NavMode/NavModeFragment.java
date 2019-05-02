@@ -27,6 +27,7 @@ import tizzy.skimapp.Emergency.EmergencyActivity;
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Resort;
+import tizzy.skimapp.ResortModel.Run;
 import tizzy.skimapp.ResortModel.SkiLevel;
 import tizzy.skimapp.RouteFinding.DirectionsActivity;
 import tizzy.skimapp.RouteFinding.SkiRoute;
@@ -105,7 +106,8 @@ public class NavModeFragment extends Fragment {
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         mCurrentLocationTextView = view.findViewById(R.id.current_location);
-        mTextToSpeech.speak("Starting Route.", TextToSpeech.QUEUE_FLUSH, null);
+        mTextToSpeech.speak("Starting Route.", TextToSpeech.QUEUE_ADD, null);
+        mTextToSpeech.speak("Take " + mSkiRoute.getEdgeName(0), TextToSpeech.QUEUE_ADD, null);
 
         // For debugging
 //        if (mSkiersLocation.isNull()) {
@@ -156,35 +158,44 @@ public class NavModeFragment extends Fragment {
                 if (currNode.equals(mSkiRoute.getEndNodeAt(mCurrentSegment))) {
                     // change text color of completed segment
                     mSkiRoute.setCompleted(mCurrentSegment);
-                    mCurrentSegment++;
 
-                    // Speak next direction
-                    if (mLastNode != currNode) {
-                        mTextToSpeech.speak("Take " + mSkiRoute.getEdgeName(mCurrentSegment), TextToSpeech.QUEUE_ADD, null);
-                    }
                     // Check if route completed
                     if (mCurrentSegment == mSkiRoute.length()-1) {
                         mCurrentLocationTextView.setText("You've arrived!");
                         if (mLastNode != currNode) {
                             mTextToSpeech.speak("You have arrived!", TextToSpeech.QUEUE_FLUSH, null);
                         }
+                    } else {
+                        // Speak next direction
+                        if (mLastNode != currNode) {
+                            mTextToSpeech.speak("Take " + mSkiRoute.getEdgeName(mCurrentSegment+1), TextToSpeech.QUEUE_ADD, null);
+                        }
                     }
+
+                    mCurrentSegment++;
 
                     // refresh recycler view
                     mAdapter.notifyDataSetChanged();
                 } else {
-                    // Skier has reached a different route and is therefore off course
-                    mCurrentLocationTextView.setText("You've taken a wrong turn!");
-                    if (mLastNode != currNode) {
-                        mTextToSpeech.speak("You took a wrong turn.", TextToSpeech.QUEUE_FLUSH, null);
+                    // Check that node isn't midpoint of current run.
+                    Run currentRun = mResort.getRun(mSkiRoute.getEdgeName(mCurrentSegment));
+                    if ((currentRun != null) && (currentRun.getMidpoints() != null)) {
+                        if (!currentRun.getMidpoints().contains(currNode)) {
+
+                            // Skier has reached a different route and is therefore off course
+                            mCurrentLocationTextView.setText("You've taken a wrong turn!");
+                            if (mLastNode != currNode) {
+                                mTextToSpeech.speak("You took a wrong turn.", TextToSpeech.QUEUE_FLUSH, null);
+                            }
+
+                            // Take the start node as their current node
+                            // Take the same end node
+                            // Calculate new route
+                            // What about variables?
+
+                            mEndRouteButton.setText("REROUTE");
+                        }
                     }
-
-                    // Take the start node as their current node
-                    // Take the same end node
-                    // Calculate new route
-                    // What about variables?
-
-                    mEndRouteButton.setText("REROUTE");
                 }
             }
 
@@ -230,10 +241,10 @@ public class NavModeFragment extends Fragment {
         // For debugging
         if (currentNode != null) {
             //mLocTextView.setText(currentNode.getId());
-            mCurrentLocationTextView.setText(currentNode.getId());
+            //mCurrentLocationTextView.setText(currentNode.getId());
             return currentNode;
         } else {
-            mCurrentLocationTextView.setText("You are not currently at a node");
+            //mCurrentLocationTextView.setText("You are not currently at a node");
             return null;
         }
     }

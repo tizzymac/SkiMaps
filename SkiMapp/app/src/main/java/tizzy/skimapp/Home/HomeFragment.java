@@ -33,8 +33,6 @@ import tizzy.skimapp.Settings.SettingsActivity;
 
 public class HomeFragment extends PreferenceFragment {
 
-    private static final String TAG = "HomeFragment";
-
     private Button mDirectionsButton;
     private ImageButton mDirectionsIcon;
     private Button mInfoButton;

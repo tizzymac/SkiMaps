@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <SkiResort>
+    <Resort
+        name="Snowmass"
+        region="USA"/>
     <Nodes>
         <Node
             id="1"

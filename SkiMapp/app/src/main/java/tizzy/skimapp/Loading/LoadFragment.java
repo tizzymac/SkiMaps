@@ -10,11 +10,7 @@ import android.view.ViewGroup;
 
 import tizzy.skimapp.Home.HomeActivity;
 import tizzy.skimapp.R;
-import tizzy.skimapp.ResortModel.Path;
 import tizzy.skimapp.ResortModel.Resort;
-import tizzy.skimapp.RouteFinding.DirectionsActivity;
-import tizzy.skimapp.RouteFinding.Graph;
-import tizzy.skimapp.Settings.SettingsActivity;
 
 public class LoadFragment extends Fragment {
 

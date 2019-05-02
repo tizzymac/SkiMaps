@@ -107,7 +107,8 @@ public class DirectionsFragment extends Fragment {
                         Path path = facilityFinder.pathToNearestFacility(start, "Restrooms");
 
                         if (path == null) {
-                            mRoute.setText("This route is not possible");
+                            //mRoute.setText("This route is not possible");
+                            Toast.makeText(getActivity(), "This route is not possible", Toast.LENGTH_LONG).show();
                         } else {
                             if (path.getDistance() == 1) {
                                 mRoute.setText("You are already here!");
@@ -144,7 +145,8 @@ public class DirectionsFragment extends Fragment {
                         Path path = facilityFinder.pathToNearestFacility(start, "Restaurant");
 
                         if (path.getDistance() == 0) {
-                            mRoute.setText("This route is not possible");
+                            //mRoute.setText("This route is not possible");
+                            Toast.makeText(getActivity(), "No start inputted!", Toast.LENGTH_LONG).show();
                         } else {
                             if (path.getDistance() == 1) {
                                 mRoute.setText("You are already here!");
@@ -335,7 +337,7 @@ public class DirectionsFragment extends Fragment {
             // If longer route is checked
             if (longer) {
                 Yen yen = new Yen(mResort);
-                List<Path> paths = yen.YenKSP(graph, (Node) objects[0], (Node) objects[1], 3);
+                List<Path> paths = yen.YenKSP(graph, (Node) objects[0], (Node) objects[1], 4);
                 path = paths.get(paths.size() - 1);
 
                 // Shortest route
@@ -345,21 +347,20 @@ public class DirectionsFragment extends Fragment {
                 path = dijkstra.getPath((Node) objects[1]);    // end node
 
             }
-
             return path;
         }
 
         @Override
         protected void onPostExecute(Path path) {
             if (path == null) {
-                mRoute.setText("This route is not possible");
+                //mRoute.setText("This route is not possible");
+                Toast.makeText(getActivity(), "This route is not possible", Toast.LENGTH_LONG).show();
                 mGoButton.setEnabled(true);
                 mGoButton.setText("GO");
-                // TODO clear mRouteListView
             } else {
                 SkiRoute skiRoute = new SkiRoute(path, mBasicResortGraph);
 
-//                mRoute.setText("");
+                mRoute.setText("");
 //                mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 
                 // Start Nav Mode

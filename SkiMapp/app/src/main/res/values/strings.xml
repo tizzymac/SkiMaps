@@ -82,5 +82,6 @@
     <string name="blue_ability">Blue / Intermediate\nYou can make parallel turns.</string>
     <string name="red_ability">Red / Advanced\nYou are a confident skier.</string>
     <string name="black_ability">Black / Expert\nYou can ski anything on the mountain.</string>
-    <string name="all_abilities">Green / Beginner\nYou have never skied or you are a confident novice.\n\nBlue / Intermediate\nYou can make parallel turns.\n\nBlack / Expert\nYou can ski anything on the mountain.</string>
+    <string name="all_abilities_US">Green / Beginner\nYou have never skied or you are a confident novice.\n\nBlue / Intermediate\nYou can make parallel turns.\n\nBlack / Expert\nYou can ski anything on the mountain.</string>
+    <string name="all_abilities_EU">Green / Beginner\nYou have never skied or you are a confident novice.\n\nBlue / Intermediate\nYou can make parallel turns.\n\nRed / Advanced\nYou are a confident skier.\n\nBlack / Expert\nYou can ski anything on the mountain.</string>
 </resources>

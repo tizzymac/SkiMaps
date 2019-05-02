@@ -38,7 +38,7 @@ public class Yen {
 
         for (int k = 1; k <= K; k++) {
             // The spur node ranges from the first node to the next to last node in the previous k-shortest path.
-            int d = shortestPaths.get(k - 1).getDistance() - 1; // Changed from 2 to 1
+            int d = shortestPaths.get(k - 1).getDistance() - 2;
             for (int i = 0; i <= d; i++) {
 
                 // Spur node is retrieved from the previous k-shortest path, k − 1.
@@ -61,7 +61,6 @@ public class Yen {
                     }
                 }
 
-                // Do I need to do this on a different (background / worker) thread?
                 // Calculate the spur path from the spur node to the sink.
                 Dijkstra dijkstraSpur = new Dijkstra(graph);
                 dijkstraSpur.execute(spurNode);

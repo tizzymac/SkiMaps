@@ -10,6 +10,7 @@ public abstract class Edge implements Serializable {
     public abstract Node getStart();
     public abstract int getSimpleWeight();
     public abstract int getWeight();
+    public abstract void setWeight(int weight);
     public abstract List<Edge> getEdgeSegments();
 
 }

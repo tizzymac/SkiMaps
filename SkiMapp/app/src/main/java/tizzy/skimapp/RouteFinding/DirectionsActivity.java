@@ -32,4 +32,9 @@ public class DirectionsActivity extends SingleFragmentActivity {
         intent.putExtra(EXTRA_SKI_ABILITY, skiAbility);
         return intent;
     }
+
+    @Override
+    public void onBackPressed() {
+        //
+    }
 }

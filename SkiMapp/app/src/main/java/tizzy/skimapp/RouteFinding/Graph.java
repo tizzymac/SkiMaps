@@ -1,5 +1,7 @@
 package tizzy.skimapp.RouteFinding;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -8,6 +10,7 @@ import java.util.List;
 import tizzy.skimapp.ResortModel.Edge;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Run;
+import tizzy.skimapp.ResortModel.SkiLevel;
 
 public class Graph implements Serializable {
 
@@ -34,62 +37,22 @@ public class Graph implements Serializable {
 
             // Check if this edge is a run
             if (e instanceof Run) {
+
                 // Only add if level within skier's ability
                 if (((Run) e).getLevel().getLevelNumber() <= maxLevel) {
-                    // Add all run segments
-                    edgeSegments.addAll(e.getEdgeSegments());
+
+                    // Check if run is open
+                    if (((Run) e).getStatus().isOpen()) {
+
+                        // Add all run segments
+                        edgeSegments.addAll(e.getEdgeSegments());
+                    }
                 }
             } else {
                 // Add all lift segments
                 edgeSegments.addAll(e.getEdgeSegments());
             }
         }
-//
-//        if (maxLevel.equals("Green")) {
-//            // Remove all Blacks and Blues from edges
-//            for (Iterator<Edge> iterator = edges.iterator(); iterator.hasNext();) {
-//                Edge e = iterator.next();
-//
-//                // Check if this edge is a run
-//                if (e instanceof Run) {
-//                    // Only add if level is green
-//                    if (((Run) e).getLevel().equals("Green")) {
-//                        // Add all run segments
-//                        edgeSegments.addAll(e.getEdgeSegments());
-//                    }
-//                } else {
-//                    // Add all lift segments
-//                    edgeSegments.addAll(e.getEdgeSegments());
-//                }
-//            }
-//        }
-//
-//        if (maxLevel.equals("Blue")) {
-//            // Remove all Black runs
-//            for (Iterator<Edge> iterator = edges.iterator(); iterator.hasNext();) {
-//                Edge e = iterator.next();
-//
-//                // Check if this edge is a run
-//                if (e instanceof Run) {
-//                    // Only add if level is green or blue
-//                    if ((((Run) e).getLevel().equals("Green") || (((Run) e).getLevel().equals("Blue")))) {
-//                        // Add all run segments
-//                        edgeSegments.addAll(e.getEdgeSegments());
-//                    }
-//                } else {
-//                    // Add all lift segments
-//                    edgeSegments.addAll(e.getEdgeSegments());
-//                }
-//            }
-//        }
-//
-//        if (maxLevel.equals("Black")) {
-//            // Add all edges
-//            for (Iterator<Edge> iterator = edges.iterator(); iterator.hasNext();) {
-//                Edge e = iterator.next();
-//                edgeSegments.addAll(e.getEdgeSegments());
-//            }
-//        }
 
         this.mNodes = nodes;
         this.mEdges = (LinkedList<Edge>) edgeSegments;
@@ -101,18 +64,20 @@ public class Graph implements Serializable {
         for (Iterator<Edge> iterator = mEdges.iterator(); iterator.hasNext();) {
             Edge e = iterator.next();
 
-            // Check if this edge is a run
-            if (e instanceof Run) {
+            try {
+                String level = ((Run) e).getLevel().getLevelString();
+
                 // Multiply edge weight
-                if (((Run) e).getLevel().equals("Green")) {
-                    ((Run) e).setWeight(8);
+                if (level.equals("Green")) {
+                    e.setWeight(e.getWeight() * 8);
                 }
-                if (((Run) e).getLevel().equals("Blue")) {
-                    ((Run) e).setWeight(4);
+                if (level.equals("Blue")) {
+                    e.setWeight(e.getWeight() * 4);
                 }
+            } catch (ClassCastException exception) {
+                // It's a lift
             }
         }
-
     }
 
     public void groomersOnly() {
@@ -121,11 +86,13 @@ public class Graph implements Serializable {
             Edge e = iterator.next();
 
             // Check if this edge is a run
-            if (e instanceof Run) {
+            try {
                 if (!((Run) e).getStatus().isGroomed()) {
                     // remove
                     iterator.remove(); // prevent concurrent modification by using an iterator
                 }
+            } catch (ClassCastException exception) {
+                // It's a lift
             }
         }
     }
@@ -140,8 +107,12 @@ public class Graph implements Serializable {
 
     public Edge getEdgeBetweenNodes(Node start, Node end) {
         for (Edge e : mEdges) {
-            if ((e.getStart() == start) && (e.getEnd() == end)) {
-                return e;
+            if (e == null) {
+                Log.i("Graph", "Null Edge.");
+            } else {
+                if ((e.getStart() == start) && (e.getEnd() == end)) {
+                    return e;
+                }
             }
         }
         return null;

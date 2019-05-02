@@ -121,6 +121,7 @@ public class Run extends Edge implements Comparable<Run>, Serializable {
         mRunStatus = runStatus;
     }
 
+    @Override
     public void setWeight(int weight) {
         this.mWeight = weight;
     }

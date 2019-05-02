@@ -45,4 +45,9 @@ public class NavModeActivity extends SingleFragmentActivity {
         intent.putExtra(EXTRA_LEVEL, level);
         return intent;
     }
+
+    @Override
+    public void onBackPressed() {
+        //
+    }
 }

@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/level_explanations"
         android:textAlignment="center"
-        android:text="@string/all_abilities"
+        android:text="@string/all_abilities_EU"
         android:textColor="@color/colorPrimary"
         android:textSize="18dp"
         android:layout_margin="8dp"
