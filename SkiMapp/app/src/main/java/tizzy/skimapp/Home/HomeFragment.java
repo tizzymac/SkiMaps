@@ -23,7 +23,6 @@ import tizzy.skimapp.Emergency.EmergencyActivity;
 import tizzy.skimapp.GetInfo.InfoListActivity;
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Resort;
-import tizzy.skimapp.ResortModel.SkiLevel;
 import tizzy.skimapp.RouteFinding.DirectionsActivity;
 import tizzy.skimapp.Settings.SettingsActivity;
 
@@ -63,8 +62,9 @@ public class HomeFragment extends PreferenceFragment {
             Log.e("Resort", "Invalid region.");
             throw new IllegalStateException();
         }
+
         if (mResort.getRegion().equals("USA")) {
-            addPreferencesFromResource(R.xml.preferences_usa);
+            addPreferencesFromResource(R.xml.preferences);
         }
         if (mResort.getRegion().equals("Europe")) {
             addPreferencesFromResource(R.xml.preferences_eu);

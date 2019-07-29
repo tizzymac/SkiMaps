@@ -17,7 +17,9 @@
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="45sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"/>
+    <!--android:fontFamily="@font/lobster_two_bold"-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,11 +29,11 @@
 
         <ImageButton
             android:id="@+id/directions_icon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:background="@drawable/button_round"
             android:src="@drawable/ic_directions_foreground"
-            android:layout_margin="20dp"/>
+            android:layout_margin="10dp"/>
 
         <Button
             android:id="@+id/directionsButton"
@@ -51,11 +53,11 @@
 
         <ImageButton
             android:id="@+id/info_icon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:background="@drawable/button_round"
             android:src="@drawable/ic_info_foreground"
-            android:layout_margin="20dp"/>
+            android:layout_margin="10dp"/>
         <Button
             android:id="@+id/infoButton"
             android:layout_width="wrap_content"
@@ -74,11 +76,11 @@
 
         <ImageButton
             android:id="@+id/emergency_icon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:background="@drawable/button_round"
             android:src="@drawable/ic_emergency_foreground"
-            android:layout_margin="20dp"/>
+            android:layout_margin="10dp"/>
         <Button
             android:id="@+id/emergencyButton"
             android:layout_width="wrap_content"
@@ -97,11 +99,11 @@
 
         <ImageButton
             android:id="@+id/settings_icon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:background="@drawable/button_round"
             android:src="@drawable/ic_settings_foreground"
-            android:layout_margin="20dp"/>
+            android:layout_margin="10dp"/>
 
         <Button
             android:id="@+id/settingsButton"
@@ -143,12 +145,12 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:background="@drawable/button_rounded_corners_light">
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:id="@android:id/list" />
     </LinearLayout>
 

@@ -52,6 +52,8 @@ dependencies {
     // Firebase
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-database:16.0.1'
+
+    implementation 'com.android.support:design:26.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

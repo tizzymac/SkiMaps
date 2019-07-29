@@ -106,8 +106,8 @@ public class NavModeFragment extends Fragment {
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         mCurrentLocationTextView = view.findViewById(R.id.current_location);
-        mTextToSpeech.speak("Starting Route.", TextToSpeech.QUEUE_ADD, null);
-        mTextToSpeech.speak("Take " + mSkiRoute.getEdgeName(0), TextToSpeech.QUEUE_ADD, null);
+        //mTextToSpeech.speak("Starting Route.", TextToSpeech.QUEUE_FLUSH, null);
+        mTextToSpeech.speak("Take " + mSkiRoute.getEdgeName(0), TextToSpeech.QUEUE_FLUSH, null);
 
         // For debugging
 //        if (mSkiersLocation.isNull()) {
@@ -168,7 +168,7 @@ public class NavModeFragment extends Fragment {
                     } else {
                         // Speak next direction
                         if (mLastNode != currNode) {
-                            mTextToSpeech.speak("Take " + mSkiRoute.getEdgeName(mCurrentSegment+1), TextToSpeech.QUEUE_ADD, null);
+                            mTextToSpeech.speak("Take " + mSkiRoute.getEdgeName(mCurrentSegment+1), TextToSpeech.QUEUE_FLUSH, null);
                         }
                     }
 
@@ -185,7 +185,9 @@ public class NavModeFragment extends Fragment {
                             // Skier has reached a different route and is therefore off course
                             mCurrentLocationTextView.setText("You've taken a wrong turn!");
                             if (mLastNode != currNode) {
-                                mTextToSpeech.speak("You took a wrong turn.", TextToSpeech.QUEUE_FLUSH, null);
+                                if (!(mCurrentSegment == 0)) {
+                                    mTextToSpeech.speak("You took a wrong turn.", TextToSpeech.QUEUE_FLUSH, null);
+                                }
                             }
 
                             // Take the start node as their current node

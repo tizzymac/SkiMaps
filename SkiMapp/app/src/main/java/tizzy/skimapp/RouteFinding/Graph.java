@@ -69,10 +69,10 @@ public class Graph implements Serializable {
 
                 // Multiply edge weight
                 if (level.equals("Green")) {
-                    e.setWeight(e.getWeight() * 8);
+                    e.setWeight(e.getWeight() + 32);
                 }
                 if (level.equals("Blue")) {
-                    e.setWeight(e.getWeight() * 4);
+                    e.setWeight(e.getWeight() + 8);
                 }
             } catch (ClassCastException exception) {
                 // It's a lift

@@ -10,6 +10,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,6 +23,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -49,14 +53,14 @@ public class DirectionsFragment extends Fragment {
     private SkiLevel mSkiAbility;
 
     private Button mGoButton;
-    private Button mBathroomButton;
-    private Button mFoodButton;
-    //    private EditText mToInput;
+    private ImageButton mBathroomButton;
+    private ImageButton mFoodButton;
+    private Button mSelectDestButton;
     private Switch mTopBottomSwitch;
     private Switch mRunLiftSwitch;
     private Spinner mToSpinner;
-    private EditText mFromInput;
     private TextView mRoute;
+    private BottomSheetBehavior mBottomSheetBehavior;
 
     // route options
     private CheckBox mLongerRouteCheckBox;
@@ -92,6 +96,9 @@ public class DirectionsFragment extends Fragment {
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
+        mBottomSheetBehavior = new BottomSheetBehavior().from(view.findViewById(R.id.destinationSelectionBottomSheet));
+        mBottomSheetBehavior.setPeekHeight(60);
+
         mBathroomButton = view.findViewById(R.id.bathroom);
         mBathroomButton.setOnClickListener(new View.OnClickListener() {
 
@@ -111,7 +118,8 @@ public class DirectionsFragment extends Fragment {
                             Toast.makeText(getActivity(), "This route is not possible", Toast.LENGTH_LONG).show();
                         } else {
                             if (path.getDistance() == 1) {
-                                mRoute.setText("You are already here!");
+                                //mRoute.setText("You are already here!");
+                                Toast.makeText(getActivity(), "You are already here!", Toast.LENGTH_LONG).show();
                             } else {
                                 SkiRoute skiRoute = new SkiRoute(path, mBasicResortGraph);
                                 mRoute.setText("");
@@ -134,34 +142,41 @@ public class DirectionsFragment extends Fragment {
             public void onClick(View v) {
                 // Find shortest route to a restaurant
 
-                // Check if anything was inputted
-                if (mFromInput.getText().toString().equals("")) {
-                    Toast.makeText(getActivity(), "No start inputted!", Toast.LENGTH_LONG).show();
-                } else {
+                Node start = getStartNode();
+                if (start != null) {
+                    FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
+                    Path path = facilityFinder.pathToNearestFacility(start, "Restaurant");
 
-                    Node start = getStartNode();
-                    if (start != null) {
-                        FacilityFinder facilityFinder = new FacilityFinder(mResort, mSkiAbility);
-                        Path path = facilityFinder.pathToNearestFacility(start, "Restaurant");
+                    if (path.getDistance() == 0) {
+                        //mRoute.setText("This route is not possible");
+                        Toast.makeText(getActivity(), "No start inputted!", Toast.LENGTH_LONG).show();
+                    } else {
+                        if (path.getDistance() == 1) {
+                            //mRoute.setText("You are already here!");
+                            Toast.makeText(getActivity(), "You are already here!", Toast.LENGTH_LONG).show();
 
-                        if (path.getDistance() == 0) {
-                            //mRoute.setText("This route is not possible");
-                            Toast.makeText(getActivity(), "No start inputted!", Toast.LENGTH_LONG).show();
                         } else {
-                            if (path.getDistance() == 1) {
-                                mRoute.setText("You are already here!");
-                            } else {
-                                SkiRoute skiRoute = new SkiRoute(path, mBasicResortGraph);
-                                mRoute.setText("");
+                            SkiRoute skiRoute = new SkiRoute(path, mBasicResortGraph);
+                            mRoute.setText("");
 //                        mRouteListView.setAdapter(new RouteViewAdapter(getActivity(), skiRoute));
 
-                                // Start Nav Mode
-                                Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility.getLevelString(), mResort.getRegion()));
-                                startActivity(intent);
-                            }
+                            // Start Nav Mode
+                            Intent intent = NavModeActivity.newIntent(getActivity(), skiRoute, new SkiLevel(mSkiAbility.getLevelString(), mResort.getRegion()));
+                            startActivity(intent);
                         }
                     }
                 }
+            }
+        });
+
+        mSelectDestButton = view.findViewById(R.id.select_dest);
+        mSelectDestButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                // Bottom sheet comes up
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
 
@@ -184,9 +199,6 @@ public class DirectionsFragment extends Fragment {
         mToSpinner = view.findViewById(R.id.to_spinner);
         mToSpinner.setAdapter(getAdapter(mRunLiftSwitch.isChecked()));
 
-//        mToInput = view.findViewById(R.id.where_to);
-        mFromInput = view.findViewById(R.id.where_from);
-        mFromInput.setText("Current Location");
         mRoute = view.findViewById(R.id.route);
 
         mGoButton = view.findViewById(R.id.go_button);
@@ -371,49 +383,16 @@ public class DirectionsFragment extends Fragment {
     }
 
     private Node getStartNode() {
-        // Check if input is empty
-        if (mFromInput.getText().toString().equals("")) {
-            Toast.makeText(getActivity(), "No start inputted!", Toast.LENGTH_LONG).show();
+        Node currentNode = mSkiersLocation.getNode();
+        if (currentNode != null) {
+            // Return current location node
+            return currentNode;
         } else {
-            // Current location
-            if (mFromInput.getText().toString().equals("Current Location")) {
-                Node currentNode = mSkiersLocation.getNode();
-                if (currentNode != null) {
-                    // Return current location node
-                    return currentNode;
-                } else {
-                    Toast.makeText(getActivity(), "Unable to locate you.", Toast.LENGTH_LONG).show();
-                    mGoButton.setText("GO");
-                    mGoButton.setEnabled(true);
-                    return null;
-                }
-
-                // Use inputted location
-            } else {
-                // Check if input is a valid node id
-                int input;
-                try {
-                    input = Integer.parseInt(mFromInput.getText().toString());
-                } catch (NumberFormatException e) {
-                    Toast.makeText(getActivity(), "Invalid input.", Toast.LENGTH_LONG).show();
-                    mGoButton.setText("GO");
-                    mGoButton.setEnabled(true);
-                    return null;
-                }
-                if (input > mResort.getNodes().size()) {
-                    Toast.makeText(getActivity(), "Invalid input.", Toast.LENGTH_LONG).show();
-                    mGoButton.setText("GO");
-                    mGoButton.setEnabled(true);
-                    return null;
-                } else {
-                    return mResort.getNodes().get(input - 1);
-                }
-            }
+            Toast.makeText(getActivity(), "Unable to locate you.", Toast.LENGTH_LONG).show();
+            mGoButton.setText("GO");
+            mGoButton.setEnabled(true);
+            return null;
         }
-        Toast.makeText(getActivity(), "Invalid input.", Toast.LENGTH_LONG).show();
-        mGoButton.setText("GO");
-        mGoButton.setEnabled(true);
-        return null;
     }
 
 }

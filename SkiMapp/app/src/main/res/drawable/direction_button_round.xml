@@ -3,17 +3,16 @@
     <item android:state_pressed="true" >
         <shape android:shape="oval">
             <solid android:color="@color/colorPrimaryDark"/>
-            <size android:width="150dp" android:height="150dp"/>
+            <size android:width="60dp" android:height="60dp"/>
         </shape>
     </item>
-
     <item>
         <shape android:shape="oval">
-            <!--
+            <!--s
             <stroke android:color="#1E90FF" android:width="5dp" />
             -->
-            <solid android:color="@color/colorPrimary"/>
-            <size android:width="150dp" android:height="150dp"/>
+            <solid android:color="#87CEEB"/>
+            <size android:width="60dp" android:height="60dp"/>
         </shape>
     </item>
 </selector>

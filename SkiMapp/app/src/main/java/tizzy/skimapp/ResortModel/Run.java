@@ -34,7 +34,7 @@ public class Run extends Edge implements Comparable<Run>, Serializable {
         this.mStart = start;
         this.mEnd = end;
         this.mRunStatus = new RunStatus();
-        this.mWeight = 1;
+        this.mWeight = 4;
 
         if (mLevel.getLevelString().equals("Black")) {
             mRunStatus.setGroomed(false);
@@ -114,7 +114,6 @@ public class Run extends Edge implements Comparable<Run>, Serializable {
 
         // Slope is rise / run
         return (int) Math.atan(rise/run);
-        // TODO test this
     }
 
     public void setRunStatus(RunStatus runStatus) {
@@ -141,12 +140,15 @@ public class Run extends Edge implements Comparable<Run>, Serializable {
             // Cycle through nodes
             for (int i = 1; i < allNodes.size(); i++) {
                 // Get edge segment
-                edgeSegments.add(new Run(
+                Run run = new Run(
                         mName,
                         mLevel.getLevelString(),
                         mLevel.getRegion(),
                         allNodes.get(i-1),
-                        allNodes.get(i)));
+                        allNodes.get(i));
+                //run.setWeight(mWeight/allNodes.size());
+                run.setWeight(mWeight/4);
+                edgeSegments.add(run);
             }
         }
 

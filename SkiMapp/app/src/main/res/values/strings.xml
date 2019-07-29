@@ -15,12 +15,12 @@
     <string name="pref_red">Red</string>
     <string name="pref_black">Black</string>
 
-    <string-array name="pref_userSettings_entries_USA">
+    <string-array name="pref_userSettings_entries">
         <item>Green</item>
         <item>Blue</item>
         <item>Black</item>
     </string-array>
-    <string-array name="pref_userSettings_values_USA">
+    <string-array name="pref_userSettings_values">
         <item>Green</item>
         <item>Blue</item>
         <item>Black</item>
