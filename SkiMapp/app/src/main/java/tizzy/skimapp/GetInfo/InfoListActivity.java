@@ -2,8 +2,8 @@ package tizzy.skimapp.GetInfo;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 
+import androidx.fragment.app.Fragment;
 import tizzy.skimapp.SingleFragmentActivity;
 
 public class InfoListActivity extends SingleFragmentActivity {

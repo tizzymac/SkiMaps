@@ -1,10 +1,10 @@
 package tizzy.skimapp.ResortModel;
 
-import android.support.annotation.NonNull;
-
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by tizzy on 10/15/18.

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="tizzy.skimapp">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -14,7 +15,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_snowflake"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:node="replace">
         <activity android:name=".Loading.LoadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -32,6 +34,7 @@
         <activity android:name=".Map.MapActivity"/>
         <activity android:name=".Emergency.EmergencyActivity"/>
         <activity android:name=".RouteFinding.NavMode.NavModeActivity"/>
+        <!--<activity android:name=".Home.PagerActivity"/>-->
 
         <uses-library android:name="android.test.runner"
                       android:required="false" />

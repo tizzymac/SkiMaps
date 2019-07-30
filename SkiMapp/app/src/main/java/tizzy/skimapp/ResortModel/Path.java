@@ -1,9 +1,9 @@
 package tizzy.skimapp.ResortModel;
 
-import android.support.annotation.NonNull;
-
 import java.io.Serializable;
 import java.util.LinkedList;
+
+import androidx.annotation.NonNull;
 
 public class Path implements Comparable<Path>, Serializable {
 

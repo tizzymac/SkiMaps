@@ -9,8 +9,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Equivalent to {@link AsyncTask}, but also adds a timeout.  If the task exceeds the timeout,
- * {@link AsyncTaskWithTimeout#onTimeout()} will be called via the UI {@link Thread}.
  *
  * from: https://gist.github.com/scottTomaszewski/3c9af91295e8871953739bb456de937b
  */
@@ -61,9 +59,6 @@ public abstract class AsyncTaskWithTimeout<Params, Progress, Result>
         timeoutThread.start();
     }
 
-    /**
-     * Equivalent to {@link AsyncTask#onPreExecute()}
-     */
     protected void onPreExec() {
     }
 
@@ -74,22 +69,11 @@ public abstract class AsyncTaskWithTimeout<Params, Progress, Result>
         return runInBackground(params);
     }
 
-    /**
-     * Equivalent to {@link AsyncTask#doInBackground(Object[])}
-     */
     protected abstract Result runInBackground(Params... params);
 
-
-    /**
-     * This will be run on the UI thread if the timeout is reached.
-     */
     protected void onTimeout() {
     }
 
-    /**
-     * Called if the AsyncTask throws an exception.
-     * By default wrap in {@link RuntimeException} and let it bubble up to the system.
-     */
     protected void onException(ExecutionException e) {
         throw new RuntimeException(e);
     }

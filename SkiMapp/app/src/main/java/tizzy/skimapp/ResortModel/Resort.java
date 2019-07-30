@@ -3,6 +3,8 @@ package tizzy.skimapp.ResortModel;
 
 import android.content.Context;
 
+import com.google.firebase.FirebaseApp;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -62,6 +64,9 @@ public class Resort implements Serializable {
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(resortIS);
             doc.getDocumentElement().normalize();
+
+            // Initialize Firebase
+            FirebaseApp.initializeApp(context);
 
             // Read in Resort data from xml
             readRegion(doc);

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.viewpager.widget.ViewPager
+    android:id="@+id/pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <com.google.android.material.tabs.TabItem
+            android:icon="@drawable/ic_directions_foreground"
+            android:text="@string/directions"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+        <com.google.android.material.tabs.TabItem
+            android:icon="@drawable/ic_info_foreground"
+            android:text="@string/info_lookup"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+        <com.google.android.material.tabs.TabItem
+            android:icon="@drawable/ic_settings_foreground"
+            android:text="@string/settings"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+    </com.google.android.material.tabs.TabLayout>
+
+</androidx.viewpager.widget.ViewPager>

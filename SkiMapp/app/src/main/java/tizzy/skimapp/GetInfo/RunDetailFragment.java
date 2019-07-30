@@ -1,10 +1,8 @@
 package tizzy.skimapp.GetInfo;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import androidx.fragment.app.DialogFragment;
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Run;
 import tizzy.skimapp.ResortModel.RunStatus;

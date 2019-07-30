@@ -9,10 +9,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +19,10 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import tizzy.skimapp.Emergency.EmergencyActivity;
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Node;

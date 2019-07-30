@@ -22,7 +22,7 @@
             android:textColor="@color/colorPrimary"
             android:layout_margin="6dp"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/run_info_recycler_view"
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
             android:textColor="@color/colorPrimary"
             android:layout_margin="6dp"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/lift_info_recycler_view"
             android:layout_width="match_parent"

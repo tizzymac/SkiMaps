@@ -2,6 +2,7 @@ package tizzy.skimapp.Map;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
@@ -10,8 +11,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +38,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import androidx.core.app.ActivityCompat;
 import tizzy.skimapp.R;
 
 public class MapFragment2 extends GlobeMapFragment {

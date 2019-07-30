@@ -6,7 +6,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import tizzy.skimapp.Emergency.EmergencyActivity;
 import tizzy.skimapp.GetInfo.InfoListActivity;
 import tizzy.skimapp.R;
