@@ -95,7 +95,7 @@ public class DirectionsFragment extends Fragment {
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         mBottomSheetBehavior = new BottomSheetBehavior().from(view.findViewById(R.id.destinationSelectionBottomSheet));
-        mBottomSheetBehavior.setPeekHeight(60);
+        mBottomSheetBehavior.setPeekHeight(0);
 
         mBathroomButton = view.findViewById(R.id.bathroom);
         mBathroomButton.setOnClickListener(new View.OnClickListener() {

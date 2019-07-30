@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import tizzy.skimapp.Home.HomeActivity;
+import tizzy.skimapp.Home.PagerActivity;
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Resort;
 
@@ -53,8 +54,8 @@ public class LoadFragment extends Fragment {
         @Override
         protected void onPostExecute(Resort r) {
             // open home fragment
-            Intent intent = HomeActivity.newIntent(getActivity());
-            //Intent intent = PagerActivity.newIntent(getActivity());
+            //Intent intent = HomeActivity.newIntent(getActivity());
+            Intent intent = PagerActivity.newIntent(getActivity());
             startActivity(intent);
         }
     }

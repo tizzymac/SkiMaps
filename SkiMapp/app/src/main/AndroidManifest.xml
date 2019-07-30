@@ -34,7 +34,7 @@
         <activity android:name=".Map.MapActivity"/>
         <activity android:name=".Emergency.EmergencyActivity"/>
         <activity android:name=".RouteFinding.NavMode.NavModeActivity"/>
-        <!--<activity android:name=".Home.PagerActivity"/>-->
+        <activity android:name=".Home.PagerActivity"/>
 
         <uses-library android:name="android.test.runner"
                       android:required="false" />
