@@ -5,19 +5,56 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/white">
 
+    <LinearLayout
+        android:id="@+id/run_info"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
             <TextView
                 android:id="@+id/run_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Run Name"
-                android:textColor="@color/white"
-                android:textSize="22sp"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
+
+            <LinearLayout
+                android:id="@+id/run_sub_item"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right">
+                <TextView
+                    android:id="@+id/run_sub_item_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/darkGrey"
+                    android:textSize="14dp"/>
+                <TextView
+                    android:id="@+id/run_sub_item_open"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/darkGrey"
+                    android:textSize="14dp"/>
+                <TextView
+                    android:id="@+id/run_sub_item_groomed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/darkGrey"
+                    android:textSize="14dp"/>
+
+            </LinearLayout>
+
+    </LinearLayout>
 
             <ImageView
                 android:id="@+id/run_level"
@@ -26,7 +63,7 @@
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/run_name"
+                app:layout_constraintTop_toTopOf="@+id/run_info"
                 app:layout_constraintVertical_bias="0.0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,6 +50,10 @@ public class DirectionsFragment extends Fragment {
     private Graph mBasicResortGraph;
     private SkiLevel mSkiAbility;
 
+    // Greeting
+    private TextView mGreetingText;
+    private TextView mLevelText;
+
     private Button mGoButton;
     private ImageButton mBathroomButton;
     private ImageButton mFoodButton;
@@ -96,6 +100,19 @@ public class DirectionsFragment extends Fragment {
 
         mBottomSheetBehavior = new BottomSheetBehavior().from(view.findViewById(R.id.destinationSelectionBottomSheet));
         mBottomSheetBehavior.setPeekHeight(0);
+
+        // Greeting
+        mGreetingText = view.findViewById(R.id.greeting);
+        mGreetingText.setText("Welcome back, " + "name.");
+        mLevelText = view.findViewById(R.id.ski_ability);
+        mLevelText.setText(mSkiAbility.getLevelString());
+        mLevelText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Change level", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         mBathroomButton = view.findViewById(R.id.bathroom);
         mBathroomButton.setOnClickListener(new View.OnClickListener() {

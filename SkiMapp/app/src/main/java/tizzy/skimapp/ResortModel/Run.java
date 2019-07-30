@@ -27,6 +27,9 @@ public class Run extends Edge implements Comparable<Run>, Serializable {
     private RunStatus mRunStatus;
     private int mWeight;
 
+    // State of the item
+    private boolean expanded = false;
+
     private transient DatabaseReference mDatabase;
 
     public Run(String name, String level, String region, Node start, Node end) {
@@ -177,5 +180,13 @@ public class Run extends Edge implements Comparable<Run>, Serializable {
     @Override
     public int compareTo(@NonNull Run otherRun) {
         return this.mName.compareTo(otherRun.getName());
+    }
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
     }
 }

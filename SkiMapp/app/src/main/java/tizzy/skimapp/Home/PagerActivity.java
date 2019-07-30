@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import tizzy.skimapp.Emergency.EmergencyFragment;
 import tizzy.skimapp.GetInfo.InfoListFragment;
 import tizzy.skimapp.R;
 import tizzy.skimapp.RouteFinding.DirectionsFragment;
@@ -45,7 +46,7 @@ public class PagerActivity extends AppCompatActivity {
 
                     @Override
                     public int getCount() {
-                        return 2;
+                        return 3;
                     }
 
                     @Override
@@ -53,6 +54,7 @@ public class PagerActivity extends AppCompatActivity {
                         switch (position) {
                             case 0 : return DirectionsFragment.newInstance(mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
                             case 1 : return InfoListFragment.newInstance();
+                            case 2 : return EmergencyFragment.newInstance();
                             default: return DirectionsFragment.newInstance(mSharedPref.getString(SettingsActivity.KEY_PREF_SKI_ABILITY, "Black"));
                         }
                     }
@@ -63,7 +65,10 @@ public class PagerActivity extends AppCompatActivity {
                 .setText("Directions");
         mTabLayout.getTabAt(1)
                 .setIcon(R.drawable.ic_info_icon)
-                .setText("Info");
+                .setText("Information");
+        mTabLayout.getTabAt(2)
+                .setIcon(R.drawable.ic_emergency_icon)
+                .setText("Emergency");
 
     }
 

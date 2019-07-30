@@ -15,6 +15,42 @@
         android:orientation="vertical"
         android:background="@color/white">
 
+        <!--Mini profile -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/greeting"
+            android:textColor="@color/darkGrey"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:layout_margin="16dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your ski ability is "
+                android:textColor="@color/darkGrey"
+                android:layout_gravity="left"
+                android:layout_marginLeft="16dp"
+                android:textSize="16dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ski_ability"
+                android:textColor="@color/colorAccentLight"
+                android:layout_gravity="left"
+                android:clickable="true"
+                android:textSize="16dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/darkGrey"
+            android:layout_margin="16dp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -113,8 +149,6 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-        <!--style="?attr/bottomSheetStyle"-->
-
 
         <!-- Bottom Sheet contents -->
 
@@ -129,8 +163,8 @@
             android:layout_height="80dp"
             android:orientation="horizontal"
             android:background="@color/colorPrimaryDark"
-            android:layout_margin="10dp"
-            android:padding="10dp"
+            android:layout_margin="8dp"
+            android:padding="8dp"
             android:layout_gravity="center_vertical">
 
                 <LinearLayout
@@ -186,9 +220,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Longer route"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:textColor="@color/white"
-                android:padding="5dp"
+                android:padding="4dp"
                 android:layout_margin="2dp"/>
 
                 <!-- Harder route checkbox -->
@@ -197,9 +231,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Harder route"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:textColor="@color/white"
-                android:padding="5dp"
+                android:padding="4dp"
                 android:layout_margin="2dp"/>
 
                 <!-- Groomers checkbox -->
@@ -208,9 +242,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Groomers only"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:textColor="@color/white"
-                android:padding="5dp"
+                android:padding="4dp"
                 android:layout_margin="2dp"/>
 
             </LinearLayout>
@@ -224,7 +258,7 @@
                 android:textColor="@color/white"
                 android:text="@string/go"
                 android:textSize="20sp"
-                android:layout_margin="10dp"/>
+                android:layout_margin="6dp"/>
 
         </LinearLayout>
 

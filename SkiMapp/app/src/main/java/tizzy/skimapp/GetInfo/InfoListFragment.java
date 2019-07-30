@@ -1,10 +1,12 @@
 package tizzy.skimapp.GetInfo;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -72,14 +74,23 @@ public class InfoListFragment extends Fragment {
 
         private TextView mRunNameTextView;
         private ImageView mRunLevelImageView;
+        private LinearLayout mRunSubItem;
         private Run mRun;
 
         @Override
         public void onClick(View view) {
-            // Open details
-            FragmentManager manager = getFragmentManager();
-            RunDetailFragment runDialog = RunDetailFragment.newInstance(mRun);
-            runDialog.show(manager, DIALOG_RUN_DETAIL);
+//            // Open details
+//            FragmentManager manager = getFragmentManager();
+//            RunDetailFragment runDialog = RunDetailFragment.newInstance(mRun);
+//            runDialog.show(manager, DIALOG_RUN_DETAIL);
+
+            // Expand to show details
+            // Get the current state of the item
+            boolean expanded = mRun.isExpanded();
+            // Change the state
+            mRun.setExpanded(!expanded);
+            // Notify the adapter that item has changed
+            mRunAdapter.notifyItemChanged(getLayoutPosition());
         }
 
         public RunHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -88,6 +99,7 @@ public class InfoListFragment extends Fragment {
 
             mRunNameTextView = itemView.findViewById(R.id.run_name);
             mRunLevelImageView = itemView.findViewById(R.id.run_level);
+            mRunSubItem = itemView.findViewById(R.id.run_sub_item);
         }
 
         public void bind(Run run) {
@@ -102,6 +114,19 @@ public class InfoListFragment extends Fragment {
                                 break;
             }
             mRunLevelImageView.setVisibility(View.VISIBLE);
+
+            // Set the visibility based on state
+            boolean expanded = mRun.isExpanded();
+            mRunSubItem.setVisibility(expanded ? View.VISIBLE : View.GONE);
+
+            TextView level = itemView.findViewById(R.id.run_sub_item_level);
+            level.setText("Level: " + mRun.getLevel().getLevelString());
+
+            TextView open =  itemView.findViewById(R.id.run_sub_item_open);
+            open.setText("Open: " + mRun.getStatus().isOpen());
+
+            TextView groomed = itemView.findViewById(R.id.run_sub_item_groomed);
+            groomed.setText("Groomed: " + mRun.getStatus().isGroomed());
         }
     }
 
