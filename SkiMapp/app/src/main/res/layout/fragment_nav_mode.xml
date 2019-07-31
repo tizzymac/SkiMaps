@@ -9,16 +9,16 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="12dp"
             android:gravity="center"
             android:text="@string/your_route"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="26dp"/>
 
         <TextView
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/darkGrey"
             android:textSize="16dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -42,16 +42,15 @@
 
         <Button
             android:id="@+id/end_route"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
+            android:layout_gravity="bottom"
+            android:layout_margin="12dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/button_rounded_corners_red"
-            android:padding="10dp"
             android:text="@string/end_route"
             android:textColor="@color/white"
-            android:textSize="20dp"/>
+            android:textSize="18dp"/>
 
     </LinearLayout>
 

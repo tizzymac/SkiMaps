@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/name"
@@ -13,9 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Node Name"
-        android:textColor="@color/white"
+        android:textColor="@color/darkGrey"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

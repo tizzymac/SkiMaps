@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import tizzy.skimapp.Emergency.EmergencyActivity;
+import tizzy.skimapp.Home.PagerActivity;
 import tizzy.skimapp.R;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Resort;
@@ -129,7 +130,7 @@ public class NavModeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Return to directions fragment
-                Intent intent = DirectionsActivity.newIntent(getActivity(), mSkiLevel.getLevelString());
+                Intent intent = PagerActivity.newIntent(getActivity());
                 startActivity(intent);
             }
         });

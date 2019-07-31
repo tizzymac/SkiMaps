@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,12 +38,17 @@ public class EdgeAdapter extends RecyclerView.Adapter<EdgeAdapter.ViewHolder> {
 
         // Set item views based on your views and data model
         TextView textView = holder.nameTextView;
-        textView.setText(mSkiRoute.getEdgeName(position));
+
+        if (mSkiRoute.getInfoEncoding(position) > 0) {
+            textView.setText("Ski down " + mSkiRoute.getEdgeName(position));
+        } else {
+            textView.setText("Ride the " + mSkiRoute.getEdgeName(position) + " chairlift");
+        }
 
         if (mSkiRoute.isSegmentCompleted(position)) {
-            textView.setTextColor(Color.GRAY);
+            textView.setTextColor(Color.parseColor("#87CEEB"));
         } else {
-            textView.setTextColor(Color.WHITE);
+            textView.setTextColor(Color.GRAY);
         }
     }
 

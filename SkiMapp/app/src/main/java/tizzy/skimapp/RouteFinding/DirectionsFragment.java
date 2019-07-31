@@ -30,8 +30,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import tizzy.skimapp.R;
+import tizzy.skimapp.ResortModel.Coords;
 import tizzy.skimapp.ResortModel.Edge;
 import tizzy.skimapp.ResortModel.Lift;
 import tizzy.skimapp.ResortModel.Node;
@@ -190,8 +192,15 @@ public class DirectionsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                // Bottom sheet comes up
-                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                // Toggle bottom sheet
+                if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    mSelectDestButton.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.button_rounded_corners_light));
+
+                } else {
+                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    mSelectDestButton.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.button_rounded_corners));
+                }
             }
         });
 
@@ -403,10 +412,14 @@ public class DirectionsFragment extends Fragment {
             // Return current location node
             return currentNode;
         } else {
-            Toast.makeText(getActivity(), "Unable to locate you.", Toast.LENGTH_LONG).show();
-            mGoButton.setText("GO");
-            mGoButton.setEnabled(true);
-            return null;
+
+            // TEST
+            return mResort.getRun("No Problem").getStart();
+
+//            Toast.makeText(getActivity(), "Unable to locate you.", Toast.LENGTH_LONG).show();
+//            mGoButton.setText("GO");
+//            mGoButton.setEnabled(true);
+//            return null;
         }
     }
 

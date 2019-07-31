@@ -1,24 +1,26 @@
 package tizzy.skimapp.RouteFinding;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 import tizzy.skimapp.ResortModel.Edge;
+import tizzy.skimapp.ResortModel.Lift;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Path;
+import tizzy.skimapp.ResortModel.Run;
 
 public class SkiRoute implements Serializable {
 
     private LinkedList<String> mEdgeNamePath;
     private LinkedList<Node> mEndNodes;
+    private LinkedList<Integer> mEdgeInfo;
     private boolean[] mCompleted;
 
     // Create SkiRoute from Path
     public SkiRoute(Path path, Graph resortGraph) {
         mEdgeNamePath = new LinkedList<>();
         mEndNodes = new LinkedList<>();
+        mEdgeInfo = new LinkedList<>();
 
         // Rejoin adjacent segments from same run
 
@@ -33,7 +35,7 @@ public class SkiRoute implements Serializable {
         while (startNode != finalNodeInPath) {
             int currStartIndex = path.getNodePath().indexOf(startNode);
 
-            String edgeFromStart = resortGraph.getEdgeBetweenNodes(startNode, path.getNode(currStartIndex +1 )).getName();
+            Edge edgeFromStart = resortGraph.getEdgeBetweenNodes(startNode, path.getNode(currStartIndex +1 ));
             // This is the name of the edge between startNode and its adjacent node
 
             // Compare the name of this first edge to the name of its adjacent edges
@@ -41,11 +43,12 @@ public class SkiRoute implements Serializable {
                 int j = i+1;
                 String nextEdge = resortGraph.getEdgeBetweenNodes(path.getNode(i), path.getNode(j)).getName();
 
-                if (!nextEdge.equals(edgeFromStart)) {
+                if (!nextEdge.equals(edgeFromStart.getName())) {
                     // set end of current edge as i
                     // add edge to SkiRoute
-                    mEdgeNamePath.add(edgeFromStart);
+                    mEdgeNamePath.add(edgeFromStart.getName());
                     mEndNodes.add(path.getNode(i));
+                    mEdgeInfo.add(infoEncoding(edgeFromStart));
 
                     // set startNode to node at i
                     startNode = path.getNode(i);
@@ -55,16 +58,18 @@ public class SkiRoute implements Serializable {
 
                 // check if at final node
                 if (j == path.getNodePath().size()-1) {
-                    mEdgeNamePath.add(edgeFromStart);
+                    mEdgeNamePath.add(edgeFromStart.getName());
                     mEndNodes.add(path.getNode(j));
+                    mEdgeInfo.add(infoEncoding(edgeFromStart));
                     startNode = path.getNode(j);
                 }
             }
 
             if (startNode == penultimateNodeInPath) {
-                String finalEdge = resortGraph.getEdgeBetweenNodes(penultimateNodeInPath, finalNodeInPath).getName();
-                mEdgeNamePath.add(finalEdge);
+                Edge finalEdge = resortGraph.getEdgeBetweenNodes(penultimateNodeInPath, finalNodeInPath);
+                mEdgeNamePath.add(finalEdge.getName());
                 mEndNodes.add(finalNodeInPath);
+                mEdgeInfo.add(infoEncoding(finalEdge));
 
                 // exit while loop
                 startNode = finalNodeInPath;
@@ -97,5 +102,27 @@ public class SkiRoute implements Serializable {
 
     public int length() {
         return mEdgeNamePath.size();
+    }
+
+    public int getInfoEncoding(int index) {
+        return mEdgeInfo.get(index);
+    }
+
+    public int infoEncoding(Edge edge) {
+        try {
+            String level = ((Run) edge).getLevel().getLevelString();
+
+            switch (level) {
+                case "Green" : return 1;
+                case "Blue" : return 2;
+                case "Black" : return 3;
+            }
+
+        } catch (ClassCastException exception) {
+            // It's a lift
+            return 0;
+        }
+
+        return -1;
     }
 }

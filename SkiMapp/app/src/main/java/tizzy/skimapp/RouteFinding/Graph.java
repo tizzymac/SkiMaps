@@ -10,7 +10,6 @@ import java.util.List;
 import tizzy.skimapp.ResortModel.Edge;
 import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Run;
-import tizzy.skimapp.ResortModel.SkiLevel;
 
 public class Graph implements Serializable {
 
