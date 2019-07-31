@@ -26,7 +26,8 @@ public class EdgeAdapter extends RecyclerView.Adapter<EdgeAdapter.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.item_edge, parent, false);
+        //View contactView = inflater.inflate(R.layout.item_edge, parent, false);
+        View contactView = inflater.inflate(R.layout.list_item_route, parent, false);
 
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(contactView);
@@ -38,15 +39,22 @@ public class EdgeAdapter extends RecyclerView.Adapter<EdgeAdapter.ViewHolder> {
 
         // Set item views based on your views and data model
         TextView textView = holder.nameTextView;
+        ImageView iconView = holder.iconView;
 
         if (mSkiRoute.getInfoEncoding(position) > 0) {
+            iconView.setImageResource(R.drawable.ic_ski);
             textView.setText("Ski down " + mSkiRoute.getEdgeName(position));
+            iconView.setVisibility(View.VISIBLE);
         } else {
+            iconView.setImageResource(R.drawable.ic_lift);
             textView.setText("Ride the " + mSkiRoute.getEdgeName(position) + " chairlift");
+            iconView.setVisibility(View.VISIBLE);
         }
 
         if (mSkiRoute.isSegmentCompleted(position)) {
             textView.setTextColor(Color.parseColor("#87CEEB"));
+            iconView.setImageResource(R.drawable.ic_check);
+            iconView.setVisibility(View.VISIBLE);
         } else {
             textView.setTextColor(Color.GRAY);
         }
@@ -63,6 +71,7 @@ public class EdgeAdapter extends RecyclerView.Adapter<EdgeAdapter.ViewHolder> {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public TextView nameTextView;
+        public ImageView iconView;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -72,6 +81,7 @@ public class EdgeAdapter extends RecyclerView.Adapter<EdgeAdapter.ViewHolder> {
             super(itemView);
 
             nameTextView = itemView.findViewById(R.id.edge_name);
+            iconView = itemView.findViewById(R.id.edge_icon);
         }
     }
 }

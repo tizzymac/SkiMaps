@@ -41,7 +41,7 @@ public class RouteViewAdapter extends BaseAdapter {
         if(convertView == null){
             convertView = mInflater.inflate(R.layout.list_item_route, null);
             holder = new ViewHolder();
-            holder.edgeID = convertView.findViewById(R.id.name);
+            holder.edgeID = convertView.findViewById(R.id.edge_name);
 
             convertView.setTag(holder);
         } else {

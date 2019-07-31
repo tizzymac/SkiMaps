@@ -7,18 +7,27 @@
     android:layout_height="wrap_content"
     android:background="@color/white">
 
+    <ImageView
+        android:id="@+id/edge_icon"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edge_name"
+        app:layout_constraintVertical_bias="0.0"/>
+
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/edge_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_margin="6dp"
         android:text="Node Name"
         android:textColor="@color/darkGrey"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/edge_icon"
         app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

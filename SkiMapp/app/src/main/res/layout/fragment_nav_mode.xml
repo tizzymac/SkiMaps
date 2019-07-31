@@ -45,12 +45,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_margin="12dp"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="16dp"
             android:background="@drawable/button_rounded_corners_red"
             android:text="@string/end_route"
             android:textColor="@color/white"
-            android:textSize="18dp"/>
+            android:textSize="16dp"/>
 
     </LinearLayout>
 
