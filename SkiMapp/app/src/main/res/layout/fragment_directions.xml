@@ -43,6 +43,7 @@
                 android:layout_gravity="left"
                 android:clickable="true"
                 android:textSize="16dp"/>
+
         </LinearLayout>
 
         <View
@@ -107,7 +108,8 @@
                     android:textSize="14sp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:padding="8dp"/>
+                    android:padding="8dp"
+                    style="?android:attr/borderlessButtonStyle"/>
 
             </LinearLayout>
 

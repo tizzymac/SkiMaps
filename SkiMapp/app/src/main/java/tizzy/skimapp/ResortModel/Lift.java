@@ -18,14 +18,16 @@ public class Lift extends Edge implements Comparable<Lift> {
     private List<Node> mMidpoints = null;
     private int mWeight;
     private int mCapacity;
+    private String mLiftType;
 
-    public Lift(String name, Node start, Node end, int capacity, String open, String close) throws ParseException {
+    public Lift(String name, Node start, Node end, int capacity, String type, String open, String close) throws ParseException {
         this.mName = name;
         this.mStart = start;
         this.mEnd = end;
         this.mWeight = getSimpleWeight();
         this.mCapacity = capacity;
         this.mStatus = new LiftStatus(open, close);
+        this.mLiftType = type;
     }
 
     @Override
@@ -101,5 +103,9 @@ public class Lift extends Edge implements Comparable<Lift> {
     @Override
     public void setWeight(int weight) {
         this.mWeight = weight;
+    }
+
+    public String getLiftType() {
+        return mLiftType;
     }
 }

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -33,7 +34,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import tizzy.skimapp.R;
-import tizzy.skimapp.ResortModel.Coords;
 import tizzy.skimapp.ResortModel.Edge;
 import tizzy.skimapp.ResortModel.Lift;
 import tizzy.skimapp.ResortModel.Node;
@@ -43,6 +43,7 @@ import tizzy.skimapp.ResortModel.Run;
 import tizzy.skimapp.ResortModel.SkiLevel;
 import tizzy.skimapp.RouteFinding.KShortestPaths.Yen;
 import tizzy.skimapp.RouteFinding.NavMode.NavModeActivity;
+import tizzy.skimapp.RouteFinding.SkiRoute.SkiRoute;
 
 public class DirectionsFragment extends Fragment {
     private static final String ARG_SKI_ABILITY = "ski_ability";
@@ -55,6 +56,7 @@ public class DirectionsFragment extends Fragment {
     // Greeting
     private TextView mGreetingText;
     private TextView mLevelText;
+    private SharedPreferences mSharedPref;
 
     private Button mGoButton;
     private ImageButton mBathroomButton;
@@ -414,7 +416,7 @@ public class DirectionsFragment extends Fragment {
         } else {
 
             // TEST
-            return mResort.getRun("No Problem").getStart();
+            return mResort.getRun("Buckskin").getEnd();
 
 //            Toast.makeText(getActivity(), "Unable to locate you.", Toast.LENGTH_LONG).show();
 //            mGoButton.setText("GO");

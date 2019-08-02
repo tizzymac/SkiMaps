@@ -417,6 +417,7 @@
             start="1"
             end="2"
             capacity="4"
+            type="chairlift"
             open="08:00"
             close="15:30"/>
         <Lift
@@ -424,6 +425,7 @@
             start="1"
             end="3"
             capacity="2"
+            type="chairlift"
             open="08:00"
             close="15:00"/>
         <Lift
@@ -431,6 +433,7 @@
             start="4"
             end="2"
             capacity="4"
+            type="chairlift"
             open="08:00"
             close="16:00"/>
         <Lift
@@ -439,6 +442,7 @@
             end="50"
             midway_load="52"
             capacity="4"
+            type="chairlift"
             open="08:00"
             close="16:00"/>
     </Lifts>

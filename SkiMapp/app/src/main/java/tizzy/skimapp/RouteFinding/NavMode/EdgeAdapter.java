@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 import tizzy.skimapp.R;
-import tizzy.skimapp.RouteFinding.SkiRoute;
+import tizzy.skimapp.RouteFinding.SkiRoute.SkiRoute;
 
 public class EdgeAdapter extends RecyclerView.Adapter<EdgeAdapter.ViewHolder> {
 
@@ -47,7 +47,7 @@ public class EdgeAdapter extends RecyclerView.Adapter<EdgeAdapter.ViewHolder> {
             iconView.setVisibility(View.VISIBLE);
         } else {
             iconView.setImageResource(R.drawable.ic_lift);
-            textView.setText("Ride the " + mSkiRoute.getEdgeName(position) + " chairlift");
+            textView.setText("Ride the " + mSkiRoute.getEdgeName(position) + " " + mSkiRoute.getLiftType(position));
             iconView.setVisibility(View.VISIBLE);
         }
 

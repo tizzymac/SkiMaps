@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import tizzy.skimapp.R;
-import tizzy.skimapp.ResortModel.Resort;
+import tizzy.skimapp.RouteFinding.SkiRoute.SkiRoute;
 
 public class RouteViewAdapter extends BaseAdapter {
 

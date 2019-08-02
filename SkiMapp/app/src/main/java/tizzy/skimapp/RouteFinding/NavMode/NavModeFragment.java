@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -30,8 +29,7 @@ import tizzy.skimapp.ResortModel.Node;
 import tizzy.skimapp.ResortModel.Resort;
 import tizzy.skimapp.ResortModel.Run;
 import tizzy.skimapp.ResortModel.SkiLevel;
-import tizzy.skimapp.RouteFinding.DirectionsActivity;
-import tizzy.skimapp.RouteFinding.SkiRoute;
+import tizzy.skimapp.RouteFinding.SkiRoute.SkiRoute;
 import tizzy.skimapp.RouteFinding.SkiersLocation;
 
 public class NavModeFragment extends Fragment {
@@ -48,7 +46,7 @@ public class NavModeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private TextView mCurrentLocationTextView;
     private Button mEndRouteButton;
-    private ImageButton mEmergencyButton;
+    private Button mEmergencyButton;
 
     private TextToSpeech mTextToSpeech;
     private Node mLastNode;

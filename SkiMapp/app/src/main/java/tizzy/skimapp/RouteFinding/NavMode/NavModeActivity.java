@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import tizzy.skimapp.ResortModel.SkiLevel;
-import tizzy.skimapp.RouteFinding.SkiRoute;
+import tizzy.skimapp.RouteFinding.SkiRoute.SkiRoute;
 import tizzy.skimapp.SingleFragmentActivity;
 
 public class NavModeActivity extends SingleFragmentActivity {
